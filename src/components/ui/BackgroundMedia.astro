@@ -8,51 +8,75 @@ interface Props {
 		mobileVideo?: string;
 		alt?: string;
 	};
+	loading?: 'eager' | 'lazy';
 	fetchPriority?: 'high' | 'low' | 'auto';
 }
 
-const { media, fetchPriority = 'auto' } = Astro.props;
+const { media, loading = 'eager', fetchPriority = 'auto' } = Astro.props;
+
+const isLazy = loading === 'lazy';
+
 const desktopVideo = media.video?.trim();
-const mobileVideo = media.mobileVideo?.trim() || desktopVideo;
-const desktopSource = desktopVideo || mobileVideo;
+const mobileVideo = media.mobileVideo?.trim();
 const imageSource = media.image?.trim();
-const getVideoType = (source?: string) => {
-	const path = source?.split(/[?#]/, 1)[0].toLowerCase();
-	return path?.endsWith('.webm') ? 'video/webm' : path?.endsWith('.mp4') ? 'video/mp4' : undefined;
+
+const videoSource = desktopVideo || mobileVideo;
+
+const hasMobileVideo = Boolean(desktopVideo && mobileVideo && desktopVideo !== mobileVideo);
+
+const getVideoType = (src?: string): string | undefined => {
+	const path = src?.split(/[?#]/, 1)[0].toLowerCase();
+
+	if (path?.endsWith('.mp4')) return 'video/mp4';
+	if (path?.endsWith('.webm')) return 'video/webm';
+
+	return undefined;
 };
 ---
 
 {
-	desktopSource ? (
+	videoSource ? (
 		<video
 			class='background-media'
-			data-poster={imageSource || undefined}
 			autoplay
 			muted
 			loop
 			playsinline
-			disablepictureinpicture
-			disableRemotePlayback
-			preload='none'
 			aria-hidden='true'
+			width='1920'
+			height='1080'
+			preload={isLazy ? 'none' : undefined}
+			poster={!isLazy ? imageSource || undefined : undefined}
+			data-lazy-media={isLazy ? 'video' : undefined}
+			data-poster={isLazy ? imageSource || undefined : undefined}
 		>
-			<source data-src={mobileVideo} type={getVideoType(mobileVideo)} media='(max-width: 767px)' />
+			{hasMobileVideo && (
+				<source
+					src={!isLazy ? mobileVideo : undefined}
+					data-src={isLazy ? mobileVideo : undefined}
+					type={getVideoType(mobileVideo)}
+					media='(max-width: 767px)'
+				/>
+			)}
+
 			<source
-				data-src={desktopSource}
-				type={getVideoType(desktopSource)}
-				media='(min-width: 768px)'
+				src={!isLazy ? videoSource : undefined}
+				data-src={isLazy ? videoSource : undefined}
+				type={getVideoType(videoSource)}
 			/>
 		</video>
 	) : imageSource ? (
 		<img
 			class='background-media'
-			data-src={imageSource}
+			src={!isLazy ? imageSource : undefined}
+			data-src={isLazy ? imageSource : undefined}
+			data-lazy-media={isLazy ? 'image' : undefined}
 			alt={media.alt ?? ''}
 			width='1920'
 			height='1080'
-			fetchpriority={fetchPriority}
+			fetchpriority={isLazy ? 'low' : fetchPriority}
+			loading={isLazy ? undefined : 'eager'}
+			decoding='async'
 		/>
 	) : null
 }
-
-<script src='../../scripts/background-media.ts'></script>

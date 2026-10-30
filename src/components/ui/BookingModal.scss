@@ -6,10 +6,18 @@
 	position: fixed;
 	inset: 0;
 	z-index: var.$z-modal;
-	background: rgba(var.$color-deep-slate, 0.6);
+	background: rgba(var.$color-deep-slate, 0.88);
 	backdrop-filter: blur(fn.rem(6));
 	overflow: hidden;
 	height: 100dvh;
+	opacity: 0;
+	visibility: hidden;
+	transition: var.$motion-duration ease;
+
+	&[open] {
+		visibility: visible;
+		opacity: 1;
+	}
 
 	> div {
 		padding: fn.rem(40) fn.rem(15);
@@ -78,6 +86,7 @@
 }
 
 .booking-form {
+	position: relative;
 	display: grid;
 	gap: var.$space-3;
 
@@ -301,10 +310,32 @@
 		background: var.$color-accent-soft;
 		color: var.$color-ink;
 		font-size: var.$text-sm;
+
+		&[data-state='idle'] {
+			display: none;
+		}
+
+		&[data-state='success'] {
+			border-left-color: var.$color-success;
+			background: color-mix(in srgb, var.$color-success 15%, transparent);
+		}
+
+		&[data-state='error'] {
+			border-left-color: var.$color-error;
+			background: color-mix(in srgb, var.$color-error 15%, transparent);
+		}
 	}
 
 	.button--primary:hover {
 		background: var.$color-ink;
 		color: var.$color-accent;
 	}
+}
+
+.booking-form__hp {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
 }

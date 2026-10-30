@@ -130,15 +130,3 @@ a:hover {
 		transition: none;
 	}
 }
-
-[data-booking-modal] {
-	opacity: 1;
-	visibility: visible;
-	transition: var.$motion-duration;
-
-	&[hidden] {
-		display: block;
-		opacity: 0;
-		visibility: hidden;
-	}
-}

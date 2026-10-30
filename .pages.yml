@@ -51,14 +51,8 @@ content:
       - name: city
         label: City
         type: string
-      - name: cityLocative
-        label: City name in locative case, used in copy such as "in {cityLocative}"
-        type: string
       - name: phoneNumber
         label: Phone number in international format
-        type: string
-      - name: phoneCountryCode
-        label: Phone country code displayed in the booking form
         type: string
       - name: address
         label: Street address
@@ -165,34 +159,62 @@ content:
           - name: external
             label: Opens in a new tab
             type: boolean
+
       - name: booking
-        label: Booking form labels
+        label: Booking form
         type: object
+        required: true
         fields:
           - name: title
             label: Title
             type: string
+            required: true
+
           - name: intro
             label: Intro
             type: text
+            required: true
+
           - name: optionalLabel
             label: Optional field marker
             type: string
+            required: true
+
           - name: submitLabel
             label: Submit button
             type: string
+            required: true
+
           - name: namePlaceholder
             label: Name placeholder
             type: string
+            required: true
+
           - name: phonePlaceholder
             label: Phone placeholder
             type: string
+            required: true
+
           - name: notePlaceholder
             label: Note placeholder
             type: string
-          - name: status
-            label: Status message
+            required: true
+
+          - name: successMessage
+            label: Success message
             type: text
+            required: true
+
+          - name: loadingMessage
+            label: Loading message
+            type: string
+            required: true
+
+          - name: errorMessage
+            label: Error message
+            type: text
+            required: true
+
   - name: seo
     label: SEO and social preview
     type: file
@@ -205,7 +227,7 @@ content:
         label: Page title template. Supports {name} and {city}.
         type: string
       - name: description
-        label: Search description template. Supports {name}, {city}, {cityLocative}, and {phone}.
+        label: Search description template. Supports {name}, {city}, and {phone}.
         type: text
       - name: canonicalUrl
         label: Canonical URL override. Leave empty to use the current page URL.

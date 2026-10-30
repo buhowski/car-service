@@ -11,7 +11,7 @@ const ctaData = content.cta;
 
 <section class='cta' aria-labelledby='cta-heading'>
 	<div class='cta__background' aria-hidden='true'>
-		<BackgroundMedia media={ctaData.background} />
+		<BackgroundMedia media={ctaData.background} loading='lazy' />
 	</div>
 	<div class='cta__chequer' aria-hidden='true'></div>
 	<div class='cta__chequer cta__chequer--bottom' aria-hidden='true'></div>
@@ -33,3 +33,9 @@ const ctaData = content.cta;
 		</div>
 	</Container>
 </section>
+
+<script>
+	import { initLazyMedia } from '../../scripts/lazy-media';
+
+	initLazyMedia();
+</script>

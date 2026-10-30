@@ -12,7 +12,7 @@ const [headlineStart, headlineEnd = ''] = heroData.headline.split(heroData.highl
 
 <section class='hero' id='hero' aria-labelledby='hero-heading'>
 	<div class='hero__background'>
-		<BackgroundMedia media={heroData.background} fetchPriority='high' />
+		<BackgroundMedia media={heroData.background} loading='eager' fetchPriority='high' />
 	</div>
 
 	<Container>

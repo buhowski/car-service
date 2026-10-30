@@ -43,3 +43,23 @@ input {
 address {
 	font-style: normal;
 }
+
+// Reset UA <dialog> defaults. Custom styles go on top.
+dialog {
+	width: auto;
+	max-width: none;
+	height: auto;
+	max-height: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: inherit;
+	overflow: visible;
+	inset: auto;
+	display: block;
+
+	&::backdrop {
+		background: transparent;
+	}
+}

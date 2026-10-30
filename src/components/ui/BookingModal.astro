@@ -4,17 +4,19 @@ import Button from './Button.astro';
 import Icon from './Icon.astro';
 import SocialLinks from '../header/SocialLinks.astro';
 import { siteSettings } from '../../data/site';
+
 const settings = siteSettings;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
-<div class='booking-modal' data-booking-modal hidden>
+<dialog
+	class='booking-modal'
+	data-booking-modal
+	aria-labelledby='booking-title'
+	aria-describedby='booking-description'
+>
 	<div>
-		<div
-			class='booking-modal__panel'
-			role='dialog'
-			aria-modal='true'
-			aria-labelledby='booking-title'
-		>
+		<div class='booking-modal__panel'>
 			<button
 				class='booking-modal__close'
 				type='button'
@@ -24,18 +26,36 @@ const settings = siteSettings;
 				<Icon name='close' width='16' height='16' />
 			</button>
 
-			<h2 class='booking-modal__title' id='booking-title'>{settings.booking.title}</h2>
-			<p class='booking-modal__intro'>{settings.booking.intro}</p>
+			<h2 class='booking-modal__title' id='booking-title'>
+				{settings.booking.title}
+			</h2>
 
-			<form class='booking-form' data-booking-form>
+			<p class='booking-modal__intro' id='booking-description'>
+				{settings.booking.intro}
+			</p>
+
+			<form
+				class='booking-form'
+				action='/api/booking'
+				method='post'
+				data-booking-form
+				data-success-message={settings.booking.successMessage}
+				data-loading-message={settings.booking.loadingMessage}
+				data-error-message={settings.booking.errorMessage}
+			>
 				<div class='booking-form__field'>
-					<label for='booking-name'>{settings.ui.nameLabel} <span class='booking-form__required' aria-hidden='true'>*</span></label>
+					<label for='booking-name'>
+						{settings.ui.nameLabel}
+						<span class='booking-form__required' aria-hidden='true'>*</span>
+					</label>
+
 					<input
 						id='booking-name'
 						name='name'
 						type='text'
 						autocomplete='name'
 						class='form-control'
+						minlength='2'
 						maxlength='80'
 						placeholder={settings.booking.namePlaceholder}
 						required
@@ -43,9 +63,14 @@ const settings = siteSettings;
 				</div>
 
 				<div class='booking-form__field'>
-					<label for='booking-phone'>{settings.ui.phoneLabel} <span class='booking-form__required' aria-hidden='true'>*</span></label>
+					<label for='booking-phone'>
+						{settings.ui.phoneLabel}
+						<span class='booking-form__required' aria-hidden='true'>*</span>
+					</label>
+
 					<div class='booking-form__phone'>
-						<span class='booking-form__country-code' aria-hidden='true'>{settings.phoneCountryCode}</span>
+						<span class='booking-form__country-code' aria-hidden='true'>+380</span>
+
 						<input
 							id='booking-phone'
 							name='phone'
@@ -54,8 +79,8 @@ const settings = siteSettings;
 							autocomplete='tel-national'
 							placeholder={settings.booking.phonePlaceholder}
 							class='form-control'
-							maxlength='19'
 							pattern='[0-9]{2} [0-9]{3} [0-9]{2} [0-9]{2}'
+							title='XX XXX XX XX'
 							required
 						/>
 					</div>
@@ -66,6 +91,7 @@ const settings = siteSettings;
 						{settings.ui.noteLabel}{' '}
 						<span class='booking-form__optional'>({settings.booking.optionalLabel})</span>
 					</label>
+
 					<textarea
 						id='booking-note'
 						name='note'
@@ -77,24 +103,60 @@ const settings = siteSettings;
 
 				<fieldset class='booking-form__contact-method'>
 					<legend>{settings.ui.contactMethodLegend}</legend>
+
 					<div class='booking-form__contact-options'>
-						{settings.ui.contactMethods.map((method, index) => (
-							<label><input type='radio' name='contactMethod' value={method} checked={index === 0} />{method}</label>
-						))}
+						{
+							settings.ui.contactMethods.map((method, index) => (
+								<label>
+									<input
+										type='radio'
+										name='contactMethod'
+										value={method}
+										checked={index === 0}
+										required={index === 0}
+									/>
+									{method}
+								</label>
+							))
+						}
 					</div>
 				</fieldset>
 
-				<Button variant='primary' block type='submit'>{settings.booking.submitLabel}</Button>
-				<p class='booking-form__status' data-booking-status aria-live='polite' hidden>
-					{settings.booking.status}
-				</p>
-				<div class='booking-form__alternative'>
-					<p class='booking-form__call'>{settings.ui.alternativeContact}</p>
-					<SocialLinks className='booking-form__social' />
+				<div class='booking-form__hp' aria-hidden='true'>
+					<input type='text' name='website' tabindex='-1' autocomplete='off' />
 				</div>
+
+				<div
+					class='cf-turnstile'
+					data-sitekey={turnstileSiteKey}
+					data-appearance='interaction-only'
+				>
+				</div>
+
+				<Button variant='primary' block type='submit'>
+					{settings.booking.submitLabel}
+				</Button>
+
+				<p
+					class='booking-form__status'
+					data-booking-status
+					data-state='idle'
+					role='status'
+					aria-live='polite'
+				>
+				</p>
 			</form>
+
+			<div class='booking-form__alternative'>
+				<p class='booking-form__call'>
+					{settings.ui.alternativeContact}
+				</p>
+
+				<SocialLinks className='booking-form__social' />
+			</div>
 		</div>
 	</div>
-</div>
+</dialog>
 
+<script is:inline src='https://challenges.cloudflare.com/turnstile/v0/api.js' async defer></script>
 <script src='../../scripts/booking-modal.ts'></script>

@@ -4,7 +4,6 @@
 	"city": "Львів",
 	"cityLocative": "Львові",
 	"phoneNumber": "+380668573564",
-	"phoneCountryCode": "+380",
 	"address": "м. Львів, вул. Луганська, 3а",
 	"mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2574.89365717332!2d24.055047800000004!3d49.806866899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473ae734df4d4723%3A0x295611f0460cb7f1!2z0KHQotCeICLQn9C-0YDRiNC10L3RjCIgLyDQkNCy0YLQvtC30LDQv9GH0LDRgdGC0LjQvdC4INCe0ZbRgdCQ0LLRgtC-!5e0!3m2!1sen!2sua!4v1793200788451!5m2!1sen!2sua",
 	"navigation": [
@@ -14,14 +13,14 @@
 	],
 	"socialLinks": [
 		{
-			"href": "viber://chat?number=%2B380322345678",
+			"href": "viber://chat?number=%2B",
 			"label": "Написати у Viber",
 			"title": "Viber",
 			"icon": "viber",
 			"external": false
 		},
 		{
-			"href": "https://t.me/sto_porshen",
+			"href": "https://t.me/",
 			"label": "Написати у Telegram",
 			"title": "Telegram",
 			"icon": "telegram",
@@ -65,7 +64,9 @@
 		"submitLabel": "Надіслати заявку",
 		"namePlaceholder": "Як до вас звертатися",
 		"phonePlaceholder": "XX XXX XX XX",
-		"notePlaceholder": "Марка авто та коротко проблему",
-		"status": "Форма ще не підключена до надсилання заявок. Зателефонуйте нам за номером нижче."
+		"notePlaceholder": "Марка авто та короткий опис проблеми",
+		"successMessage": "Дякуємо! Заявку надіслано. Ми скоро з вами зв'яжемося.",
+		"loadingMessage": "Надсилаємо заявку…",
+		"errorMessage": "Не вдалося надіслати заявку. Спробуй ще раз."
 	}
 }

@@ -10,16 +10,20 @@ export type OpeningHour = {
 	isClosed: boolean;
 };
 
-const dayNames = schedule.daysOfWeek;
+const weekdays = [1, 2, 3, 4, 5, 6, 0];
+const formatWeekday = (weekday: number) =>
+	new Intl.DateTimeFormat('uk-UA', { weekday: 'long', timeZone: 'UTC' }).format(
+		new Date(Date.UTC(2023, 0, weekday)),
+	);
 
 const formatTime = (group: OpeningScheduleGroup) =>
 	group.open && group.close ? `${group.open} – ${group.close}` : closedLabel;
 
-export const openingHours: OpeningHour[] = dayNames.map(({ full, weekday }) => {
+export const openingHours: OpeningHour[] = weekdays.map((weekday) => {
 	const group = openingSchedule.find((item) => item.days.includes(weekday));
 	const isClosed = !group?.open || !group.close;
 	return {
-		day: full,
+		day: formatWeekday(weekday),
 		weekday,
 		time: group ? formatTime(group) : closedLabel,
 		isClosed,

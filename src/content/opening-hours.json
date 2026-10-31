@@ -1,17 +1,21 @@
 {
-  "closedLabel": "Зачинено",
-  "daysOfWeek": [
-    { "weekday": 1, "full": "Понеділок" },
-    { "weekday": 2, "full": "Вівторок" },
-    { "weekday": 3, "full": "Середа" },
-    { "weekday": 4, "full": "Четвер" },
-    { "weekday": 5, "full": "П'ятниця" },
-    { "weekday": 6, "full": "Субота" },
-    { "weekday": 0, "full": "Неділя" }
-  ],
-  "groups": [
-    { "label": "Пн–Пт", "days": [1, 2, 3, 4, 5], "open": "09:30", "close": "19:00" },
-    { "label": "Сб", "days": [6], "open": "10:00", "close": "16:00" },
-    { "label": "Нд", "days": [0] }
-  ]
+	"closedLabel": "Зачинено",
+	"groups": [
+		{
+			"label": "Пн–Пт",
+			"days": [1, 2, 3, 4, 5],
+			"open": "09:30",
+			"close": "19:00"
+		},
+		{
+			"label": "Сб",
+			"days": [6],
+			"open": "10:00",
+			"close": "16:00"
+		},
+		{
+			"label": "Нд",
+			"days": [0]
+		}
+	]
 }

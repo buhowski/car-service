@@ -6,35 +6,24 @@
 	"phoneNumber": "+380668573564",
 	"address": "м. Львів, вул. Луганська, 3а",
 	"mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2574.89365717332!2d24.055047800000004!3d49.806866899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473ae734df4d4723%3A0x295611f0460cb7f1!2z0KHQotCeICLQn9C-0YDRiNC10L3RjCIgLyDQkNCy0YLQvtC30LDQv9GH0LDRgdGC0LjQvdC4INCe0ZbRgdCQ0LLRgtC-!5e0!3m2!1sen!2sua!4v1793200788451!5m2!1sen!2sua",
+	"instagram": "ois_auto.sto",
+	"warranty": "24 місяці",
+	"experience": "10 років",
 	"navigation": [
-		{ "href": "#services", "label": "Послуги" },
-		{ "href": "#why-choose", "label": "Переваги" },
-		{ "href": "#visit", "label": "Контакти" }
-	],
-	"socialLinks": [
 		{
-			"href": "viber://chat?number=%2B",
-			"label": "Написати у Viber",
-			"title": "Viber",
-			"icon": "viber",
-			"external": false
+			"href": "#services",
+			"label": "Послуги"
 		},
 		{
-			"href": "https://t.me/",
-			"label": "Написати у Telegram",
-			"title": "Telegram",
-			"icon": "telegram",
-			"external": true
+			"href": "#why-choose",
+			"label": "Переваги"
 		},
 		{
-			"href": "https://www.instagram.com/ois_auto.sto",
-			"label": "{name} в Instagram",
-			"title": "Instagram",
-			"icon": "instagram",
-			"external": true
+			"href": "#visit",
+			"label": "Контакти"
 		}
 	],
-	"footerAbout": "Сімейне СТО у Львові: чесні кошториси, сертифіковані майстри та гарантія 24 місяці на кожну роботу.",
+	"footerAbout": "Сімейне СТО у {cityLocative}: чесні кошториси, сертифіковані майстри та гарантія {warranty} на кожну роботу.",
 	"ui": {
 		"brandHomeLabel": "{name} — на головну",
 		"bookingCloseLabel": "Закрити форму",
@@ -55,7 +44,10 @@
 		"contactSocialNavLabel": "Телефон і соціальні мережі",
 		"footerContactLabel": "Контактна інформація",
 		"copyright": "© {year} {name}. Усі права захищено.",
-		"loaderLabel": "Завантаження сторінки"
+		"loaderLabel": "Завантаження сторінки",
+		"viberLabel": "Написати у Viber",
+		"telegramLabel": "Написати у Telegram",
+		"instagramLabel": "{name} в Instagram"
 	},
 	"booking": {
 		"title": "Записатися на сервіс",

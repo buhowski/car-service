@@ -41,7 +41,9 @@ export const site = {
 		href:
 			link.icon === 'viber'
 				? `viber://chat?number=${encodeURIComponent(settings.phoneNumber)}`
-				: link.href,
+				: link.icon === 'telegram'
+					? `https://t.me/+${settings.phoneNumber.replace('+', '')}`
+					: link.href,
 		label: formatText(link.label, { name: businessName }),
 	})),
 } as const;

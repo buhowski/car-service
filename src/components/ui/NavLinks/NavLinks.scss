@@ -1,0 +1,81 @@
+@use '../../../styles/functions' as fn;
+@use '../../../styles/mixins' as bp;
+@use '../../../styles/variables' as var;
+
+.nav-links {
+	display: flex;
+	align-items: center;
+	gap: 1.7rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	// .nav-links--desktop
+	&--desktop {
+		@include bp.tablet-lg {
+			display: none;
+		}
+	}
+
+	// .nav-links__item
+	&__item {
+		@include bp.focus-ring;
+		display: inline-block;
+		position: relative;
+		padding: 0.4rem 0;
+		color: var.$color-text-on-dark;
+		font-family: var.$font-display;
+		font-size: var.$text-base;
+		font-weight: var.$font-weight-semibold;
+		letter-spacing: var.$tracking-wide;
+		text-decoration: none;
+		text-transform: var.$text-transform-display;
+
+		&::after {
+			position: absolute;
+			bottom: fn.rem(-2);
+			left: 0;
+			width: 0;
+			height: fn.rem(3);
+			background: var.$color-accent;
+			content: '';
+			transition: width var.$motion-duration ease;
+		}
+
+		&:is(:hover, .is-active) {
+			color: var.$color-paper;
+
+			&::after {
+				width: 100%;
+			}
+		}
+	}
+}
+
+.mobile-links {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	.nav-links__item {
+		display: flex;
+		min-height: fn.rem(48);
+		align-items: center;
+		padding: 0.65rem 0.75rem;
+		border-radius: var.$radius-sm;
+		font-size: var.$text-lg;
+		letter-spacing: var.$tracking-normal;
+
+		&::after {
+			display: none;
+		}
+
+		&:is(:hover, :focus-visible, .is-active) {
+			color: var.$color-accent;
+		}
+	}
+
+	li + li {
+		margin-top: 0.2rem;
+	}
+}

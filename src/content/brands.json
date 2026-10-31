@@ -1,0 +1,72 @@
+{
+	"eyebrow": "Обслуговуємо популярні марки авто",
+	"headline": "Сервіс для вашого авто",
+	"description": "Обслуговуємо популярні марки авто. Не знайшли свою марку? Зателефонуйте — уточнимо можливість обслуговування.",
+	"carouselLabel": "Марки автомобілів, які ми обслуговуємо",
+	"items": [
+		{
+			"name": "Toyota",
+			"logo": "/uploads/brands/toyota.svg"
+		},
+		{
+			"name": "Volkswagen",
+			"logo": "/uploads/brands/volkswagen.svg"
+		},
+		{
+			"name": "Renault",
+			"logo": "/uploads/brands/renault.svg"
+		},
+		{
+			"name": "Škoda",
+			"logo": "/uploads/brands/skoda.svg"
+		},
+		{
+			"name": "BMW",
+			"logo": "/uploads/brands/bmw.svg"
+		},
+		{
+			"name": "Hyundai",
+			"logo": "/uploads/brands/hyundai.svg"
+		},
+		{
+			"name": "Audi",
+			"logo": "/uploads/brands/audi.svg"
+		},
+		{
+			"name": "Nissan",
+			"logo": "/uploads/brands/nissan.svg"
+		},
+		{
+			"name": "Ford",
+			"logo": "/uploads/brands/ford.svg"
+		},
+		{
+			"name": "BYD",
+			"logo": "/uploads/brands/byd.svg"
+		},
+		{
+			"name": "Mazda",
+			"logo": "/uploads/brands/mazda.svg"
+		},
+		{
+			"name": "Honda",
+			"logo": "/uploads/brands/honda.svg"
+		},
+		{
+			"name": "Kia",
+			"logo": "/uploads/brands/kia.svg"
+		},
+		{
+			"name": "Mercedes-Benz",
+			"logo": "/uploads/brands/mercedes-benz.svg"
+		},
+		{
+			"name": "Tesla",
+			"logo": "/uploads/brands/tesla.svg"
+		},
+		{
+			"name": "Suzuki",
+			"logo": "/uploads/brands/suzuki.svg"
+		}
+	]
+}

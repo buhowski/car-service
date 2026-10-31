@@ -1,0 +1,79 @@
+---
+import seo from '../../../content/seo.json';
+import { formatText, site } from '../../../data/site';
+
+interface Props {
+	title?: string;
+	description?: string;
+	canonicalUrl?: string;
+	image?: string;
+	imageAlt?: string;
+	noIndex?: boolean;
+}
+
+const cityLocative = 'Львів';
+const { title, description, canonicalUrl, image, imageAlt, noIndex = false } = Astro.props;
+const titleText = formatText(title ?? seo.title, { name: site.name, city: site.city });
+const descriptionText = formatText(description ?? seo.description, {
+	name: site.name,
+	city: site.city,
+	cityLocative: cityLocative,
+	phone: site.phone.display,
+});
+const canonicalTarget = canonicalUrl ?? seo.canonicalUrl;
+const resolvedCanonicalUrl =
+	canonicalTarget || (Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined);
+const socialImage = image ?? seo.openGraph.image;
+const socialImageAlt = imageAlt ?? seo.openGraph.imageAlt;
+const resolvedSocialImage = socialImage
+	? new URL(socialImage, Astro.site ?? Astro.url).toString()
+	: undefined;
+const openGraphTitle = formatText(seo.openGraph.title || titleText, {
+	name: site.name,
+	city: site.city,
+	cityLocative: cityLocative,
+});
+const openGraphDescription = formatText(seo.openGraph.description || descriptionText, {
+	name: site.name,
+	city: site.city,
+	cityLocative: cityLocative,
+	phone: site.phone.display,
+});
+const twitterTitle = formatText(seo.twitter.title || openGraphTitle, {
+	name: site.name,
+	city: site.city,
+	cityLocative: cityLocative,
+});
+const twitterDescription = formatText(seo.twitter.description || openGraphDescription, {
+	name: site.name,
+	city: site.city,
+	cityLocative: cityLocative,
+	phone: site.phone.display,
+});
+const twitterImage = seo.twitter.image
+	? new URL(seo.twitter.image, Astro.site ?? Astro.url).toString()
+	: resolvedSocialImage;
+---
+
+<title>{titleText}</title>
+<meta name='description' content={descriptionText} />
+<meta name='robots' content={noIndex ? 'noindex, nofollow' : seo.robots} />
+<meta name='theme-color' content={seo.themeColor} />
+{resolvedCanonicalUrl && <link rel='canonical' href={resolvedCanonicalUrl} />}
+<link rel='icon' type='image/x-icon' href={seo.favicon} />
+<link rel='apple-touch-icon' href={seo.appleTouchIcon} />
+
+<meta property='og:locale' content={seo.openGraph.locale} />
+<meta property='og:type' content={seo.openGraph.type} />
+<meta property='og:site_name' content={formatText(seo.openGraph.siteName, { name: site.name })} />
+<meta property='og:title' content={openGraphTitle} />
+<meta property='og:description' content={openGraphDescription} />
+{resolvedCanonicalUrl && <meta property='og:url' content={resolvedCanonicalUrl} />}
+{resolvedSocialImage && <meta property='og:image' content={resolvedSocialImage} />}
+{resolvedSocialImage && <meta property='og:image:alt' content={socialImageAlt} />}
+
+<meta name='twitter:card' content={seo.twitter.card} />
+<meta name='twitter:title' content={twitterTitle} />
+<meta name='twitter:description' content={twitterDescription} />
+{twitterImage && <meta name='twitter:image' content={twitterImage} />}
+{twitterImage && <meta name='twitter:image:alt' content={socialImageAlt} />}

@@ -1,0 +1,57 @@
+@use '../../../styles/mixins' as bp;
+@use '../../../styles/variables' as var;
+
+.section-header {
+	width: min(100%, 50rem);
+	// .section-header--center
+	&--center {
+		margin-inline: auto;
+		text-align: center;
+	}
+
+	// .section-header__eyebrow
+	&__eyebrow {
+		display: block;
+		font-family: var.$font-display;
+		font-weight: var.$font-weight-semibold;
+		text-transform: var.$text-transform-display;
+		letter-spacing: var.$tracking-widest;
+		font-size: var.$text-xs;
+		color: var.$color-accent;
+		margin: 0 0 var.$space-3;
+	}
+	// .section-header__title
+	&__title {
+		max-width: 24ch;
+	}
+	&--center &__title {
+		margin-inline: auto;
+	}
+	&--center &__description {
+		margin-inline: auto;
+	}
+	// .section-header__description
+	&__description {
+		max-width: 42rem;
+		margin-top: var.$space-4;
+		color: var.$color-text-muted;
+		font-size: var.$text-lg;
+		line-height: var.$line-height-copy-relaxed;
+	}
+}
+
+.section-header + p,
+.section-header + .lead {
+	margin-top: var.$space-4;
+}
+
+.section-header {
+	@include bp.mobile {
+		&__title {
+			max-width: 20ch;
+		}
+		&__description {
+			margin-top: var.$space-3;
+		}
+	}
+}

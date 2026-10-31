@@ -1,0 +1,74 @@
+@use '../../../styles/functions' as fn;
+@use '../../../styles/mixins' as bp;
+@use '../../../styles/variables' as var;
+
+.services {
+	padding-block: var.$section-space;
+	background: var.$color-paper;
+
+	.section-header__eyebrow {
+		color: var.$color-secondary;
+	}
+
+	.section-header {
+		margin-bottom: var.$space-10;
+	}
+
+	@include bp.tablet-md {
+		padding: 4rem 0;
+
+		.section-header {
+			margin-bottom: var.$space-8;
+		}
+	}
+
+	// .services__catalog
+	&__catalog {
+		display: grid;
+		grid-template-columns: max-content minmax(0, 1fr);
+		align-items: start;
+		column-gap: 1.5rem;
+
+		@include bp.tablet-md {
+			display: block;
+		}
+	}
+
+	// .services__category-list
+	&__category-list {
+		display: grid;
+		align-content: start;
+		gap: 0.55rem;
+
+		@include bp.tablet-md {
+			display: none;
+		}
+	}
+
+	// .services__panel-list
+	&__panel-list {
+		position: sticky;
+		top: fn.rem(105);
+
+		@include bp.tablet-md {
+			display: none;
+		}
+	}
+
+	// .services__mobile-list
+	&__mobile-list {
+		display: none;
+
+		@include bp.tablet-md {
+			display: block;
+		}
+	}
+
+	// .services__entry
+	&__entry {
+		@include bp.tablet-md {
+			display: block;
+			margin-bottom: var.$space-2;
+		}
+	}
+}

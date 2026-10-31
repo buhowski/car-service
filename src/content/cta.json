@@ -1,0 +1,13 @@
+{
+	"eyebrow": "Готові коли ви",
+	"headline": "Запишіться на сервіс сьогодні",
+	"subtext": "Запис у той самий день, прозорі ціни та гарантія, на яку можна розраховувати. Подбаймо, щоб ваше авто працювало якнайкраще.",
+	"background": {
+		"image": "/uploads/video/cta-poster.jpg",
+		"video": "/uploads/video/sto-porshen-cta-video-car-driving.mp4",
+		"mobileVideo": "",
+		"alt": ""
+	},
+	"primaryCta": "Записатися",
+	"secondaryCta": "Зателефонувати"
+}

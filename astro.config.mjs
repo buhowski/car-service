@@ -1,8 +1,12 @@
 import { defineConfig } from 'astro/config';
+import browserslist from 'browserslist';
+import { browserslistToTargets } from 'lightningcss';
+
+const isBuild = process.argv.includes('build');
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://sto-porshen.pages.dev',
+	site: process.env.SITE_URL ?? 'https://sto-porshen.pages.dev',
 	output: 'static',
 	build: {
 		inlineStylesheets: 'auto',
@@ -14,6 +18,16 @@ export default defineConfig({
 					api: 'modern-compiler',
 				},
 			},
+			// prefixes only in production build
+			...(isBuild && {
+				transformer: 'lightningcss',
+				lightningcss: {
+					targets: browserslistToTargets(browserslist()),
+				},
+			}),
+		},
+		build: {
+			...(isBuild && { cssMinify: 'lightningcss' }),
 		},
 	},
 });

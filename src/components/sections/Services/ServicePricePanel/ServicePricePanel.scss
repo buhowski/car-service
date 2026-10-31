@@ -1,0 +1,115 @@
+@use '../../../../styles/functions' as fn;
+@use '../../../../styles/mixins' as bp;
+@use '../../../../styles/variables' as var;
+
+.service-price-panel {
+	align-self: start;
+	min-width: 0;
+	padding: clamp(1.25rem, 3vw, 2.25rem);
+	animation: service-price-panel-in var.$motion-duration ease both;
+	background: var.$color-light;
+	box-shadow: var.$shadow-md;
+
+	// .service-price-panel__heading
+	&__heading {
+		padding-bottom: 1.2rem;
+		border-bottom: fn.rem(2) solid var.$color-ink;
+	}
+
+	// .service-price-panel__kicker
+	&__kicker {
+		display: block;
+		margin-bottom: 0.4rem;
+		color: var.$color-secondary;
+		font-family: var.$font-display;
+		font-size: var.$text-xs;
+		font-weight: var.$font-weight-semibold;
+		letter-spacing: var.$tracking-widest;
+		text-transform: var.$text-transform-display;
+	}
+
+	// .service-price-panel__list
+	&__list {
+		margin-top: 0.35rem;
+	}
+
+	// .service-price-panel__row
+	&__row {
+		display: grid;
+		min-height: fn.rem(58);
+		grid-template-columns: minmax(0, 1fr) auto auto;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.8rem 0;
+		border-bottom: 1px solid var.$color-line;
+	}
+
+	// .service-price-panel__name
+	&__name {
+		@include bp.tablet-md {
+			font-size: var.$text-sm;
+		}
+	}
+
+	// .service-price-panel__price
+	&__price {
+		color: var.$color-ink;
+		font-size: var.$text-sm;
+		font-weight: var.$font-weight-semibold;
+		white-space: nowrap;
+	}
+
+	// .service-price-panel__order
+	&__order {
+		padding: fn.rem(11) fn.rem(15);
+		font-size: var.$text-sm;
+		letter-spacing: var.$tracking-normal;
+		white-space: nowrap;
+		background: var.$color-ink;
+		color: var.$color-paper;
+
+		&:hover {
+			background: var.$color-ink;
+			color: var.$color-accent;
+		}
+	}
+
+	// .service-price-panel__note
+	&__note {
+		margin: 1.2rem 0 0;
+		color: var.$color-text-muted;
+		font-size: var.$text-xs;
+		text-align: right;
+	}
+
+	@include bp.tablet-md {
+		margin-top: var.$space-2;
+		padding: 1rem;
+
+		&__heading {
+			padding-bottom: 0.9rem;
+		}
+
+		&__row {
+			grid-template-columns: minmax(0, 1fr) auto;
+			gap: 0.8rem 1rem;
+		}
+
+		&__order {
+			grid-column: 1 / -1;
+			justify-self: end;
+		}
+	}
+}
+
+@keyframes service-price-panel-in {
+	from {
+		opacity: 0;
+		transform: translateY(fn.rem(6));
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

@@ -1,0 +1,54 @@
+---
+import './ServicePricePanel.scss';
+import Button from '../../../ui/Button/Button.astro';
+import servicesData from '../../../../content/services.json';
+import { formatText } from '../../../../data/site';
+
+type Service = (typeof servicesData.categories)[number]['services'][number];
+
+interface Props {
+	id: string;
+	triggerId: string;
+	title: string;
+	services: Service[];
+	active?: boolean;
+}
+
+const { id, triggerId, title, services, active = false } = Astro.props;
+---
+
+<div
+	class='service-price-panel'
+	id={id}
+	role='region'
+	aria-labelledby={triggerId}
+	hidden={!active}
+>
+	<div class='service-price-panel__heading'>
+		<div>
+			<span class='service-price-panel__kicker'>{servicesData.ui.panelKicker}</span>
+			<h3>{title}</h3>
+		</div>
+	</div>
+	<div class='service-price-panel__list'>
+		{
+			services.map((service) => (
+				<div class='service-price-panel__row'>
+					<span class='service-price-panel__name'>{service.name}</span>
+					<span class='service-price-panel__price'>{service.price}</span>
+					<Button
+						variant='primary'
+						class='service-price-panel__order'
+						aria-label={formatText(servicesData.ui.orderAriaLabel, { service: service.name })}
+						data-booking-open
+					>
+						{servicesData.ui.orderLabel}
+					</Button>
+				</div>
+			))
+		}
+	</div>
+	<p class='service-price-panel__note'>
+		{servicesData.ui.priceNote}
+	</p>
+</div>

@@ -1,0 +1,32 @@
+---
+import './Hero.scss';
+import Container from '../../ui/Container/Container.astro';
+import Button from '../../ui/Button/Button.astro';
+import BusinessHours from '../../ui/BusinessHours/BusinessHours.astro';
+import BackgroundMedia from '../../ui/BackgroundMedia/BackgroundMedia.astro';
+import { site } from '../../../data/site';
+import content from '../../../content/hero.json';
+const heroData = content;
+const [headlineStart, headlineEnd = ''] = heroData.headline.split(heroData.highlightedWord);
+---
+
+<section class='hero' id='hero' aria-labelledby='hero-heading'>
+	<div class='hero__background'>
+		<BackgroundMedia media={heroData.background} loading='eager' fetchPriority='high' />
+	</div>
+
+	<Container>
+		<BusinessHours class='hero__meta' />
+		<h1 id='hero-heading' class='hero__title'>
+			<span class='hero__title-line'>{headlineStart}</span>
+			<span class='hero__highlight'>{heroData.highlightedWord}</span>{headlineEnd}
+		</h1>
+		<p class='hero__sub'>{heroData.subtext}</p>
+
+		<div class='hero__actions'>
+			<Button variant='primary' data-booking-open>{heroData.primaryCta}</Button>
+
+			<Button variant='secondary' href={site.links.services}>{heroData.secondaryCta}</Button>
+		</div>
+	</Container>
+</section>

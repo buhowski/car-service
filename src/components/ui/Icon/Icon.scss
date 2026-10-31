@@ -1,0 +1,50 @@
+@use '../../../styles/functions' as fn;
+
+$icon-files: (
+	brandMark: 'brandMark.svg',
+	certified: 'certified.svg',
+	circleArrowDown: 'circle-arrow-down.svg',
+	chevronLeft: 'chevronLeft.svg',
+	chevronRight: 'chevronRight.svg',
+	clock: 'clock.svg',
+	close: 'close.svg',
+	'google-maps': 'google-maps.svg',
+	instagram: 'instagram.svg',
+	location: 'location.svg',
+	phone: 'phone.svg',
+	quote: 'quote.svg',
+	speed: 'speed.svg',
+	star: 'star.svg',
+	starOutline: 'star-outline.svg',
+	step1: 'step1.svg',
+	step2: 'step2.svg',
+	step3: 'step3.svg',
+	telegram: 'telegram.svg',
+	viber: 'viber.svg',
+	warranty: 'warranty.svg',
+);
+
+.icon {
+	display: inline-block;
+	flex: none;
+	background-color: currentColor;
+	mask-position: center;
+	mask-repeat: no-repeat;
+	mask-size: contain;
+
+	@each $name, $file in $icon-files {
+		&[data-icon='#{$name}'] {
+			mask-image: url('/uploads/icons/#{$file}');
+		}
+	}
+
+	@each $size in 16, 20, 22, 24 {
+		&[data-width='#{$size}'] {
+			width: fn.rem($size);
+		}
+
+		&[data-height='#{$size}'] {
+			height: fn.rem($size);
+		}
+	}
+}

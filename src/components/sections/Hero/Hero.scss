@@ -1,0 +1,79 @@
+@use '../../../styles/functions' as fn;
+@use '../../../styles/mixins' as bp;
+@use '../../../styles/variables' as var;
+
+.hero {
+	position: relative;
+	display: flex;
+	min-height: 100vh;
+	align-items: center;
+	padding: 12rem 0;
+	background: var.$color-ink;
+	color: var.$color-paper;
+	overflow: hidden;
+
+	@include bp.mobile {
+		padding: 6.5rem 0 5rem;
+
+		.business-hours {
+			font-size: fn.rem(13);
+		}
+	}
+
+	> .container {
+		position: relative;
+		z-index: 2;
+	}
+
+	// .hero__meta
+	&__meta {
+		margin-bottom: var.$space-6;
+	}
+
+	// .hero__background
+	&__background {
+		position: absolute;
+		z-index: 0;
+		inset: 0;
+		@include bp.background-overlay;
+	}
+
+	// .hero__title
+	&__title {
+		margin-bottom: 1.25rem;
+		color: var.$color-paper;
+	}
+
+	// .hero__title-line
+	&__title-line {
+		display: block;
+	}
+
+	// .hero__highlight
+	&__highlight {
+		color: var.$color-accent;
+	}
+
+	// .hero__sub
+	&__sub {
+		max-width: 33rem;
+		margin-bottom: 1.8rem;
+		color: var.$color-text-on-dark;
+		font-size: var.$text-lg;
+	}
+
+	// .hero__actions
+	&__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+
+		@include bp.mobile {
+			margin-bottom: 0;
+		}
+
+		.button {
+			min-width: 240px;
+		}
+	}
+}

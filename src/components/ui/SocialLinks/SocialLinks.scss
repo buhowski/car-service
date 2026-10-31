@@ -1,0 +1,34 @@
+@use '../../../styles/functions' as fn;
+@use '../../../styles/mixins' as bp;
+@use '../../../styles/variables' as var;
+
+.social-links {
+	display: flex;
+	gap: 0.6rem;
+
+	// .social-links__item
+	&__item {
+		@include bp.focus-ring;
+		@include bp.press-feedback(fn.rem(-2));
+		display: grid;
+		width: fn.rem(40);
+		height: fn.rem(40);
+		place-items: center;
+		border: var.$border-width solid rgba(var.$color-paper, 16%);
+		border-radius: var.$radius-sm;
+		background: var.$color-surface-dark;
+		color: var.$color-text-on-dark;
+		text-decoration: none;
+		transition:
+			color var.$motion-duration ease,
+			background-color var.$motion-duration ease,
+			border-color var.$motion-duration ease,
+			transform var.$motion-duration ease;
+
+		&:is(:hover, :focus-visible) {
+			border-color: var.$color-accent;
+			background: var.$color-accent;
+			color: var.$color-ink;
+		}
+	}
+}

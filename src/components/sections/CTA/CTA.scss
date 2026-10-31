@@ -1,0 +1,79 @@
+@use '../../../styles/functions' as fn;
+@use '../../../styles/mixins' as bp;
+@use '../../../styles/variables' as var;
+
+.cta {
+	position: relative;
+	padding-block: var.$section-space;
+	color: var.$color-paper;
+	overflow: hidden;
+
+	// .cta__background
+	&__background {
+		position: absolute;
+		z-index: 1;
+		inset: 0;
+		overflow: hidden;
+		background: var.$color-ink;
+		@include bp.background-overlay;
+	}
+
+	// .cta__chequer
+	&__chequer {
+		position: absolute;
+		z-index: 1;
+		inset: 0 0 auto;
+		height: fn.rem(12);
+		background: conic-gradient(
+			var.$color-paper 25%,
+			var.$color-black 0 50%,
+			var.$color-paper 0 75%,
+			var.$color-black 0
+		);
+		background-position: 0 0;
+		background-size: fn.rem(12) fn.rem(12);
+
+		// .cta__chequer--bottom
+		&--bottom {
+			inset: auto 0 0;
+			background: conic-gradient(
+				var.$color-black 25%,
+				var.$color-accent 0 50%,
+				var.$color-black 0 75%,
+				var.$color-accent 0
+			);
+			background-position: 0 0;
+			background-size: fn.rem(12) fn.rem(12);
+		}
+	}
+
+	// .cta__content
+	&__content {
+		position: relative;
+		z-index: 2;
+		max-width: fn.rem(720);
+		margin-inline: auto;
+		text-align: center;
+
+		.section-header__title {
+			color: var.$color-paper;
+		}
+
+		.section-header__description {
+			color: var.$color-text-on-dark;
+		}
+	}
+
+	// .cta__actions
+	&__actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1.5rem;
+		margin-top: var.$space-8;
+
+		.button {
+			min-width: 200px;
+		}
+	}
+}

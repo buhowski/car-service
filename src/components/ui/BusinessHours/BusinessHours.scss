@@ -1,0 +1,40 @@
+@use '../../../styles/mixins' as bp;
+@use '../../../styles/functions' as fn;
+@use '../../../styles/variables' as var;
+.business-hours {
+	display: flex;
+	width: fit-content;
+	align-items: center;
+	gap: 0.45rem;
+	padding: 0.65rem 0.9rem;
+	border: 1px solid rgba(var.$color-white, 16%);
+	border-radius: var.$radius-sm;
+	background: rgba(var.$color-ink, 30%);
+	backdrop-filter: blur(fn.rem(4));
+	color: var.$color-paper;
+	font-size: fn.rem(14);
+	font-variant-numeric: tabular-nums;
+	font-family: var.$font-display;
+	letter-spacing: var.$tracking-wide;
+}
+
+.business-hours__city {
+	font-weight: inherit;
+}
+
+.business-hours__clock {
+	flex: none;
+	color: var.$color-accent;
+	font-size: fn.rem(16);
+}
+
+.business-hours__schedule {
+	span {
+		display: inline-block;
+	}
+
+	// .business-hours__schedule-dot
+	&-dot {
+		margin-inline: fn.rem(5);
+	}
+}

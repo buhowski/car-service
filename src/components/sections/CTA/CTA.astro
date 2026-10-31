@@ -1,0 +1,41 @@
+---
+import './CTA.scss';
+import Container from '../../ui/Container/Container.astro';
+import Button from '../../ui/Button/Button.astro';
+import SectionHeader from '../../ui/SectionHeader/SectionHeader.astro';
+import BackgroundMedia from '../../ui/BackgroundMedia/BackgroundMedia.astro';
+import { site } from '../../../data/site';
+import content from '../../../content/cta.json';
+const ctaData = content;
+---
+
+<section class='cta' aria-labelledby='cta-heading'>
+	<div class='cta__background' aria-hidden='true'>
+		<BackgroundMedia media={ctaData.background} loading='lazy' />
+	</div>
+	<div class='cta__chequer' aria-hidden='true'></div>
+	<div class='cta__chequer cta__chequer--bottom' aria-hidden='true'></div>
+	<Container>
+		<div class='cta__content'>
+			<SectionHeader
+				id='cta-heading'
+				eyebrow={ctaData.eyebrow}
+				headline={ctaData.headline}
+				description={ctaData.subtext}
+				centered
+			/>
+			<div class='cta__actions'>
+				<Button variant='primary' href={site.links.booking} data-booking-open
+					>{ctaData.primaryCta}</Button
+				>
+				<Button variant='secondary' href={site.phone.href}>{ctaData.secondaryCta}</Button>
+			</div>
+		</div>
+	</Container>
+</section>
+
+<script>
+	import { initLazyMedia } from '../../../scripts/lazy-media';
+
+	initLazyMedia();
+</script>

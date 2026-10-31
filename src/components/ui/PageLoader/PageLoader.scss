@@ -1,0 +1,35 @@
+@use '../../../styles/variables' as var;
+@use '../../../styles/functions' as fn;
+
+.page-loader {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	display: grid;
+	place-items: center;
+	background: var.$color-ink;
+	transition: opacity 0.25s ease, visibility 0.25s ease;
+
+	&.is-hidden {
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
+
+	&__spinner {
+		width: fn.rem(42);
+		aspect-ratio: 1;
+		border: fn.rem(3) solid rgba(var.$color-accent, 22%);
+		border-top-color: var.$color-accent;
+		border-radius: 50%;
+		animation: page-loader-spin 0.75s linear infinite;
+	}
+}
+
+@keyframes page-loader-spin {
+	to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.page-loader__spinner { animation-duration: 1.8s; }
+}

@@ -2,6 +2,9 @@
 	"name": "sto-porshen",
 	"version": "1.0.0",
 	"private": true,
+	"engines": {
+		"node": ">=24"
+	},
 	"packageManager": "yarn@4.18.1",
 	"scripts": {
 		"dev": "astro dev",
@@ -13,16 +16,14 @@
 		"astro": "^7.4.2"
 	},
 	"devDependencies": {
-		"autoprefixer": "^10.6.1",
-		"postcss": "^8.5.31",
+		"browserslist": "^4.29.5",
+		"lightningcss": "^1.33.0",
 		"sass": "^1.106.1",
 		"wrangler": "^4.156.0"
 	},
-	"browserslist": {
-		"production": [
-			"> 0.2%",
-			"last 4 versions",
-			"not dead"
-		]
-	}
+	"browserslist": [
+		"> 0.5%",
+		"last 2 versions",
+		"not dead"
+	]
 }

@@ -293,146 +293,76 @@ content:
               media: uploads
               path: public/uploads
               categories: [image]
-  - name: homepage
-    label: Homepage content
+  - name: hero
+    label: Hero
     type: file
-    path: src/content/homepage.json
+    path: src/content/hero.json
     fields:
-      - name: hero
-        label: Hero
+      - { name: headline, label: Headline, type: string }
+      - { name: highlightedWord, label: Highlighted word, type: string }
+      - { name: subtext, label: Description, type: text }
+      - { name: background, label: Background media, component: backgroundMedia }
+      - { name: primaryCta, label: Primary button, type: string }
+      - { name: secondaryCta, label: Secondary button, type: string }
+  - name: why-choose
+    label: Why choose us
+    type: file
+    path: src/content/why-choose.json
+    fields:
+      - { name: eyebrow, label: Eyebrow, type: string }
+      - { name: headline, label: Headline, type: string }
+      - { name: lead, label: Intro, type: text }
+      - { name: image, label: Image, type: image }
+      - { name: imageAlt, label: Image description, type: string }
+      - name: items
+        label: Benefits
         type: object
+        list: true
         fields:
-          - name: headline
-            label: Headline
-            type: string
-          - name: highlightedWord
-            label: Highlighted word
-            type: string
-          - name: subtext
-            label: Description
-            type: text
-          - name: background
-            label: Background media
-            component: backgroundMedia
-          - name: primaryCta
-            label: Primary button
-            type: string
-          - name: secondaryCta
-            label: Secondary button
-            type: string
-      - name: whyChoose
-        label: Why choose us
+          - { name: icon, label: Icon name, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: description, label: Description, type: text }
+  - name: brands
+    label: Car brands
+    type: file
+    path: src/content/brands.json
+    fields:
+      - { name: eyebrow, label: Eyebrow, type: string }
+      - { name: headline, label: Headline, type: string }
+      - { name: description, label: Description, type: text }
+      - { name: carouselLabel, label: Brand list accessibility label, type: string }
+      - name: items
+        label: Brands
         type: object
+        list: true
         fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: headline
-            label: Headline
-            type: string
-          - name: lead
-            label: Intro
-            type: text
-          - name: image
-            label: Image
-            type: image
-          - name: imageAlt
-            label: Image description
-            type: string
-          - name: items
-            label: Benefits
-            type: object
-            list: true
-            fields:
-              - name: icon
-                label: Icon name
-                type: string
-              - name: title
-                label: Title
-                type: string
-              - name: description
-                label: Description
-                type: text
-      - name: brands
-        label: Car brands
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: headline
-            label: Headline
-            type: string
-          - name: description
-            label: Description
-            type: text
-          - name: carouselLabel
-            label: Brand list accessibility label
-            type: string
-          - name: items
-            label: Brands
-            type: object
-            list: true
-            fields:
-              - name: name
-                label: Brand name
-                type: string
-              - name: logo
-                label: SVG logo
-                type: image
-      - name: cta
-        label: Call to action
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: headline
-            label: Headline
-            type: string
-          - name: subtext
-            label: Description
-            type: text
-          - name: background
-            label: Background media
-            component: backgroundMedia
-          - name: primaryCta
-            label: Primary button
-            type: string
-          - name: secondaryCta
-            label: Secondary button
-            type: string
-      - name: hours
-        label: Contact section
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: headline
-            label: Headline
-            type: string
-          - name: lead
-            label: Description. Use {address} for the address.
-            type: text
-          - name: directionsLabel
-            label: Directions button
-            type: string
-          - name: scheduleTitle
-            label: Schedule heading
-            type: string
-          - name: scheduleAriaLabel
-            label: Schedule accessibility label
-            type: string
-          - name: addressLabel
-            label: Address heading
-            type: string
-          - name: contactLabel
-            label: Contact heading
-            type: string
-          - name: mapTitle
-            label: Map title. Supports {address}.
-            type: string
+          - { name: name, label: Brand name, type: string }
+          - { name: logo, label: SVG logo, type: image }
+  - name: cta
+    label: Call to action
+    type: file
+    path: src/content/cta.json
+    fields:
+      - { name: eyebrow, label: Eyebrow, type: string }
+      - { name: headline, label: Headline, type: string }
+      - { name: subtext, label: Description, type: text }
+      - { name: background, label: Background media, component: backgroundMedia }
+      - { name: primaryCta, label: Primary button, type: string }
+      - { name: secondaryCta, label: Secondary button, type: string }
+  - name: hours-content
+    label: Contact section content
+    type: file
+    path: src/content/hours.json
+    fields:
+      - { name: eyebrow, label: Eyebrow, type: string }
+      - { name: headline, label: Headline, type: string }
+      - { name: lead, label: Description, type: text }
+      - { name: directionsLabel, label: Directions button, type: string }
+      - { name: scheduleTitle, label: Schedule heading, type: string }
+      - { name: scheduleAriaLabel, label: Schedule accessibility label, type: string }
+      - { name: addressLabel, label: Address heading, type: string }
+      - { name: contactLabel, label: Contact heading, type: string }
+      - { name: mapTitle, label: Map title, type: string }
   - name: services
     label: Services and prices
     type: file

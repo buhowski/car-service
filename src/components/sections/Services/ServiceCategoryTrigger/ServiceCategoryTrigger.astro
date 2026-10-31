@@ -1,0 +1,32 @@
+---
+import './ServiceCategoryTrigger.scss';
+import Icon from '../../../ui/Icon/Icon.astro';
+import servicesData from '../../../../content/services.json';
+import { formatText } from '../../../../data/site';
+
+interface Props {
+	category: (typeof servicesData.categories)[number];
+	triggerId: string;
+	panelId: string;
+	active: boolean;
+}
+
+const { category, triggerId, panelId, active } = Astro.props;
+---
+
+<button
+	class:list={['service-category', { 'service-category--active': active }]}
+	id={triggerId}
+	data-service-trigger
+	aria-expanded={active}
+	aria-controls={panelId}
+	type='button'
+>
+	<span class='service-category__copy'>
+		<span class='service-category__title'>{category.title}</span>
+		<span class='service-category__count'>{formatText(servicesData.ui.serviceCountLabel, { count: category.services.length })}</span>
+	</span>
+	<span class='service-category__arrow' aria-hidden='true'>
+		<Icon name='circleArrowDown' width='20' height='20' />
+	</span>
+</button>

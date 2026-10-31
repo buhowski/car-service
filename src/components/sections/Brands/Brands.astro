@@ -3,6 +3,7 @@ import './Brands.scss';
 import Container from '../../ui/Container/Container.astro';
 import SectionHeader from '../../ui/SectionHeader/SectionHeader.astro';
 import content from '../../../content/brands.json';
+import { ui } from '../../../config/ui';
 const brandsData = content;
 ---
 
@@ -20,7 +21,7 @@ const brandsData = content;
 			class='brands__carousel reveal'
 			data-brands-carousel
 			role='region'
-			aria-label={brandsData.carouselLabel}
+			aria-label={ui.brands.carouselLabel}
 		>
 			<div class='brands__track' data-brands-track>
 				{

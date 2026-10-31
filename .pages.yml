@@ -1,21 +1,26 @@
+# MEDIA: where uploads go
 media:
   - name: uploads
     label: Зображення
     input: public/uploads
     output: /uploads
     categories: [image]
+
   - name: video
     label: Відео та постери
     input: public/uploads/video
     output: /uploads/video
     categories: [image, video]
+
   - name: brands
     label: Логотипи марок (SVG)
     input: public/uploads/brands
     output: /uploads/brands
     extensions: [svg]
 
+# COMPONENTS: reusable field sets
 components:
+  # Background for hero and cta (the only places with video)
   backgroundMedia:
     type: object
     fields:
@@ -25,6 +30,7 @@ components:
         options:
           media: video
           categories: [image]
+
       - name: video
         label: Відео для комп'ютера
         type: file
@@ -32,6 +38,7 @@ components:
           media: video
           categories: [video]
           extensions: [mp4, webm]
+
       - name: mobileVideo
         label: Відео для телефону (до 767px)
         description: Необов'язково. Якщо порожньо, телефон показує звичайне відео.
@@ -40,554 +47,486 @@ components:
           media: video
           categories: [video]
           extensions: [mp4, webm]
+
       - name: alt
         label: Опис картинки
         description: Для екранних читачів. Для декоративного фону залиш порожнім.
         type: string
 
-content:
-  - name: site
-    label: Загальні дані сайту
-    type: file
-    path: src/content/site.json
+  # One working day in opening-hours.json
+  workDay:
+    type: object
     fields:
-      - name: brandPrefix
-        label: Початок назви
-        description: Наприклад, "СТО".
+      - name: open
+        label: Відкриваємось
+        description: Формат 09:30. Порожньо = вихідний.
         type: string
-        required: true
-      - name: brandName
-        label: Назва
-        description: Наприклад, "Поршень".
+
+      - name: close
+        label: Зачиняємось
+        description: Формат 19:00. Порожньо = вихідний.
         type: string
-        required: true
-      - name: city
-        label: Місто
-        type: string
-        required: true
-      - name: cityLocative
-        label: Місто у знахідному відмінку ("у Львові")
-        description: Підставляється у тексти як {cityLocative}.
-        type: string
-        required: true
-      - name: phoneNumber
-        label: Телефон
-        description: У міжнародному форматі, наприклад +380668573564. З нього будуються лінки на дзвінок, Viber і Telegram.
-        type: string
-        required: true
-      - name: address
-        label: Адреса
-        type: string
-        required: true
-      - name: mapEmbedUrl
-        label: Посилання на карту Google
-        description: Google Maps > Поділитися > Вбудувати карту > скопіюй тільки адресу з src.
-        type: string
-      - name: instagram
-        label: Instagram (нік без @)
-        description: Якщо порожньо, іконка не показується.
-        type: string
-      - name: warranty
-        label: Гарантія
-        description: Підставляється у тексти як {warranty}. Наприклад, "24 місяці".
-        type: string
-        required: true
-      - name: experience
-        label: Досвід
-        description: Підставляється у тексти як {experience}. Наприклад, "10 років".
-        type: string
-      - name: navigation
-        label: Меню
-        type: object
-        list: true
+
+# CONTENT: sidebar in the editor
+content:
+  # GROUP 1: page sections (same order as on the page)
+
+  - name: sections
+    label: Контент сторінки
+    type: group
+    items:
+      # Hero
+      - name: hero
+        label: Перший екран
+        type: file
+        path: src/content/hero.json
         fields:
-          - name: href
-            label: Якір розділу
-            description: Наприклад, #services. Має збігатися з id розділу на сторінці.
-            type: string
-          - name: label
-            label: Назва пункту
-            type: string
-      - name: footerAbout
-        label: Короткий опис у футері
-        type: text
-      - name: booking
-        label: Форма запису
-        type: object
-        required: true
-        fields:
-          - name: title
+          - name: headline
             label: Заголовок
             type: string
             required: true
-          - name: intro
-            label: Вступний текст
-            type: text
-            required: true
-          - name: optionalLabel
-            label: Позначка необов'язкового поля
-            type: string
-            required: true
-          - name: submitLabel
-            label: Кнопка відправки
-            type: string
-            required: true
-          - name: namePlaceholder
-            label: Підказка у полі імені
-            type: string
-            required: true
-          - name: phonePlaceholder
-            label: Підказка у полі телефону
-            type: string
-            required: true
-          - name: notePlaceholder
-            label: Підказка у полі опису
-            type: string
-            required: true
-          - name: successMessage
-            label: Повідомлення про успіх
-            type: text
-            required: true
-          - name: loadingMessage
-            label: Повідомлення під час відправки
-            type: string
-            required: true
-          - name: errorMessage
-            label: Повідомлення про помилку
-            type: text
-            required: true
-      - name: ui
-        label: Службові тексти (змінюються рідко)
-        type: object
-        fields:
-          - name: brandHomeLabel
-            label: Підпис лого для екранних читачів
-            description: Підтримує {name}.
-            type: string
-          - name: bookingCloseLabel
-            label: Кнопка "Закрити форму"
-            type: string
-          - name: nameLabel
-            label: Поле "Ім'я"
-            type: string
-          - name: phoneLabel
-            label: Поле "Телефон"
-            type: string
-          - name: noteLabel
-            label: Поле "Що потрібно зробити"
-            type: string
-          - name: contactMethodLegend
-            label: Заголовок вибору способу зв'язку
-            type: string
-          - name: contactMethods
-            label: Способи зв'язку
-            type: string
-            list: true
-          - name: alternativeContact
-            label: Заголовок "Або зв'яжіться з нами"
-            type: string
-          - name: headerNavLabel
-            label: Підпис головного меню
-            type: string
-          - name: mobileNavLabel
-            label: Підпис мобільного меню
-            type: string
-          - name: openMenuLabel
-            label: Кнопка "Відкрити меню"
-            type: string
-          - name: closeMenuLabel
-            label: Кнопка "Закрити меню"
-            type: string
-          - name: bookingButtonLabel
-            label: Кнопка "Записатися"
-            type: string
-          - name: phoneAccessibleLabel
-            label: Підпис телефону для екранних читачів
-            description: Підтримує {phone}.
-            type: string
-          - name: phoneTitle
-            label: Підказка на телефоні
-            type: string
-          - name: socialNavLabel
-            label: Підпис блоку соцмереж
-            type: string
-          - name: contactSocialNavLabel
-            label: Підпис блоку телефону і соцмереж
-            type: string
-          - name: footerContactLabel
-            label: Підпис контактів у футері
-            type: string
-          - name: viberLabel
-            label: Підпис лінка Viber
-            type: string
-          - name: telegramLabel
-            label: Підпис лінка Telegram
-            type: string
-          - name: instagramLabel
-            label: Підпис лінка Instagram
-            description: Підтримує {name}.
-            type: string
-          - name: copyright
-            label: Копірайт
-            description: Підтримує {year} і {name}.
-            type: string
-          - name: loaderLabel
-            label: Підпис завантаження сторінки
+
+          - name: headlineAccent
+            label: Виділена частина заголовка
+            description: Показується другим рядком, кольором.
             type: string
 
-  - name: hero
-    label: Перший екран
-    type: file
-    path: src/content/hero.json
-    fields:
-      - name: headline
-        label: Заголовок
-        type: string
-        required: true
-      - name: headlineAccent
-        label: Виділена частина заголовка
-        description: Показується другим рядком, кольором.
-        type: string
-      - name: subtext
-        label: Опис
-        description: Підтримує {warranty}.
-        type: text
-      - name: background
-        label: Фон (відео або картинка)
-        component: backgroundMedia
-      - name: primaryCta
-        label: Головна кнопка
-        type: string
-        required: true
-      - name: secondaryCta
-        label: Друга кнопка
-        type: string
+          - name: subtext
+            label: Опис
+            description: Підтримує {warranty}.
+            type: text
 
-  - name: services
-    label: Послуги та ціни
-    type: file
-    path: src/content/services.json
-    fields:
-      - name: eyebrow
-        label: Малий надзаголовок
-        type: string
-      - name: headline
-        label: Заголовок
-        type: string
-        required: true
-      - name: ui
-        label: Службові тексти
-        type: object
+          - name: background
+            label: Фон (відео або картинка)
+            component: backgroundMedia
+
+          - name: primaryCta
+            label: Головна кнопка
+            type: string
+            required: true
+
+          - name: secondaryCta
+            label: Друга кнопка
+            type: string
+
+      # Services
+      - name: services
+        label: Послуги та ціни
+        type: file
+        path: src/content/services.json
         fields:
-          - name: serviceCountLabel
-            label: Кількість послуг у категорії
-            description: Підтримує {count}.
+          - name: eyebrow
+            label: Малий надзаголовок
             type: string
-          - name: panelKicker
-            label: Заголовок панелі з цінами
+
+          - name: headline
+            label: Заголовок
             type: string
-          - name: orderLabel
-            label: Кнопка "Замовити"
-            type: string
-          - name: orderAriaLabel
-            label: Підпис кнопки для екранних читачів
-            description: Підтримує {service}.
-            type: string
-          - name: priceFromLabel
-            label: Слово перед ціною "від"
-            type: string
-          - name: currencyLabel
-            label: Валюта
-            type: string
+            required: true
+
           - name: priceNote
             label: Примітка до цін
             type: text
-      - name: categories
-        label: Категорії
-        type: object
-        list: true
+
+          - name: categories
+            label: Категорії
+            type: object
+            list: true
+            fields:
+              - name: id
+                label: Код категорії
+                description: Латиницею, без пробілів, унікальний. Наприклад, brakes.
+                type: string
+                required: true
+
+              - name: title
+                label: Назва категорії
+                type: string
+                required: true
+
+              - name: services
+                label: Послуги
+                type: object
+                list: true
+                fields:
+                  - name: name
+                    label: Назва послуги
+                    type: string
+                    required: true
+
+                  - name: price
+                    label: Ціна, грн
+                    type: number
+                    required: true
+
+                  - name: from
+                    label: Ціна "від"
+                    type: boolean
+
+      # Why choose us ---------------
+      - name: why-choose
+        label: Чому ми
+        type: file
+        path: src/content/why-choose.json
         fields:
-          - name: id
-            label: Код категорії
-            description: Латиницею, без пробілів, унікальний. Наприклад, brakes.
+          - name: eyebrow
+            label: Малий надзаголовок
+            type: string
+
+          - name: headline
+            label: Заголовок
             type: string
             required: true
-          - name: title
-            label: Назва категорії
+
+          - name: lead
+            label: Вступний текст
+            description: Підтримує {cityLocative} і {experience}.
+            type: text
+
+          - name: image
+            label: Картинка
+            type: image
+            options:
+              media: uploads
+
+          - name: imageAlt
+            label: Опис картинки
+            type: string
+
+          - name: items
+            label: Переваги
+            type: object
+            list: true
+            fields:
+              - name: icon
+                label: Іконка
+                type: select
+                options:
+                  values:
+                    - { value: certified, label: Сертифікат }
+                    - { value: quote, label: Кошторис }
+                    - { value: warranty, label: Гарантія }
+                    - { value: speed, label: Швидкість }
+
+              - name: title
+                label: Заголовок
+                description: Підтримує {warranty}.
+                type: string
+
+              - name: description
+                label: Опис
+                description: Підтримує {warranty}.
+                type: text
+
+      # Brands
+      - name: brands
+        label: Марки авто
+        type: file
+        path: src/content/brands.json
+        fields:
+          - name: eyebrow
+            label: Малий надзаголовок
+            type: string
+
+          - name: headline
+            label: Заголовок
             type: string
             required: true
-          - name: services
-            label: Послуги
+
+          - name: description
+            label: Опис
+            type: text
+
+          - name: items
+            label: Марки
             type: object
             list: true
             fields:
               - name: name
-                label: Назва послуги
+                label: Назва марки
                 type: string
                 required: true
-              - name: price
-                label: Ціна, грн
-                type: number
-                required: true
-              - name: from
-                label: Ціна "від"
-                type: boolean
 
-  - name: why-choose
-    label: Чому ми
-    type: file
-    path: src/content/why-choose.json
-    fields:
-      - name: eyebrow
-        label: Малий надзаголовок
-        type: string
-      - name: headline
-        label: Заголовок
-        type: string
-        required: true
-      - name: lead
-        label: Вступний текст
-        description: Підтримує {cityLocative} і {experience}.
-        type: text
-      - name: image
-        label: Картинка
-        type: image
-        options:
-          media: uploads
-      - name: imageAlt
-        label: Опис картинки
-        type: string
-      - name: items
-        label: Переваги
-        type: object
-        list: true
+              - name: logo
+                label: Логотип (SVG)
+                type: image
+                options:
+                  media: brands
+
+      # CTA
+      - name: cta
+        label: Заклик до запису
+        type: file
+        path: src/content/cta.json
         fields:
-          - name: icon
-            label: Іконка
-            type: select
-            options:
-              values:
-                - { value: certified, label: Сертифікат }
-                - { value: quote, label: Кошторис }
-                - { value: warranty, label: Гарантія }
-                - { value: speed, label: Швидкість }
-          - name: title
-            label: Заголовок
-            description: Підтримує {warranty}.
+          - name: eyebrow
+            label: Малий надзаголовок
             type: string
-          - name: description
+
+          - name: headline
+            label: Заголовок
+            type: string
+            required: true
+
+          - name: subtext
             label: Опис
-            description: Підтримує {warranty}.
             type: text
 
-  - name: brands
-    label: Марки авто
-    type: file
-    path: src/content/brands.json
-    fields:
-      - name: eyebrow
-        label: Малий надзаголовок
-        type: string
-      - name: headline
-        label: Заголовок
-        type: string
-        required: true
-      - name: description
-        label: Опис
-        type: text
-      - name: carouselLabel
-        label: Підпис списку марок для екранних читачів
-        type: string
-      - name: items
-        label: Марки
-        type: object
-        list: true
-        fields:
-          - name: name
-            label: Назва марки
+          - name: background
+            label: Фон (відео або картинка)
+            component: backgroundMedia
+
+          - name: primaryCta
+            label: Головна кнопка
             type: string
             required: true
-          - name: logo
-            label: Логотип (SVG)
-            type: image
-            options:
-              media: brands
 
-  - name: cta
-    label: Заклик до запису
-    type: file
-    path: src/content/cta.json
-    fields:
-      - name: eyebrow
-        label: Малий надзаголовок
-        type: string
-      - name: headline
-        label: Заголовок
-        type: string
-        required: true
-      - name: subtext
-        label: Опис
-        type: text
-      - name: background
-        label: Фон (відео або картинка)
-        component: backgroundMedia
-      - name: primaryCta
-        label: Головна кнопка
-        type: string
-        required: true
-      - name: secondaryCta
-        label: Друга кнопка
-        type: string
+          - name: secondaryCta
+            label: Друга кнопка
+            type: string
 
-  - name: hours
-    label: Контакти (тексти розділу)
-    type: file
-    path: src/content/hours.json
-    fields:
-      - name: eyebrow
-        label: Малий надзаголовок
-        type: string
-      - name: headline
-        label: Заголовок
-        type: string
-        required: true
-      - name: lead
-        label: Опис
-        description: Підтримує {address}.
-        type: text
-      - name: directionsLabel
-        label: Кнопка "Маршрут"
-        type: string
-      - name: scheduleTitle
-        label: Заголовок графіка
-        type: string
-      - name: scheduleAriaLabel
-        label: Підпис графіка для екранних читачів
-        type: string
-      - name: addressLabel
-        label: Заголовок "Адреса"
-        type: string
-      - name: contactLabel
-        label: Заголовок "Контакти"
-        type: string
-      - name: mapTitle
-        label: Назва карти
-        description: Підтримує {address}.
-        type: string
-
-  - name: opening-hours
-    label: Графік роботи
-    type: file
-    path: src/content/opening-hours.json
-    fields:
-      - name: closedLabel
-        label: Підпис вихідного ("Зачинено")
-        type: string
-      - name: groups
-        label: Групи днів
-        type: object
-        list: true
+      # Contacts (texts only; schedule is in settings)
+      - name: hours
+        label: Контакти (тексти розділу)
+        type: file
+        path: src/content/hours.json
         fields:
-          - name: label
-            label: Назва групи
-            description: Наприклад, "Пн–Пт".
+          - name: eyebrow
+            label: Малий надзаголовок
+            type: string
+
+          - name: headline
+            label: Заголовок
             type: string
             required: true
-          - name: days
-            label: Дні тижня числами
-            description: Пн=1, Вт=2, Ср=3, Чт=4, Пт=5, Сб=6, Нд=0.
-            type: number
+
+          - name: lead
+            label: Опис
+            description: Підтримує {address}.
+            type: text
+
+  # GROUP 2: settings (rarely changed)
+  - name: settings
+    label: Налаштування
+    type: group
+    items:
+      # Site
+      - name: site
+        label: Загальні дані сайту
+        type: file
+        path: src/content/site.json
+        fields:
+          - name: brandPrefix
+            label: Початок назви
+            description: Наприклад, "СТО".
+            type: string
+            required: true
+
+          - name: brandName
+            label: Назва
+            description: Наприклад, "Поршень".
+            type: string
+            required: true
+
+          - name: city
+            label: Місто
+            type: string
+            required: true
+
+          - name: cityLocative
+            label: Місто у місцевому відмінку ("у Львові")
+            description: Підставляється у тексти як {cityLocative}.
+            type: string
+            required: true
+
+          - name: phoneNumber
+            label: Телефон
+            description: У міжнародному форматі, наприклад +380668573564. З нього будуються лінки на дзвінок, Viber і Telegram.
+            type: string
+            required: true
+
+          - name: address
+            label: Адреса
+            type: string
+            required: true
+
+          - name: mapEmbedUrl
+            label: Посилання на карту Google
+            description: Google Maps > Поділитися > Вбудувати карту > скопіюй тільки адресу з src.
+            type: string
+
+          - name: instagram
+            label: Instagram (нік без @)
+            description: Якщо порожньо, іконка не показується.
+            type: string
+
+          - name: warranty
+            label: Гарантія
+            description: Підставляється у тексти як {warranty}. Наприклад, "24 місяці".
+            type: string
+            required: true
+
+          - name: experience
+            label: Досвід
+            description: Підставляється у тексти як {experience}. Наприклад, "10 років".
+            type: string
+
+          - name: navigation
+            label: Меню
+            type: object
             list: true
+            fields:
+              - name: href
+                label: Якір розділу
+                description: Наприклад, #services. Має збігатися з id розділу на сторінці.
+                type: string
+
+              - name: label
+                label: Назва пункту
+                type: string
+
+          - name: footerAbout
+            label: Короткий опис у футері
+            type: text
+
+          - name: booking
+            label: Форма запису
+            type: object
             required: true
-          - name: open
-            label: Відкриваємось
-            description: Формат 09:30. Для вихідного залиш порожнім.
-            type: string
-          - name: close
-            label: Зачиняємось
-            description: Формат 19:00. Для вихідного залиш порожнім.
+            fields:
+              - name: title
+                label: Заголовок
+                type: string
+                required: true
+
+              - name: intro
+                label: Вступний текст
+                type: text
+                required: true
+
+              - name: successMessage
+                label: Повідомлення про успіх
+                type: text
+                required: true
+
+              - name: errorMessage
+                label: Повідомлення про помилку
+                type: text
+                required: true
+
+      # Opening hours (7 fixed days, empty = closed) --
+      - name: opening-hours
+        label: Графік роботи
+        type: file
+        path: src/content/opening-hours.json
+        fields:
+          - { name: mon, label: Понеділок, component: workDay }
+          - { name: tue, label: Вівторок, component: workDay }
+          - { name: wed, label: Середа, component: workDay }
+          - { name: thu, label: Четвер, component: workDay }
+          - { name: fri, label: "П'ятниця", component: workDay }
+          - { name: sat, label: Субота, component: workDay }
+          - { name: sun, label: Неділя, component: workDay }
+
+      # SEO (to be reworked later) --
+      - name: seo
+        label: SEO і прев'ю у соцмережах
+        type: file
+        path: src/content/seo.json
+        fields:
+          - name: language
+            label: Мова сторінки
             type: string
 
-  - name: seo
-    label: SEO і прев'ю у соцмережах
-    type: file
-    path: src/content/seo.json
-    fields:
-      - name: language
-        label: Мова сторінки
-        type: string
-      - name: title
-        label: Заголовок сторінки
-        description: Підтримує {name} і {city}.
-        type: string
-      - name: description
-        label: Опис для пошуку
-        description: Підтримує {name}, {city} і {phone}.
-        type: text
-      - name: canonicalUrl
-        label: Канонічне посилання
-        description: Порожньо = адреса поточної сторінки.
-        type: string
-      - name: robots
-        label: Індексація
-        type: string
-      - name: themeColor
-        label: Колір браузера
-        type: string
-      - name: favicon
-        label: Іконка сайту
-        type: string
-      - name: appleTouchIcon
-        label: Іконка для iPhone
-        type: string
-      - name: openGraph
-        label: Прев'ю у соцмережах
-        type: object
-        fields:
-          - name: locale
-            label: Локаль
-            type: string
-          - name: type
-            label: Тип
-            type: string
-          - name: siteName
-            label: Назва сайту
-            description: Підтримує {name}.
-            type: string
           - name: title
-            label: Заголовок
-            description: Порожньо = заголовок сторінки.
+            label: Заголовок сторінки
+            description: Підтримує {name} і {city}.
             type: string
+
           - name: description
-            label: Опис
-            description: Порожньо = опис для пошуку.
+            label: Опис для пошуку
+            description: Підтримує {name}, {city} і {phone}.
             type: text
-          - name: image
-            label: Картинка
-            type: image
-            options:
-              media: uploads
-          - name: imageAlt
-            label: Опис картинки
+
+          - name: canonicalUrl
+            label: Канонічне посилання
+            description: Порожньо = адреса поточної сторінки.
             type: string
-      - name: twitter
-        label: Прев'ю в X (Twitter)
-        type: object
-        fields:
-          - name: card
-            label: Тип картки
+
+          - name: robots
+            label: Індексація
             type: string
-          - name: title
-            label: Заголовок
-            description: Порожньо = заголовок прев'ю.
+
+          - name: themeColor
+            label: Колір браузера
             type: string
-          - name: description
-            label: Опис
-            description: Порожньо = опис прев'ю.
-            type: text
-          - name: image
-            label: Картинка
-            description: Порожньо = картинка прев'ю.
-            type: image
-            options:
-              media: uploads
+
+          - name: favicon
+            label: Іконка сайту
+            type: string
+
+          - name: appleTouchIcon
+            label: Іконка для iPhone
+            type: string
+
+          - name: openGraph
+            label: Прев'ю у соцмережах
+            type: object
+            fields:
+              - name: locale
+                label: Локаль
+                type: string
+
+              - name: type
+                label: Тип
+                type: string
+
+              - name: siteName
+                label: Назва сайту
+                description: Підтримує {name}.
+                type: string
+
+              - name: title
+                label: Заголовок
+                description: Порожньо = заголовок сторінки.
+                type: string
+
+              - name: description
+                label: Опис
+                description: Порожньо = опис для пошуку.
+                type: text
+
+              - name: image
+                label: Картинка
+                type: image
+                options:
+                  media: uploads
+
+              - name: imageAlt
+                label: Опис картинки
+                type: string
+
+          - name: twitter
+            label: Прев'ю в X (Twitter)
+            type: object
+            fields:
+              - name: card
+                label: Тип картки
+                type: string
+
+              - name: title
+                label: Заголовок
+                description: Порожньо = заголовок прев'ю.
+                type: string
+
+              - name: description
+                label: Опис
+                description: Порожньо = опис прев'ю.
+                type: text
+
+              - name: image
+                label: Картинка
+                description: Порожньо = картинка прев'ю.
+                type: image
+                options:
+                  media: uploads

@@ -6,11 +6,12 @@ import Brand from '../ui/Brand/Brand.astro';
 import Icon from '../ui/Icon/Icon.astro';
 import NavLinks from '../ui/NavLinks/NavLinks.astro';
 import SocialLinks from '../ui/SocialLinks/SocialLinks.astro';
-import { site, siteSettings } from '../../data/site';
+import { site } from '../../data/site';
+import { ui } from '../../config/ui';
 ---
 
 	<header class='header' role='banner' data-site-header>
-	<nav class='header__nav' aria-label={siteSettings.ui.headerNavLabel}>
+	<nav class='header__nav' aria-label={ui.common.headerNavLabel}>
 		<Container>
 			<Brand class='header__brand' />
 
@@ -24,7 +25,7 @@ import { site, siteSettings } from '../../data/site';
 				class='header__burger'
 				data-nav-toggle
 				type='button'
-				aria-label={siteSettings.ui.openMenuLabel}
+				aria-label={ui.common.openMenuLabel}
 				aria-expanded='false'
 				aria-controls='mobileMenu'
 			>
@@ -38,14 +39,14 @@ import { site, siteSettings } from '../../data/site';
 
 <div class='header__overlay' data-nav-overlay aria-hidden='true'></div>
 
-<nav class='header__mobile' id='mobileMenu' data-nav-menu aria-label={siteSettings.ui.mobileNavLabel}>
-	<button class='header__mobile-close' data-nav-close aria-label={siteSettings.ui.closeMenuLabel} aria-controls='mobileMenu'>
+<nav class='header__mobile' id='mobileMenu' data-nav-menu aria-label={ui.common.mobileNavLabel}>
+	<button class='header__mobile-close' data-nav-close aria-label={ui.common.closeMenuLabel} aria-controls='mobileMenu'>
 		<Icon name='close' width='24' height='24' />
 	</button>
 	<NavLinks className='mobile-links' />
 	<SocialLinks className='header__mobile-social' />
 
-	<Button variant='primary' block href={site.links.booking} data-booking-open>{siteSettings.ui.bookingButtonLabel}</Button>
+	<Button variant='primary' block href={site.links.booking} data-booking-open>{ui.common.bookingButtonLabel}</Button>
 </nav>
 
 <script src='../../scripts/header.ts'></script>

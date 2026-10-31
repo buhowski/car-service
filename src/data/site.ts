@@ -1,5 +1,5 @@
 import settings from '../content/site.json';
-import { openingHours } from './openingHours';
+import { ui } from '../config/ui';
 
 const phoneHref = `tel:${settings.phoneNumber}`;
 const formattedPhone = settings.phoneNumber.replace(
@@ -8,14 +8,22 @@ const formattedPhone = settings.phoneNumber.replace(
 );
 const addressLabel = settings.address;
 const businessName = `${settings.brandPrefix} ${settings.brandName}`;
+const phoneDigits = settings.phoneNumber.replace(/\D/g, '');
 
-export const formatText = (template: string, values: Record<string, string | number>) =>
-	template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? `{${key}}`));
-
-const mapCoordinates = {
-	lat: 49.8068669,
-	lng: 24.0550478,
+const textValues = {
+	name: businessName,
+	city: settings.city,
+	cityLocative: settings.cityLocative,
+	warranty: settings.warranty,
+	experience: settings.experience,
+	phone: formattedPhone,
+	address: addressLabel,
 };
+
+export const formatText = (template: string, values: Record<string, string | number> = {}) =>
+	template.replace(/\{(\w+)\}/g, (_, key: string) =>
+		String(values[key] ?? textValues[key as keyof typeof textValues] ?? `{${key}}`),
+	);
 
 export const site = {
 	name: businessName,
@@ -24,29 +32,35 @@ export const site = {
 	phone: { display: formattedPhone, href: phoneHref },
 	address: {
 		full: addressLabel,
-		mapLabel: addressLabel,
 		mapsUrl: `https://maps.google.com/?q=${encodeURIComponent(addressLabel)}`,
 		mapEmbedUrl: settings.mapEmbedUrl,
-		coordinates: mapCoordinates,
-		directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${mapCoordinates.lat}%2C${mapCoordinates.lng}&travelmode=driving`,
+		directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(addressLabel)}&travelmode=driving`,
 	},
-	openingHours,
 	links: {
 		booking: phoneHref,
 		services: '#services',
 	},
 	navigation: settings.navigation,
-	socialLinks: settings.socialLinks.map((link) => ({
-		...link,
-		href:
-			link.icon === 'viber'
-				? `viber://chat?number=${encodeURIComponent(settings.phoneNumber)}`
-				: link.icon === 'telegram'
-					? `https://t.me/+${settings.phoneNumber.replace('+', '')}`
-					: link.href,
-		label: formatText(link.label, { name: businessName }),
-	})),
+	socialLinks: {
+		viber: {
+			href: `viber://chat?number=%2B${phoneDigits}`,
+			label: formatText(ui.common.viberLabel),
+			icon: 'viber' as const,
+		},
+		telegram: {
+			href: `https://t.me/+${phoneDigits}`,
+			label: formatText(ui.common.telegramLabel),
+			icon: 'telegram' as const,
+		},
+		instagram: settings.instagram
+			? {
+					href: `https://www.instagram.com/${settings.instagram}`,
+					label: formatText(ui.common.instagramLabel),
+					icon: 'instagram' as const,
+				}
+			: undefined,
+	},
 } as const;
 
-export const footerAbout = settings.footerAbout;
+export const footerAbout = formatText(settings.footerAbout);
 export const siteSettings = settings;

@@ -6,7 +6,8 @@ import BusinessHours from '../ui/BusinessHours/BusinessHours.astro';
 import Brand from '../ui/Brand/Brand.astro';
 import NavLinks from '../ui/NavLinks/NavLinks.astro';
 import SocialLinks from '../ui/SocialLinks/SocialLinks.astro';
-import { formatText, footerAbout, site, siteSettings } from '../../data/site';
+import { formatText, footerAbout, site } from '../../data/site';
+import { ui } from '../../config/ui';
 
 const year = new Date().getFullYear();
 ---
@@ -22,7 +23,7 @@ const year = new Date().getFullYear();
 
 			<!-- <NavLinks className='footer__nav ' /> -->
 
-			<address class='footer__contact' aria-label={siteSettings.ui.footerContactLabel}>
+			<address class='footer__contact' aria-label={ui.common.footerContactLabel}>
 				<BusinessHours />
 
 				<SocialLinks className='footer__social' />
@@ -31,7 +32,7 @@ const year = new Date().getFullYear();
 
 		<div class='footer__bottom'>
 			<p class='footer__copyright'>
-				{formatText(siteSettings.ui.copyright, { year, name: site.name })}
+				{formatText(ui.common.copyright, { year, name: site.name })}
 			</p>
 
 			<a

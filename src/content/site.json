@@ -24,41 +24,10 @@
 		}
 	],
 	"footerAbout": "Сімейне СТО у {cityLocative}: чесні кошториси, сертифіковані майстри та гарантія {warranty} на кожну роботу.",
-	"ui": {
-		"brandHomeLabel": "{name} — на головну",
-		"bookingCloseLabel": "Закрити форму",
-		"nameLabel": "Ім'я",
-		"phoneLabel": "Телефон",
-		"noteLabel": "Що потрібно зробити?",
-		"contactMethodLegend": "Як зручніше зв'язатись",
-		"contactMethods": ["Telegram", "Viber", "Дзвінок"],
-		"alternativeContact": "Або зв'яжіться з нами:",
-		"headerNavLabel": "Основна навігація",
-		"mobileNavLabel": "Мобільна навігація",
-		"openMenuLabel": "Відкрити меню",
-		"closeMenuLabel": "Закрити меню",
-		"bookingButtonLabel": "Записатися",
-		"phoneAccessibleLabel": "Зателефонувати: {phone}",
-		"phoneTitle": "Телефон",
-		"socialNavLabel": "Соціальні мережі",
-		"contactSocialNavLabel": "Телефон і соціальні мережі",
-		"footerContactLabel": "Контактна інформація",
-		"copyright": "© {year} {name}. Усі права захищено.",
-		"loaderLabel": "Завантаження сторінки",
-		"viberLabel": "Написати у Viber",
-		"telegramLabel": "Написати у Telegram",
-		"instagramLabel": "{name} в Instagram"
-	},
 	"booking": {
 		"title": "Записатися на сервіс",
 		"intro": "Залиште свої контакти, і ми зателефонуємо, щоб узгодити зручний час.",
-		"optionalLabel": "необов'язково",
-		"submitLabel": "Надіслати заявку",
-		"namePlaceholder": "Як до вас звертатися",
-		"phonePlaceholder": "XX XXX XX XX",
-		"notePlaceholder": "Марка авто та короткий опис проблеми",
 		"successMessage": "Дякуємо! Заявку надіслано. Ми скоро з вами зв'яжемося.",
-		"loadingMessage": "Надсилаємо заявку…",
 		"errorMessage": "Не вдалося надіслати заявку. Спробуй ще раз."
 	}
 }

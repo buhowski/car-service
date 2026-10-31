@@ -1,9 +1,9 @@
 ---
 import './PageLoader.scss';
-import { siteSettings } from '../../../data/site';
+import { ui } from '../../../config/ui';
 ---
 
-<div class='page-loader' role='status' aria-label={siteSettings.ui.loaderLabel}>
+<div class='page-loader' role='status' aria-label={ui.common.loaderLabel}>
 	<span class='page-loader__spinner' aria-hidden='true'></span>
 </div>
 

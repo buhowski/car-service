@@ -1,33 +1,34 @@
 ---
 import './SocialLinks.scss';
 import Icon from '../Icon/Icon.astro';
-import { formatText, site, siteSettings } from '../../../data/site';
+import { formatText, site } from '../../../data/site';
+import { ui } from '../../../config/ui';
 
 interface Props {
 	className?: string;
 	socialOnly?: boolean;
 }
 
+type SocialIcon = 'phone' | 'viber' | 'telegram' | 'instagram';
+
 const { className = '', socialOnly = false } = Astro.props;
-const socialLinks = Object.fromEntries(site.socialLinks.map((link) => [link.icon, link]));
 const phoneLink = {
 	href: site.phone.href,
-	label: formatText(siteSettings.ui.phoneAccessibleLabel, { phone: site.phone.display }),
-	title: siteSettings.ui.phoneTitle,
-	icon: 'phone',
-	external: false,
+	label: formatText(ui.common.phoneAccessibleLabel),
+	title: ui.common.phoneTitle,
+	icon: 'phone' as const,
 };
-const links = [
+const links: Array<{ href: string; label: string; title?: string; icon: SocialIcon }> = [
 	...(socialOnly ? [] : [phoneLink]),
-	socialLinks.telegram,
-	socialLinks.viber,
-	socialLinks.instagram,
+	site.socialLinks.telegram,
+	site.socialLinks.viber,
+	...(site.socialLinks.instagram ? [site.socialLinks.instagram] : []),
 ];
 ---
 
 <nav
 	class={`social-links ${className}`.trim()}
-	aria-label={socialOnly ? siteSettings.ui.socialNavLabel : siteSettings.ui.contactSocialNavLabel}
+	aria-label={socialOnly ? ui.common.socialNavLabel : ui.common.contactSocialNavLabel}
 >
 	{
 		links.map((link) => (
@@ -35,9 +36,8 @@ const links = [
 				class='social-links__item'
 				href={link.href}
 				aria-label={link.label}
-				title={link.title}
-				target={link.external ? '_blank' : undefined}
-				rel={link.external ? 'noopener noreferrer' : undefined}
+				target={link.href.startsWith('https://') ? '_blank' : undefined}
+				rel={link.href.startsWith('https://') ? 'noopener noreferrer' : undefined}
 			>
 				<Icon name={link.icon} width='22' height='22' />
 			</a>

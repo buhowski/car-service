@@ -5,49 +5,38 @@ import SectionHeader from '../../ui/SectionHeader/SectionHeader.astro';
 import Icon from '../../ui/Icon/Icon.astro';
 import Button from '../../ui/Button/Button.astro';
 import { formatText, site } from '../../../data/site';
+import { getOpeningHours } from '../../../data/hours';
+import { ui } from '../../../config/ui';
 import content from '../../../content/hours.json';
 
-const hoursContent = content;
-const hoursData = {
-	sectionTitle: { eyebrow: hoursContent.eyebrow, headline: hoursContent.headline },
-	lead: hoursContent.lead.replace('{address}', site.address.mapLabel),
-	hours: site.openingHours,
-	map: {
-		address: site.address.mapLabel,
-		embedUrl: site.address.mapEmbedUrl,
-		directionsUrl: site.address.directionsUrl,
-		directionsLabel: hoursContent.directionsLabel,
+const hours = getOpeningHours();
+const contacts = [
+	{
+		icon: 'location',
+		label: ui.contacts.addressLabel,
+		text: site.address.full,
+		href: site.address.mapsUrl,
 	},
-	contact: [
-		{
-			icon: 'location',
-			label: hoursContent.addressLabel,
-			links: [{ display: site.address.full, href: site.address.mapsUrl }],
-		},
-		{
-			icon: 'phone',
-			label: hoursContent.contactLabel,
-			links: [site.phone],
-		},
-	] as const,
-};
+	{
+		icon: 'phone',
+		label: ui.contacts.contactLabel,
+		text: site.phone.display,
+		href: site.phone.href,
+	},
+];
 ---
 
 <section class='hours' id='visit' aria-labelledby='visit-heading'>
 	<Container>
 		<div class='hours__grid'>
 			<div class='hours__info reveal'>
-				<SectionHeader
-					id='visit-heading'
-					eyebrow={hoursData.sectionTitle.eyebrow}
-					headline={hoursData.sectionTitle.headline}
-				/>
-				<p class='lead hours__lead'>{hoursData.lead}</p>
+				<SectionHeader id='visit-heading' eyebrow={content.eyebrow} headline={content.headline} />
+				<p class='lead hours__lead'>{formatText(content.lead)}</p>
 
 				<div class='hours__contact'>
 					<div class='hours__line'>
 						<Icon name='clock' width='20' height='20' />
-						<span>{hoursContent.scheduleTitle}</span>
+						<span>{ui.contacts.scheduleTitle}</span>
 					</div>
 
 					<div class='hours__details'>
@@ -55,17 +44,16 @@ const hoursData = {
 							class='hours__table'
 							data-hours-table
 							role='list'
-							aria-label={hoursContent.scheduleAriaLabel}
+							aria-label={ui.contacts.scheduleAriaLabel}
 						>
 							{
-								hoursData.hours.map((hour) => (
+								hours.map((h) => (
 									<li
-										class:list={['hours__row', hour.isClosed && 'hours__row--closed']}
-										data-hours-row
-										data-day={hour.weekday}
+										class:list={['hours__row', h.isClosed && 'hours__row--closed']}
+										data-day={h.weekday}
 									>
-										<span class='hours__day'>{hour.day}</span>
-										<span class='hours__time'>{hour.time}</span>
+										<span class='hours__day'>{h.day}</span>
+										<span class='hours__time'>{h.time}</span>
 									</li>
 								))
 							}
@@ -73,23 +61,20 @@ const hoursData = {
 					</div>
 
 					{
-						hoursData.contact.map((item) => (
+						contacts.map((c) => (
 							<div class='hours__line'>
-								<Icon name={item.icon} width='20' height='20' />
+								<Icon name={c.icon} width='20' height='20' />
 								<div>
-									<span>{item.label}</span>
-
+									<span>{c.label}</span>
 									<div class='hours__links'>
-										{item.links.map((link) => (
-											<a
-												class='hours__link'
-												href={link.href}
-												target={link.href.startsWith('http') ? '_blank' : undefined}
-												rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-											>
-												{link.display}
-											</a>
-										))}
+										<a
+											class='hours__link'
+											href={c.href}
+											target={c.href.startsWith('http') ? '_blank' : undefined}
+											rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+										>
+											{c.text}
+										</a>
 									</div>
 								</div>
 							</div>
@@ -97,25 +82,29 @@ const hoursData = {
 					}
 				</div>
 			</div>
+
 			<div class='hours__map reveal'>
 				<iframe
 					class='hours__map-canvas'
-					src={hoursData.map.embedUrl}
+					src={site.address.mapEmbedUrl}
 					loading='lazy'
-					title={formatText(hoursContent.mapTitle, { address: hoursData.map.address })}></iframe>
+					title={formatText(ui.contacts.mapTitle)}></iframe>
 				<Button
 					variant='primary'
 					class='hours__map-route'
-					href={hoursData.map.directionsUrl}
+					href={site.address.directionsUrl}
 					target='_blank'
 					rel='noopener noreferrer'
 				>
 					<Icon name='google-maps' width='20' height='20' />
-					{hoursData.map.directionsLabel}
+					{ui.contacts.directionsLabel}
 				</Button>
 			</div>
 		</div>
 	</Container>
 </section>
 
-<script src='../../../scripts/hours.ts'></script>
+<script>
+	import { highlightToday } from '../../../data/hours';
+	highlightToday();
+</script>

@@ -11,15 +11,9 @@ interface Props {
 	noIndex?: boolean;
 }
 
-const cityLocative = 'Львів';
 const { title, description, canonicalUrl, image, imageAlt, noIndex = false } = Astro.props;
-const titleText = formatText(title ?? seo.title, { name: site.name, city: site.city });
-const descriptionText = formatText(description ?? seo.description, {
-	name: site.name,
-	city: site.city,
-	cityLocative: cityLocative,
-	phone: site.phone.display,
-});
+const titleText = formatText(title ?? seo.title);
+const descriptionText = formatText(description ?? seo.description);
 const canonicalTarget = canonicalUrl ?? seo.canonicalUrl;
 const resolvedCanonicalUrl =
 	canonicalTarget || (Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined);
@@ -28,28 +22,10 @@ const socialImageAlt = imageAlt ?? seo.openGraph.imageAlt;
 const resolvedSocialImage = socialImage
 	? new URL(socialImage, Astro.site ?? Astro.url).toString()
 	: undefined;
-const openGraphTitle = formatText(seo.openGraph.title || titleText, {
-	name: site.name,
-	city: site.city,
-	cityLocative: cityLocative,
-});
-const openGraphDescription = formatText(seo.openGraph.description || descriptionText, {
-	name: site.name,
-	city: site.city,
-	cityLocative: cityLocative,
-	phone: site.phone.display,
-});
-const twitterTitle = formatText(seo.twitter.title || openGraphTitle, {
-	name: site.name,
-	city: site.city,
-	cityLocative: cityLocative,
-});
-const twitterDescription = formatText(seo.twitter.description || openGraphDescription, {
-	name: site.name,
-	city: site.city,
-	cityLocative: cityLocative,
-	phone: site.phone.display,
-});
+const openGraphTitle = formatText(seo.openGraph.title || titleText);
+const openGraphDescription = formatText(seo.openGraph.description || descriptionText);
+const twitterTitle = formatText(seo.twitter.title || openGraphTitle);
+const twitterDescription = formatText(seo.twitter.description || openGraphDescription);
 const twitterImage = seo.twitter.image
 	? new URL(seo.twitter.image, Astro.site ?? Astro.url).toString()
 	: resolvedSocialImage;
@@ -65,7 +41,7 @@ const twitterImage = seo.twitter.image
 
 <meta property='og:locale' content={seo.openGraph.locale} />
 <meta property='og:type' content={seo.openGraph.type} />
-<meta property='og:site_name' content={formatText(seo.openGraph.siteName, { name: site.name })} />
+<meta property='og:site_name' content={formatText(seo.openGraph.siteName)} />
 <meta property='og:title' content={openGraphTitle} />
 <meta property='og:description' content={openGraphDescription} />
 {resolvedCanonicalUrl && <meta property='og:url' content={resolvedCanonicalUrl} />}

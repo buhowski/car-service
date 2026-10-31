@@ -3,6 +3,7 @@ import './WhyChoose.scss';
 import Container from '../../ui/Container/Container.astro';
 import SectionHeader from '../../ui/SectionHeader/SectionHeader.astro';
 import Icon from '../../ui/Icon/Icon.astro';
+import { formatText } from '../../../data/site';
 import content from '../../../content/why-choose.json';
 const whyChooseData = content;
 ---
@@ -23,9 +24,9 @@ const whyChooseData = content;
 				<SectionHeader
 					id="why-choose-heading"
 					eyebrow={whyChooseData.eyebrow}
-					headline={whyChooseData.headline}
+							headline={formatText(whyChooseData.headline)}
         />
-        <p class="lead why-choose__lead">{whyChooseData.lead}</p>
+						<p class="lead why-choose__lead">{formatText(whyChooseData.lead)}</p>
         
         <ul class="why-choose__list" role="list">
           {whyChooseData.items.map((item, index) => (
@@ -34,8 +35,8 @@ const whyChooseData = content;
 									<Icon name={item.icon as 'certified' | 'quote' | 'warranty' | 'speed'} width="24" height="24" />
               </span>
               <div>
-                <h4>{item.title}</h4>
-                <p>{item.description}</p>
+								<h4>{formatText(item.title)}</h4>
+								<p>{formatText(item.description)}</p>
               </div>
             </li>
           ))}

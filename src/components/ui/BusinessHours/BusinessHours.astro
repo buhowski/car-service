@@ -1,17 +1,17 @@
 ---
 import './BusinessHours.scss';
 import { site } from '../../../data/site';
-import { closedLabel, openingSchedule } from '../../../data/openingHours';
+import { ui } from '../../../config/ui';
+import schedule from '../../../content/opening-hours.json';
 
 interface Props {
 	class?: string;
 }
 
 const { class: className = '' } = Astro.props;
-const weekdays = openingSchedule.find((group) => group.days.includes(1));
-const saturday = openingSchedule.find((group) => group.days.includes(6));
-const formatHours = (group?: (typeof openingSchedule)[number]) =>
-	group?.open && group.close ? `${group.open}–${group.close}` : closedLabel;
+const { mon, sat } = schedule;
+const time = ({ open, close }: { open: string; close: string }) =>
+	open && close ? `${open}–${close}` : ui.schedule.closedLabel;
 ---
 
 <div class:list={['business-hours', className]}>
@@ -33,8 +33,8 @@ const formatHours = (group?: (typeof openingSchedule)[number]) =>
 		<polyline points='12 6 12 12 16.5 12'></polyline>
 	</svg>
 	<span class='business-hours__schedule'>
-		<span>{weekdays?.label}: {formatHours(weekdays)}</span>
+		<span>{ui.schedule.weekdaysLabel}: {time(mon)}</span>
 		<span class='business-hours__schedule-dot' aria-hidden='true'> · </span>
-		<span>{saturday?.label}: {formatHours(saturday)}</span>
+		<span>{ui.schedule.saturdayLabel}: {time(sat)}</span>
 	</span>
 </div>

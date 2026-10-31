@@ -4,6 +4,7 @@ import Button from '../Button/Button.astro';
 import Icon from '../Icon/Icon.astro';
 import SocialLinks from '../SocialLinks/SocialLinks.astro';
 import { siteSettings } from '../../../data/site';
+import { ui } from '../../../config/ui';
 
 const settings = siteSettings;
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
@@ -20,7 +21,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 			<button
 				class='booking-modal__close'
 				type='button'
-				aria-label={settings.ui.bookingCloseLabel}
+				aria-label={ui.booking.closeLabel}
 				data-booking-close
 			>
 				<Icon name='close' width='16' height='16' />
@@ -40,12 +41,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 				method='post'
 				data-booking-form
 				data-success-message={settings.booking.successMessage}
-				data-loading-message={settings.booking.loadingMessage}
+				data-loading-message={ui.booking.loadingMessage}
 				data-error-message={settings.booking.errorMessage}
 			>
 				<div class='booking-form__field'>
 					<label for='booking-name'>
-						{settings.ui.nameLabel}
+						{ui.booking.nameLabel}
 						<span class='booking-form__required' aria-hidden='true'>*</span>
 					</label>
 
@@ -57,14 +58,14 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 						class='form-control'
 						minlength='2'
 						maxlength='80'
-						placeholder={settings.booking.namePlaceholder}
+						placeholder={ui.booking.namePlaceholder}
 						required
 					/>
 				</div>
 
 				<div class='booking-form__field'>
 					<label for='booking-phone'>
-						{settings.ui.phoneLabel}
+						{ui.booking.phoneLabel}
 						<span class='booking-form__required' aria-hidden='true'>*</span>
 					</label>
 
@@ -77,7 +78,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 							type='tel'
 							inputmode='numeric'
 							autocomplete='tel-national'
-							placeholder={settings.booking.phonePlaceholder}
+							placeholder={ui.booking.phonePlaceholder}
 							class='form-control'
 							pattern='[0-9]{2} [0-9]{3} [0-9]{2} [0-9]{2}'
 							title='XX XXX XX XX'
@@ -88,8 +89,8 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
 				<div class='booking-form__field'>
 					<label for='booking-note'>
-						{settings.ui.noteLabel}{' '}
-						<span class='booking-form__optional'>({settings.booking.optionalLabel})</span>
+						{ui.booking.noteLabel}{' '}
+						<span class='booking-form__optional'>({ui.booking.optionalLabel})</span>
 					</label>
 
 					<textarea
@@ -98,15 +99,15 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 						rows='3'
 						class='form-control'
 						maxlength='500'
-						placeholder={settings.booking.notePlaceholder}></textarea>
+						placeholder={ui.booking.notePlaceholder}></textarea>
 				</div>
 
 				<fieldset class='booking-form__contact-method'>
-					<legend>{settings.ui.contactMethodLegend}</legend>
+					<legend>{ui.booking.contactMethodLegend}</legend>
 
 					<div class='booking-form__contact-options'>
 						{
-							settings.ui.contactMethods.map((method, index) => (
+							ui.booking.contactMethods.map((method, index) => (
 								<label>
 									<input
 										type='radio'
@@ -134,7 +135,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 				</div>
 
 				<Button variant='primary' block type='submit'>
-					{settings.booking.submitLabel}
+					{ui.booking.submitLabel}
 				</Button>
 
 				<p
@@ -149,7 +150,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
 			<div class='booking-form__alternative'>
 				<p class='booking-form__call'>
-					{settings.ui.alternativeContact}
+					{ui.booking.alternativeContact}
 				</p>
 
 				<SocialLinks className='booking-form__social' />

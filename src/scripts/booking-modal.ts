@@ -34,7 +34,7 @@ function init(): void {
 		return;
 
 	const messages: Record<Exclude<Status, 'idle'>, string> = {
-		success: 'Заявку надіслано',
+		success: 'Заявку надіслано.',
 		error: 'Не вдалося надіслати заявку. Спробуйте ще раз.',
 	};
 

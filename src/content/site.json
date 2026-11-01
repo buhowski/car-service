@@ -19,6 +19,10 @@
 			"label": "Переваги"
 		},
 		{
+			"sectionId": "brands",
+			"label": "Бренди"
+		},
+		{
 			"sectionId": "visit",
 			"label": "Контакти"
 		}

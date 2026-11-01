@@ -86,10 +86,15 @@ content:
             type: string
             required: true
 
-          - name: headlineAccent
+          - name: headlineHighlight
             label: Виділена частина заголовка
-            description: Показується другим рядком, кольором.
             type: string
+            required: true
+
+          - name: headlineSecond
+            label: Другий рядок заголовка
+            type: string
+            required: true
 
           - name: subtext
             label: Опис

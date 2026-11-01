@@ -3,7 +3,7 @@ import './ServiceCategoryTrigger.scss';
 import Icon from '../../../ui/Icon/Icon.astro';
 import servicesData from '../../../../content/services.json';
 import { formatText } from '../../../../data/site';
-import { ui } from '../../../../config/ui';
+import { ui } from '../../../../data/ui';
 
 interface Props {
 	category: (typeof servicesData.categories)[number];
@@ -25,9 +25,11 @@ const { category, triggerId, panelId, active } = Astro.props;
 >
 	<span class='service-category__copy'>
 		<span class='service-category__title'>{category.title}</span>
-		<span class='service-category__count'>{formatText(ui.services.countLabel, { count: category.services.length })}</span>
+		<span class='service-category__count'
+			>{formatText(ui.services.countLabel, { count: category.services.length })}</span
+		>
 	</span>
 	<span class='service-category__arrow' aria-hidden='true'>
-		<Icon name='circleArrowDown' width='20' height='20' />
+		<Icon name='circle-arrow-down' width='20' height='20' />
 	</span>
 </button>

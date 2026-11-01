@@ -2,7 +2,7 @@
 import './SocialLinks.scss';
 import Icon from '../Icon/Icon.astro';
 import { formatText, site } from '../../../data/site';
-import { ui } from '../../../config/ui';
+import { ui } from '../../../data/ui';
 
 interface Props {
 	className?: string;
@@ -11,19 +11,30 @@ interface Props {
 
 type SocialIcon = 'phone' | 'viber' | 'telegram' | 'instagram';
 
+interface SocialLink {
+	href: string;
+	label: string;
+	title?: string;
+	icon: SocialIcon;
+}
+
 const { className = '', socialOnly = false } = Astro.props;
-const phoneLink = {
+
+const phoneLink: SocialLink = {
 	href: site.phone.href,
 	label: formatText(ui.common.phoneAccessibleLabel),
 	title: ui.common.phoneTitle,
-	icon: 'phone' as const,
+	icon: 'phone',
 };
-const links: Array<{ href: string; label: string; title?: string; icon: SocialIcon }> = [
+
+const links: SocialLink[] = [
 	...(socialOnly ? [] : [phoneLink]),
 	site.socialLinks.telegram,
 	site.socialLinks.viber,
-	...(site.socialLinks.instagram ? [site.socialLinks.instagram] : []),
+	site.socialLinks.instagram,
 ];
+
+const isExternalUrl = (href: string) => href.startsWith('https://') || href.startsWith('http://');
 ---
 
 <nav
@@ -36,8 +47,9 @@ const links: Array<{ href: string; label: string; title?: string; icon: SocialIc
 				class='social-links__item'
 				href={link.href}
 				aria-label={link.label}
-				target={link.href.startsWith('https://') ? '_blank' : undefined}
-				rel={link.href.startsWith('https://') ? 'noopener noreferrer' : undefined}
+				title={link.title}
+				target={isExternalUrl(link.href) ? '_blank' : undefined}
+				rel={isExternalUrl(link.href) ? 'noopener noreferrer' : undefined}
 			>
 				<Icon name={link.icon} width='22' height='22' />
 			</a>

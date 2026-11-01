@@ -1,52 +1,26 @@
 ---
 import './Icon.scss';
 
-const iconFiles = {
-	brandMark: 'brandMark.svg',
-	certified: 'certified.svg',
-	circleArrowDown: 'circle-arrow-down.svg',
-	chevronLeft: 'chevronLeft.svg',
-	chevronRight: 'chevronRight.svg',
-	clock: 'clock.svg',
-	close: 'close.svg',
-	'google-maps': 'google-maps.svg',
-	instagram: 'instagram.svg',
-	location: 'location.svg',
-	phone: 'phone.svg',
-	quote: 'quote.svg',
-	speed: 'speed.svg',
-	star: 'star.svg',
-	starOutline: 'star-outline.svg',
-	step1: 'step1.svg',
-	step2: 'step2.svg',
-	step3: 'step3.svg',
-	telegram: 'telegram.svg',
-	viber: 'viber.svg',
-	warranty: 'warranty.svg',
-} as const;
+const icons = import.meta.glob<string>('/src/assets/icons/*.svg', {
+	query: '?raw',
+	import: 'default',
+	eager: true,
+});
 
 interface Props {
-	name: keyof typeof iconFiles;
+	name: string;
 	class?: string;
-	width?: 16 | 20 | 22 | 24 | '16' | '20' | '22' | '24';
-	height?: 16 | 20 | 22 | 24 | '16' | '20' | '22' | '24';
-	'aria-hidden'?: boolean;
+	width?: number | string;
+	height?: number | string;
 }
 
-const {
-	name,
-	class: className = '',
-	width = 24,
-	height = 24,
-	'aria-hidden': ariaHidden = true,
-} = Astro.props;
-
+const { name, class: className = '', width = 24, height = 24 } = Astro.props;
+const svg = icons[`/src/assets/icons/${name}.svg`] ?? icons['/src/assets/icons/default.svg'];
 ---
 
 <span
 	class:list={['icon', className]}
-	data-icon={name in iconFiles ? name : 'brandMark'}
-	data-width={String(width)}
-	data-height={String(height)}
-	aria-hidden={ariaHidden}
-></span>
+	style={{ '--icon-w': `${Number(width) / 16}rem`, '--icon-h': `${Number(height) / 16}rem` }}
+	aria-hidden='true'
+	set:html={svg}
+/>

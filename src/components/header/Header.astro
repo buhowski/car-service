@@ -7,10 +7,10 @@ import Icon from '../ui/Icon/Icon.astro';
 import NavLinks from '../ui/NavLinks/NavLinks.astro';
 import SocialLinks from '../ui/SocialLinks/SocialLinks.astro';
 import { site } from '../../data/site';
-import { ui } from '../../config/ui';
+import { ui } from '../../data/ui';
 ---
 
-	<header class='header' role='banner' data-site-header>
+<header class='header' role='banner' data-site-header>
 	<nav class='header__nav' aria-label={ui.common.headerNavLabel}>
 		<Container>
 			<Brand class='header__brand' />
@@ -40,13 +40,20 @@ import { ui } from '../../config/ui';
 <div class='header__overlay' data-nav-overlay aria-hidden='true'></div>
 
 <nav class='header__mobile' id='mobileMenu' data-nav-menu aria-label={ui.common.mobileNavLabel}>
-	<button class='header__mobile-close' data-nav-close aria-label={ui.common.closeMenuLabel} aria-controls='mobileMenu'>
+	<button
+		class='header__mobile-close'
+		data-nav-close
+		aria-label={ui.common.closeMenuLabel}
+		aria-controls='mobileMenu'
+	>
 		<Icon name='close' width='24' height='24' />
 	</button>
 	<NavLinks className='mobile-links' />
 	<SocialLinks className='header__mobile-social' />
 
-	<Button variant='primary' block href={site.links.booking} data-booking-open>{ui.common.bookingButtonLabel}</Button>
+	<Button variant='primary' block href={site.links.booking} data-booking-open
+		>{ui.common.bookingButtonLabel}</Button
+	>
 </nav>
 
 <script src='../../scripts/header.ts'></script>

@@ -1,5 +1,5 @@
 import schedule from '../content/opening-hours.json';
-import { ui } from '../config/ui';
+import { ui } from './ui';
 
 export const locale = 'uk-UA';
 export const timeZone = 'Europe/Kyiv';

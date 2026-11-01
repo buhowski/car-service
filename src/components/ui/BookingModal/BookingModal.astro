@@ -4,10 +4,14 @@ import Button from '../Button/Button.astro';
 import Icon from '../Icon/Icon.astro';
 import SocialLinks from '../SocialLinks/SocialLinks.astro';
 import { siteSettings } from '../../../data/site';
-import { ui } from '../../../config/ui';
+import { ui } from '../../../data/ui';
 
 const settings = siteSettings;
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+// DeV TEST
+// const turnstileSiteKey = import.meta.env.DEV
+// 	? '1x00000000000000000000AA'
+// 	: import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
 <dialog
@@ -35,19 +39,11 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 				{settings.booking.intro}
 			</p>
 
-			<form
-				class='booking-form'
-				action='/api/booking'
-				method='post'
-				data-booking-form
-				data-success-message={settings.booking.successMessage}
-				data-loading-message={ui.booking.loadingMessage}
-				data-error-message={settings.booking.errorMessage}
-			>
+			<form class='booking-form' action='/api/booking' method='post' data-booking-form>
 				<div class='booking-form__field'>
 					<label for='booking-name'>
 						{ui.booking.nameLabel}
-						<span class='booking-form__required' aria-hidden='true'>*</span>
+						<span class='booking-form__required' aria-hidden='true'> *</span>
 					</label>
 
 					<input
@@ -66,7 +62,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 				<div class='booking-form__field'>
 					<label for='booking-phone'>
 						{ui.booking.phoneLabel}
-						<span class='booking-form__required' aria-hidden='true'>*</span>
+						<span class='booking-form__required' aria-hidden='true'> *</span>
 					</label>
 
 					<div class='booking-form__phone'>
@@ -123,29 +119,32 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 					</div>
 				</fieldset>
 
-				<div class='booking-form__hp' aria-hidden='true'>
-					<input type='text' name='website' tabindex='-1' autocomplete='off' />
-				</div>
+				<div class='booking-form__check'>
+					<div class='booking-form__hp' aria-hidden='true'>
+						<input type='text' name='website' tabindex='-1' autocomplete='off' />
+					</div>
 
-				<div
-					class='cf-turnstile'
-					data-sitekey={turnstileSiteKey}
-					data-appearance='interaction-only'
-				>
+					<div
+						class='cf-turnstile'
+						data-sitekey={turnstileSiteKey}
+						data-appearance='interaction-only'
+					>
+					</div>
 				</div>
 
 				<Button variant='primary' block type='submit'>
-					{ui.booking.submitLabel}
+					<span data-submit-label>{ui.booking.submitLabel}</span>
 				</Button>
 
-				<p
+				<div
 					class='booking-form__status'
 					data-booking-status
 					data-state='idle'
 					role='status'
 					aria-live='polite'
 				>
-				</p>
+					<p data-booking-status-text></p>
+				</div>
 			</form>
 
 			<div class='booking-form__alternative'>

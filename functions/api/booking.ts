@@ -1,4 +1,4 @@
-import { siteSettings } from '../../src/data/site';
+import { ui } from '../../src/data/ui';
 
 interface Env {
 	TELEGRAM_BOT_TOKEN: string;
@@ -15,7 +15,7 @@ const MAX_BODY_SIZE = 4096;
 const TELEGRAM_TIMEOUT_MS = 8000;
 const TURNSTILE_TIMEOUT_MS = 5000;
 const TURNSTILE_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
-const CONTACT_METHODS = new Set<string>(siteSettings.ui.contactMethods);
+const CONTACT_METHODS = new Set<string>(ui.booking.contactMethods);
 
 function jsonResponse(data: { ok: boolean }, status = 200): Response {
 	return new Response(JSON.stringify(data), {
@@ -148,12 +148,12 @@ export async function onRequest({ request, env }: PagesContext): Promise<Respons
 	const viberLink = `${url.origin}/viber?phone=${fullPhone}`;
 
 	const message = [
-		'<b>Нова заявка</b>',
-		'',
+		'\u2800',
 		`<b>Ім’я:</b> ${escapeHtml(name)}`,
 		`<b>Телефон:</b> +${fullPhone}`,
 		`<b>Зв’язок:</b> ${escapeHtml(contactMethod)}`,
-		...(note ? ['', '<b>Коментар</b>', `<blockquote>${escapeHtml(note)}</blockquote>`] : []),
+		...(note ? ['', '<b>Коментар:</b>', `<blockquote>${escapeHtml(note)}</blockquote>`] : []),
+		'\u2800',
 	].join('\n');
 
 	try {

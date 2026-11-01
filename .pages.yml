@@ -351,8 +351,19 @@ content:
             required: true
 
           - name: mapEmbedUrl
-            label: Посилання на карту Google
-            description: Google Maps > Поділитися > Вбудувати карту > скопіюй тільки адресу з src.
+            label: Вбудована карта (Embed)
+            description: Поділитися > Вбудувати карту > скопіюй тільки адресу з src. Порожньо = простий пін за адресою.
+            type: string
+            required: true
+
+          - name: mapUrl
+            label: Посилання на місце в Google Maps
+            description: Google Maps > знайти бізнес > Поділитися > Надіслати посилання. Порожньо = пошук за адресою.
+            type: string
+
+          - name: mapTarget
+            label: Google Maps — адреса або координати
+            description: Google Maps (Copy address) або координати наприклад 49.80699845634188, 24.05505852883552
             type: string
 
           - name: instagram
@@ -401,16 +412,6 @@ content:
 
               - name: intro
                 label: Вступний текст
-                type: text
-                required: true
-
-              - name: successMessage
-                label: Повідомлення про успіх
-                type: text
-                required: true
-
-              - name: errorMessage
-                label: Повідомлення про помилку
                 type: text
                 required: true
 

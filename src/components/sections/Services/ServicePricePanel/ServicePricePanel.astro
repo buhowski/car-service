@@ -3,7 +3,7 @@ import './ServicePricePanel.scss';
 import Button from '../../../ui/Button/Button.astro';
 import servicesData from '../../../../content/services.json';
 import { formatText } from '../../../../data/site';
-import { ui } from '../../../../config/ui';
+import { ui } from '../../../../data/ui';
 
 type Service = (typeof servicesData.categories)[number]['services'][number];
 
@@ -18,13 +18,7 @@ interface Props {
 const { id, triggerId, title, services, active = false } = Astro.props;
 ---
 
-<div
-	class='service-price-panel'
-	id={id}
-	role='region'
-	aria-labelledby={triggerId}
-	hidden={!active}
->
+<div class='service-price-panel' id={id} role='region' aria-labelledby={triggerId} hidden={!active}>
 	<div class='service-price-panel__heading'>
 		<div>
 			<span class='service-price-panel__kicker'>{ui.services.panelKicker}</span>

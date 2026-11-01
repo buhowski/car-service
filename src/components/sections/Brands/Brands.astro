@@ -3,7 +3,7 @@ import './Brands.scss';
 import Container from '../../ui/Container/Container.astro';
 import SectionHeader from '../../ui/SectionHeader/SectionHeader.astro';
 import content from '../../../content/brands.json';
-import { ui } from '../../../config/ui';
+import { ui } from '../../../data/ui';
 const brandsData = content;
 ---
 
@@ -26,10 +26,20 @@ const brandsData = content;
 			<div class='brands__track' data-brands-track>
 				{
 					[false, true].map((isDuplicate) => (
-						<ul class='brands__grid' data-brands-grid aria-hidden={isDuplicate ? 'true' : undefined}>
+						<ul
+							class='brands__grid'
+							data-brands-grid
+							aria-hidden={isDuplicate ? 'true' : undefined}
+						>
 							{brandsData.items.map(({ name, logo }) => (
 								<li class='brands__item' data-brand-item>
-									<img class='brands__logo' src={logo} alt='' aria-hidden='true' draggable={false} />
+									<img
+										class='brands__logo'
+										src={logo}
+										alt=''
+										aria-hidden='true'
+										draggable={false}
+									/>
 									<span data-brand-label>{name}</span>
 								</li>
 							))}

@@ -1,50 +1,26 @@
-@use '../../../styles/functions' as fn;
-
-$icon-files: (
-	brandMark: 'brandMark.svg',
-	certified: 'certified.svg',
-	circleArrowDown: 'circle-arrow-down.svg',
-	chevronLeft: 'chevronLeft.svg',
-	chevronRight: 'chevronRight.svg',
-	clock: 'clock.svg',
-	close: 'close.svg',
-	'google-maps': 'google-maps.svg',
-	instagram: 'instagram.svg',
-	location: 'location.svg',
-	phone: 'phone.svg',
-	quote: 'quote.svg',
-	speed: 'speed.svg',
-	star: 'star.svg',
-	starOutline: 'star-outline.svg',
-	step1: 'step1.svg',
-	step2: 'step2.svg',
-	step3: 'step3.svg',
-	telegram: 'telegram.svg',
-	viber: 'viber.svg',
-	warranty: 'warranty.svg',
-);
-
 .icon {
-	display: inline-block;
+	display: inline-flex;
 	flex: none;
-	background-color: currentColor;
-	mask-position: center;
-	mask-repeat: no-repeat;
-	mask-size: contain;
+	width: var(--icon-w, 1.5rem);
+	height: var(--icon-h, 1.5rem);
 
-	@each $name, $file in $icon-files {
-		&[data-icon='#{$name}'] {
-			mask-image: url('/uploads/icons/#{$file}');
-		}
-	}
+	svg {
+		display: block;
+		width: 100%;
+		height: 100%;
 
-	@each $size in 16, 20, 22, 24 {
-		&[data-width='#{$size}'] {
-			width: fn.rem($size);
+		&:not([fill='none']) {
+			fill: currentColor;
 		}
 
-		&[data-height='#{$size}'] {
-			height: fn.rem($size);
+		&[fill]:not([fill='none']),
+		[fill]:not([fill='none']) {
+			fill: currentColor;
+		}
+
+		&[stroke]:not([stroke='none']),
+		[stroke]:not([stroke='none']) {
+			stroke: currentColor;
 		}
 	}
 }

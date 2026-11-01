@@ -6,7 +6,7 @@ import Icon from '../../ui/Icon/Icon.astro';
 import Button from '../../ui/Button/Button.astro';
 import { formatText, site } from '../../../data/site';
 import { getOpeningHours } from '../../../data/hours';
-import { ui } from '../../../config/ui';
+import { ui } from '../../../data/ui';
 import content from '../../../content/hours.json';
 
 const hours = getOpeningHours();
@@ -15,7 +15,7 @@ const contacts = [
 		icon: 'location',
 		label: ui.contacts.addressLabel,
 		text: site.address.full,
-		href: site.address.mapsUrl,
+		href: site.address.mapUrl,
 	},
 	{
 		icon: 'phone',
@@ -35,7 +35,7 @@ const contacts = [
 
 				<div class='hours__contact'>
 					<div class='hours__line'>
-						<Icon name='clock' width='20' height='20' />
+						<Icon name='clock-filled' width='20' height='20' />
 						<span>{ui.contacts.scheduleTitle}</span>
 					</div>
 
@@ -67,12 +67,7 @@ const contacts = [
 								<div>
 									<span>{c.label}</span>
 									<div class='hours__links'>
-										<a
-											class='hours__link'
-											href={c.href}
-											target={c.href.startsWith('http') ? '_blank' : undefined}
-											rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-										>
+										<a class='hours__link' href={c.href} target='_blank' rel='noopener noreferrer'>
 											{c.text}
 										</a>
 									</div>
@@ -89,6 +84,7 @@ const contacts = [
 					src={site.address.mapEmbedUrl}
 					loading='lazy'
 					title={formatText(ui.contacts.mapTitle)}></iframe>
+
 				<Button
 					variant='primary'
 					class='hours__map-route'

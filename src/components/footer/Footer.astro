@@ -4,10 +4,9 @@ import Container from '../ui/Container/Container.astro';
 import Icon from '../ui/Icon/Icon.astro';
 import BusinessHours from '../ui/BusinessHours/BusinessHours.astro';
 import Brand from '../ui/Brand/Brand.astro';
-import NavLinks from '../ui/NavLinks/NavLinks.astro';
 import SocialLinks from '../ui/SocialLinks/SocialLinks.astro';
 import { formatText, footerAbout, site } from '../../data/site';
-import { ui } from '../../config/ui';
+import { ui } from '../../data/ui';
 
 const year = new Date().getFullYear();
 ---
@@ -20,8 +19,6 @@ const year = new Date().getFullYear();
 				<Brand class='footer__brand-link' />
 				<p class='footer__about'>{footerAbout}</p>
 			</div>
-
-			<!-- <NavLinks className='footer__nav ' /> -->
 
 			<address class='footer__contact' aria-label={ui.common.footerContactLabel}>
 				<BusinessHours />
@@ -37,7 +34,7 @@ const year = new Date().getFullYear();
 
 			<a
 				class='footer__contact-item'
-				href={site.address.mapsUrl}
+				href={site.address.mapUrl}
 				target='_blank'
 				rel='noopener noreferrer'
 			>

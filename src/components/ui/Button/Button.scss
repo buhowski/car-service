@@ -30,7 +30,7 @@
 	@include bp.press-feedback;
 	&:disabled {
 		cursor: not-allowed;
-		opacity: 0.6;
+		opacity: 0.5;
 	}
 
 	svg {
@@ -39,34 +39,12 @@
 		height: fn.rem(20);
 	}
 
-	// .button--dark
-	&--dark {
-		background: var.$color-ink;
-		color: var.$color-paper;
-		&:hover {
-			color: var.$color-accent;
-		}
-	}
-
-	// .button--outline
-	&--outline {
-		border-color: var.$color-line;
-		background: transparent;
-		color: var.$color-ink;
-
-		&:hover {
-			border-color: var.$color-ink;
-			background: var.$color-ink;
-			color: var.$color-paper;
-		}
-	}
-
 	// .button--primary
 	&--primary {
 		background: var.$color-accent;
 		color: var.$color-ink;
 
-		&:hover {
+		&:not(:disabled):hover {
 			background: var.$color-paper;
 		}
 	}
@@ -77,9 +55,9 @@
 		color: var.$color-accent;
 		box-shadow: inset 0 0 0 3px var.$color-accent;
 
-		&:hover {
-			background: var.$color-ink;
-			color: var.$color-paper;
+		&:not(:disabled):hover {
+			background: var.$color-accent;
+			color: var.$color-ink;
 		}
 	}
 

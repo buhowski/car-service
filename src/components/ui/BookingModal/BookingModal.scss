@@ -84,9 +84,15 @@
 .booking-modal-open {
 	overflow: hidden;
 }
+.booking-form__call,
+.booking-form__field label,
+.booking-form__contact-method legend {
+	color: var.$color-ink;
+	font-size: var.$text-xs;
+	font-weight: var.$font-weight-semibold;
+}
 
 .booking-form {
-	position: relative;
 	display: grid;
 	gap: var.$space-3;
 
@@ -96,10 +102,6 @@
 		gap: fn.rem(5);
 
 		label {
-			color: var.$color-ink;
-			font-size: var.$text-sm;
-			font-weight: var.$font-weight-semibold;
-
 			.booking-form__required {
 				color: var.$color-error;
 			}
@@ -114,7 +116,7 @@
 
 		.form-control {
 			width: 100%;
-			height: fn.rem(48);
+			height: fn.rem(44);
 			padding: fn.rem(10) fn.rem(12);
 			border: 1px solid var.$color-input-line;
 			border-radius: var.$radius-sm;
@@ -129,7 +131,8 @@
 
 			&::placeholder {
 				color: var.$color-text-muted;
-				opacity: 0.72;
+				opacity: 0.5;
+				font-size: fn.rem(14);
 			}
 
 			&:focus {
@@ -159,7 +162,6 @@
 	// .booking-form__phone
 	&__phone {
 		display: flex;
-		height: fn.rem(48);
 		align-items: center;
 		border: 1px solid var.$color-input-line;
 		border-radius: var.$radius-sm;
@@ -185,7 +187,6 @@
 
 		.form-control {
 			min-width: 0;
-			height: fn.rem(46);
 			border: 0;
 			background: transparent;
 			box-shadow: none;
@@ -218,10 +219,7 @@
 		border: 0;
 
 		legend {
-			margin-bottom: fn.rem(8);
-			color: var.$color-ink;
-			font-size: var.$text-sm;
-			font-weight: var.$font-weight-semibold;
+			margin-bottom: fn.rem(5);
 		}
 	}
 
@@ -229,7 +227,7 @@
 	&__contact-options {
 		display: flex;
 		flex-wrap: wrap;
-		gap: fn.rem(8);
+		gap: fn.rem(10);
 
 		label {
 			position: relative;
@@ -256,7 +254,7 @@
 
 			&:has(input:checked) {
 				border-color: var.$color-secondary;
-				background: var.$color-accent-soft;
+				background: rgba(var.$color-accent, 20%);
 				color: var.$color-ink;
 			}
 
@@ -280,10 +278,8 @@
 
 	// .booking-form__call
 	&__call {
-		margin: 0;
-		color: var.$color-text-muted;
-		font-size: var.$text-sm;
 		text-align: center;
+		margin: 2px 0;
 	}
 
 	// .booking-form__alternative
@@ -304,32 +300,50 @@
 
 	// .booking-form__status
 	&__status {
-		margin: 0;
-		padding: 0.75rem;
-		border-left: fn.rem(3) solid var.$color-accent;
-		background: var.$color-accent-soft;
 		color: var.$color-ink;
 		font-size: var.$text-sm;
+		overflow: hidden;
+		max-height: 5rem;
+		transition: max-height var.$motion-duration ease;
 
 		&[data-state='idle'] {
-			display: none;
+			max-height: 0;
 		}
 
-		&[data-state='success'] {
-			border-left-color: var.$color-success;
-			background: color-mix(in srgb, var.$color-success 15%, transparent);
+		&[data-state='success'] p {
+			border-color: var.$color-success;
+			background: color-mix(in srgb, var.$color-success 20%, transparent);
 		}
 
-		&[data-state='error'] {
-			border-left-color: var.$color-error;
-			background: color-mix(in srgb, var.$color-error 15%, transparent);
+		&[data-state='error'] p {
+			border-color: var.$color-error;
+			background: color-mix(in srgb, var.$color-error 20%, transparent);
+		}
+
+		p {
+			margin: -2px 0 12px;
+			padding: 0.75rem;
+			border-left: fn.rem(4) solid transparent;
+			transition:
+				border-left var.$motion-duration ease,
+				background-color var.$motion-duration ease;
 		}
 	}
 
-	.button--primary:hover {
-		background: var.$color-ink;
-		color: var.$color-accent;
+	.button--primary {
+		&:disabled {
+			cursor: progress;
+		}
+
+		&:not(:disabled):hover {
+			background: var.$color-ink;
+			color: var.$color-accent;
+		}
 	}
+}
+
+.booking-form__check {
+	margin: 8px 0;
 }
 
 .booking-form__hp {

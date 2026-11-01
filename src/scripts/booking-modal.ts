@@ -1,4 +1,4 @@
-type Status = 'idle' | 'loading' | 'success' | 'error';
+type Status = 'idle' | 'success' | 'error';
 
 declare global {
 	interface Window {
@@ -14,20 +14,47 @@ function init(): void {
 	const panel = dialog?.querySelector<HTMLElement>('.booking-modal__panel');
 	const nameInput = form?.querySelector<HTMLInputElement>('#booking-name');
 	const phoneInput = form?.querySelector<HTMLInputElement>('#booking-phone');
-	const statusEl = form?.querySelector<HTMLElement>('[data-booking-status]');
 	const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
 
-	if (!dialog || !form || !panel || !nameInput || !phoneInput || !statusEl || !submitButton) return;
+	const submitLabel = submitButton?.querySelector<HTMLElement>('[data-submit-label]');
+	const statusEl = form?.querySelector<HTMLElement>('[data-booking-status]');
+	const statusTextEl = statusEl?.querySelector<HTMLParagraphElement>('[data-booking-status-text]');
+
+	if (
+		!dialog ||
+		!form ||
+		!panel ||
+		!nameInput ||
+		!phoneInput ||
+		!statusEl ||
+		!statusTextEl ||
+		!submitButton ||
+		!submitLabel
+	)
+		return;
 
 	const messages: Record<Exclude<Status, 'idle'>, string> = {
-		loading: form.dataset.loadingMessage?.trim() || 'Надсилаємо заявку…',
-		success: form.dataset.successMessage?.trim() || 'Заявку надіслано.',
-		error: form.dataset.errorMessage?.trim() || 'Не вдалося надіслати заявку. Спробуй ще раз.',
+		success: 'Заявку надіслано.',
+		error: 'Не вдалося надіслати заявку. Спробуйте ще раз.',
 	};
 
+	const defaultSubmitLabel = submitLabel.textContent?.trim() ?? '';
+	const loadingMessage = 'Надсилаємо заявку...';
+
+	let statusTimer: number | undefined;
+
 	function setStatus(state: Status): void {
+		if (statusTimer !== undefined) {
+			window.clearTimeout(statusTimer);
+			statusTimer = undefined;
+		}
+
 		statusEl!.dataset.state = state;
-		statusEl!.textContent = state === 'idle' ? '' : messages[state];
+		statusTextEl!.textContent = state === 'idle' ? '' : messages[state];
+
+		if (state === 'success') {
+			statusTimer = window.setTimeout(() => setStatus('idle'), 5000);
+		}
 	}
 
 	// ---- Dialog ----
@@ -43,6 +70,7 @@ function init(): void {
 		if (dialog.open) return;
 
 		setStatus('idle');
+
 		document.body.classList.add('booking-modal-open');
 		dialog.showModal();
 
@@ -115,8 +143,7 @@ function init(): void {
 		phoneInput.setSelectionRange(caret, caret);
 	});
 
-	// ---- Submit ----
-
+	// Submit
 	form.addEventListener('submit', async (event) => {
 		event.preventDefault();
 
@@ -124,14 +151,14 @@ function init(): void {
 
 		form.setAttribute('aria-busy', 'true');
 		submitButton.disabled = true;
-		setStatus('loading');
+		submitLabel.textContent = loadingMessage;
+		setStatus('idle');
 
 		try {
 			const response = await fetch(form.action, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(Object.fromEntries(new FormData(form))),
-				// AbortSignal.timeout is missing in Safari < 16
 				signal: 'timeout' in AbortSignal ? AbortSignal.timeout(REQUEST_TIMEOUT_MS) : undefined,
 			});
 
@@ -148,8 +175,8 @@ function init(): void {
 			setStatus('error');
 		} finally {
 			submitButton.disabled = false;
+			submitLabel.textContent = defaultSubmitLabel;
 			form.removeAttribute('aria-busy');
-			// Turnstile tokens are single-use
 			window.turnstile?.reset();
 		}
 	});

@@ -1,14 +1,16 @@
 import settings from '../content/site.json';
-import { ui } from '../config/ui';
+import { ui } from './ui';
 
 const phoneHref = `tel:${settings.phoneNumber}`;
 const formattedPhone = settings.phoneNumber.replace(
 	/^\+380(\d{2})(\d{3})(\d{2})(\d{2})$/,
 	'0$1 $2 $3 $4',
 );
-const addressLabel = settings.address;
 const businessName = `${settings.brandPrefix} ${settings.brandName}`;
 const phoneDigits = settings.phoneNumber.replace(/\D/g, '');
+const addressLabel = settings.address;
+const mapTargetGeo = settings.mapTarget || addressLabel;
+const encodedTarget = encodeURIComponent(mapTargetGeo);
 
 const textValues = {
 	name: businessName,
@@ -32,9 +34,10 @@ export const site = {
 	phone: { display: formattedPhone, href: phoneHref },
 	address: {
 		full: addressLabel,
-		mapsUrl: `https://maps.google.com/?q=${encodeURIComponent(addressLabel)}`,
-		mapEmbedUrl: settings.mapEmbedUrl,
-		directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(addressLabel)}&travelmode=driving`,
+		mapUrl: settings.mapUrl || `https://www.google.com/maps/search/?api=1&query=${encodedTarget}`,
+		mapEmbedUrl:
+			settings.mapEmbedUrl || `https://maps.google.com/maps?q=${encodedTarget}&output=embed`,
+		directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${encodedTarget}&travelmode=driving`,
 	},
 	links: {
 		booking: phoneHref,
@@ -52,13 +55,11 @@ export const site = {
 			label: formatText(ui.common.telegramLabel),
 			icon: 'telegram' as const,
 		},
-		instagram: settings.instagram
-			? {
-					href: `https://www.instagram.com/${settings.instagram}`,
-					label: formatText(ui.common.instagramLabel),
-					icon: 'instagram' as const,
-				}
-			: undefined,
+		instagram: {
+			href: `https://www.instagram.com/${settings.instagram}`,
+			label: formatText(ui.common.instagramLabel),
+			icon: 'instagram' as const,
+		},
 	},
 } as const;
 

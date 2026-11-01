@@ -68,7 +68,7 @@
 		background: var.$color-ink;
 		color: var.$color-paper;
 
-		&:hover {
+		&:not(:disabled):hover {
 			background: var.$color-ink;
 			color: var.$color-accent;
 		}

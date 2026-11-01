@@ -9,13 +9,18 @@ interface Props {
 }
 
 const { class: className = '' } = Astro.props;
+const brandImage = site.brand.image?.trim();
 ---
 
 <a class:list={['brand', className]} href='#main' aria-label={formatText(ui.common.brandHomeLabel)}>
 	<span class='brand__mark' aria-hidden='true'>
-		<Icon name='brandMark' width='24' height='24' />
-
-		<!-- <img src='/logo.png' alt='' width='40' height='40' /> -->
+		{
+			brandImage ? (
+				<img src={brandImage} alt='' width='40' height='40' />
+			) : (
+				<Icon name='brandMark' width='26' height='26' />
+			)
+		}
 	</span>
 	{site.brand.prefix}
 	<b class='brand__name'>{site.brand.name}</b>

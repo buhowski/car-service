@@ -20,14 +20,13 @@
 	// .brand__mark
 	&__mark {
 		display: grid;
-		width: fn.rem(40);
-		height: fn.rem(40);
-		flex: none;
+		width: fn.rem(42);
+		height: fn.rem(42);
 		place-items: center;
 		border-radius: var.$radius-sm;
 		color: var.$color-black;
 		background: var.$color-accent;
-		padding: fn.rem(4);
+		overflow: hidden;
 
 		img {
 			width: 100%;

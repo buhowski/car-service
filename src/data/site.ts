@@ -26,7 +26,7 @@ export const formatText = (template: string, values: Record<string, string | num
 
 export const site = {
 	name: businessName,
-	brand: { prefix: settings.brandPrefix, name: settings.brandName },
+	brand: { prefix: settings.brandPrefix, name: settings.brandName, image: settings.brandImage },
 	city: settings.city,
 	phone: { display: formattedPhone, href: phoneHref },
 	address: {

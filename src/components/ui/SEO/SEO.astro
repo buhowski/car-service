@@ -82,7 +82,7 @@ const structuredData = {
 			url: root,
 			telephone: siteSettings.phoneNumber,
 			image: [resolvedSocialImage],
-			logo: absoluteUrl(seo.schema.logo),
+			logo: absoluteUrl(siteSettings.brandImage),
 			priceRange: seo.schema.priceRange,
 			currenciesAccepted: seo.schema.currency,
 			address: {
@@ -120,7 +120,7 @@ const structuredDataJson = JSON.stringify(structuredData).replace(/</g, '\\u003c
 <meta name='msvalidate.01' content={seo.verification.bing} />
 <link rel='canonical' href={root} />
 <link rel='icon' href={seo.favicon} />
-<link rel='apple-touch-icon' href={seo.appleTouchIcon} />
+<link rel='apple-touch-icon' href={siteSettings.brandImage} />
 <title>{titleText}</title>
 
 <!-- Open Graph preview -->

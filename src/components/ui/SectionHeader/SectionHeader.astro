@@ -7,9 +7,18 @@ interface Props {
   description?: string;
   centered?: boolean;
   class?: string;
+	'data-reveal'?: boolean;
 }
 
-const { id, eyebrow, headline, description, centered = false, class: className = '' } = Astro.props;
+const {
+	id,
+	eyebrow,
+	headline,
+	description,
+	centered = false,
+	class: className = '',
+	'data-reveal': dataReveal,
+} = Astro.props;
 
 const classes = [
   'section-header',
@@ -17,7 +26,7 @@ const classes = [
   className,
 ].filter(Boolean).join(' ');
 ---
-<div class={classes}>
+<div class={classes} data-reveal={dataReveal ? '' : undefined}>
   <span class="section-header__eyebrow">{eyebrow}</span>
   <h2 id={id} class="section-header__title">{headline}</h2>
   {description && <p class="section-header__description">{description}</p>}

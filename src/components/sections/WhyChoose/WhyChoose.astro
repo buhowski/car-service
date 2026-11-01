@@ -4,44 +4,44 @@ import Container from '../../ui/Container/Container.astro';
 import SectionHeader from '../../ui/SectionHeader/SectionHeader.astro';
 import Icon from '../../ui/Icon/Icon.astro';
 import content from '../../../content/why-choose.json';
+
 const whyChooseData = content;
 ---
 
-<section class="why-choose" id="why-choose" aria-labelledby="why-choose-heading">
-  <Container>
-    <div class="why-choose__grid">
-      <div class="why-choose__media reveal">
-        <img 
-					  src={whyChooseData.image}
-					  alt={whyChooseData.imageAlt}
-          width="1000" 
-          height="1200" 
-          loading="lazy"
-        >
-      </div>
-      <div>
+<section class='why-choose' id='why-choose' aria-labelledby='why-choose-heading'>
+	<Container>
+		<div class='why-choose__grid'>
+			<div class='why-choose__media' data-reveal>
+				<img
+					src={whyChooseData.image}
+					alt={whyChooseData.imageAlt}
+					width='1000'
+					height='1200'
+					loading='lazy'
+				/>
+			</div>
+			<div>
 				<SectionHeader
-					id="why-choose-heading"
+					id='why-choose-heading'
 					eyebrow={whyChooseData.eyebrow}
-							headline={whyChooseData.headline}
-        />
-						<p class="lead why-choose__lead">{whyChooseData.lead}</p>
-        
-        <ul class="why-choose__list" role="list">
-          {whyChooseData.items.map((item, index) => (
-            <li class="why-choose__item reveal" data-delay={index * 100}>
-              <span class="why-choose__icon">
-								<Icon name={item.iconName as 'certified' | 'quote' | 'warranty' | 'speed'} width="24" height="24" />
-              </span>
-              <div>
+					headline={whyChooseData.headline}
+				/>
+				<p class='lead why-choose__lead'>{whyChooseData.lead}</p>
+
+				<ul class='why-choose__list' role='list'>
+					{whyChooseData.items.map((item, index) => (
+						<li class='why-choose__item' data-reveal data-delay={index * 100}>
+							<span class='why-choose__icon'>
+								<Icon name={item.iconName} width='24' height='24' />
+							</span>
+							<div>
 								<h4>{item.title}</h4>
 								<p>{item.description}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  </Container>
+							</div>
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</Container>
 </section>
-

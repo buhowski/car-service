@@ -1,11 +1,14 @@
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function initReveal() {
-	const elements = document.querySelectorAll<HTMLElement>('.reveal');
+	const elements = document.querySelectorAll<HTMLElement>('[data-reveal]');
 	if (!elements.length) return;
+	const show = (element: HTMLElement) => {
+		element.dataset.reveal = 'visible';
+	};
 
 	if (prefersReduced || !('IntersectionObserver' in window)) {
-		elements.forEach((element) => element.classList.add('in'));
+		elements.forEach(show);
 		return;
 	}
 
@@ -16,9 +19,9 @@ function initReveal() {
 				const element = entry.target as HTMLElement;
 				const delay = Number(element.dataset.delay);
 				if (delay > 0) {
-					window.setTimeout(() => element.classList.add('in'), delay);
+					window.setTimeout(() => show(element), delay);
 				} else {
-					element.classList.add('in');
+					show(element);
 				}
 				observer.unobserve(element);
 			});

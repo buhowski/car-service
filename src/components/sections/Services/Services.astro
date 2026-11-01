@@ -14,6 +14,7 @@ const { categories } = servicesData;
 			id='services-heading'
 			eyebrow={servicesData.eyebrow}
 			headline={servicesData.headline}
+			data-reveal
 		/>
 
 		<div class='services__catalog'>
@@ -30,7 +31,7 @@ const { categories } = servicesData;
 				}
 			</div>
 
-			<div class='services__panel-list' data-service-set='desktop'>
+			<div class='services__panel-list' data-service-set='desktop' data-reveal>
 				{
 					categories.map((category, index) => (
 						<ServicePricePanel
@@ -55,6 +56,7 @@ const { categories } = servicesData;
 							panelId={`mobile-service-panel-${index}`}
 							active={index === 0}
 						/>
+
 						<ServicePricePanel
 							id={`mobile-service-panel-${index}`}
 							triggerId={`mobile-service-trigger-${index}`}

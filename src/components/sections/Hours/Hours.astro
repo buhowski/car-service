@@ -29,7 +29,7 @@ const contacts = [
 <section class='hours' id='visit' aria-labelledby='visit-heading'>
 	<Container>
 		<div class='hours__grid'>
-			<div class='hours__info reveal'>
+			<div class='hours__info' data-reveal>
 				<SectionHeader id='visit-heading' eyebrow={content.eyebrow} headline={content.headline} />
 				<p class='lead hours__lead'>{content.lead}</p>
 
@@ -78,7 +78,7 @@ const contacts = [
 				</div>
 			</div>
 
-			<div class='hours__map reveal'>
+			<div class='hours__map' data-reveal>
 				<iframe
 					class='hours__map-canvas'
 					src={site.address.mapEmbedUrl}

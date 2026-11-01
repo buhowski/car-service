@@ -11,10 +11,10 @@ const REQUEST_TIMEOUT_MS = 10_000;
 function init(): void {
 	const dialog = document.querySelector<HTMLDialogElement>('[data-booking-modal]');
 	const form = dialog?.querySelector<HTMLFormElement>('[data-booking-form]');
-	const panel = dialog?.querySelector<HTMLElement>('.booking-modal__panel');
-	const nameInput = form?.querySelector<HTMLInputElement>('#booking-name');
-	const phoneInput = form?.querySelector<HTMLInputElement>('#booking-phone');
-	const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+	const panel = dialog?.querySelector<HTMLElement>('[data-booking-panel]');
+	const nameInput = form?.querySelector<HTMLInputElement>('[data-booking-name]');
+	const phoneInput = form?.querySelector<HTMLInputElement>('[data-booking-phone]');
+	const submitButton = form?.querySelector<HTMLButtonElement>('[data-booking-submit]');
 
 	const submitLabel = submitButton?.querySelector<HTMLElement>('[data-submit-label]');
 	const statusEl = form?.querySelector<HTMLElement>('[data-booking-status]');
@@ -34,7 +34,7 @@ function init(): void {
 		return;
 
 	const messages: Record<Exclude<Status, 'idle'>, string> = {
-		success: 'Заявку надіслано.',
+		success: 'Заявку надіслано',
 		error: 'Не вдалося надіслати заявку. Спробуйте ще раз.',
 	};
 

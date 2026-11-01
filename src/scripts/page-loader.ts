@@ -1,4 +1,4 @@
-const pageLoader = document.querySelector<HTMLElement>('.page-loader');
+const pageLoader = document.querySelector<HTMLElement>('[data-page-loader]');
 
 if (pageLoader) {
 	const hidePageLoader = () => pageLoader.classList.add('is-hidden');

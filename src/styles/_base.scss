@@ -89,17 +89,17 @@ a:hover {
 	color: var.$color-surface-dark;
 }
 
-.js .reveal {
+.js [data-reveal] {
 	opacity: 0;
 	transform: translateY(fn.rem(20));
-}
-
-.js .reveal.in {
-	opacity: 1;
-	transform: translateY(0);
 	transition:
 		opacity 0.4s ease,
 		transform 0.4s ease;
+}
+
+.js [data-reveal='visible'] {
+	opacity: 1;
+	transform: translateY(0);
 }
 
 :where(a, button, input, [tabindex]) {
@@ -129,8 +129,7 @@ a:hover {
 		transition-duration: 0.01ms !important;
 	}
 
-	.js .reveal,
-	.js .reveal.in {
+	.js [data-reveal] {
 		opacity: 1;
 		transform: none;
 		transition: none;

@@ -23,8 +23,9 @@ const ctaData = content;
 				headline={ctaData.headline}
 				description={ctaData.subtext}
 				centered
+				data-reveal
 			/>
-			<div class='cta__actions'>
+			<div class='cta__actions' data-reveal data-delay='100'>
 				<Button variant='primary' href={site.links.booking} data-booking-open
 					>{ctaData.primaryCta}</Button
 				>

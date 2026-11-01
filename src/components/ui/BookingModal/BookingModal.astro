@@ -21,7 +21,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 	aria-describedby='booking-description'
 >
 	<div>
-		<div class='booking-modal__panel'>
+		<div class='booking-modal__panel' data-booking-panel>
 			<button
 				class='booking-modal__close'
 				type='button'
@@ -48,6 +48,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
 					<input
 						id='booking-name'
+						data-booking-name
 						name='name'
 						type='text'
 						autocomplete='name'
@@ -70,6 +71,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
 						<input
 							id='booking-phone'
+							data-booking-phone
 							name='phone'
 							type='tel'
 							inputmode='numeric'
@@ -132,7 +134,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 					</div>
 				</div>
 
-				<Button variant='primary' block type='submit'>
+				<Button variant='primary' block type='submit' data-booking-submit>
 					<span data-submit-label>{ui.booking.submitLabel}</span>
 				</Button>
 

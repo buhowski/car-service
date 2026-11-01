@@ -10,9 +10,8 @@ interface Props {
 }
 
 const { class: className = '' } = Astro.props;
-const { mon, sat } = schedule;
-const time = ({ open, close }: { open: string; close: string }) =>
-	open && close ? `${open}–${close}` : ui.schedule.closedLabel;
+const { weekdays, sat } = schedule;
+const time = ({ schedule }: { schedule: string }) => schedule || ui.schedule.closedLabel;
 ---
 
 <div class:list={['business-hours', className]}>
@@ -21,7 +20,7 @@ const time = ({ open, close }: { open: string; close: string }) =>
 	<Icon name='clock' width='16' height='16' class='business-hours__clock' />
 
 	<span class='business-hours__schedule'>
-		<span>{ui.schedule.weekdaysLabel}: {time(mon)}</span>
+		<span>{ui.schedule.weekdaysLabel}: {time(weekdays)}</span>
 		<span class='business-hours__schedule-dot' aria-hidden='true'> · </span>
 		<span>{ui.schedule.saturdayLabel}: {time(sat)}</span>
 	</span>

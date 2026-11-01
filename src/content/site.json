@@ -2,30 +2,27 @@
 	"brandPrefix": "СТО",
 	"brandName": "Поршень",
 	"city": "Львів",
-	"cityLocative": "Львові",
 	"phoneNumber": "+380668573564",
 	"address": "м. Львів, вул. Луганська, 3а",
 	"mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d773.9816483241337!2d24.054942388912558!3d49.806867820892215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473ae734df4d4723%3A0x295611f0460cb7f1!2z0KHQotCeICLQn9C-0YDRiNC10L3RjCIgLyDQkNCy0YLQvtC30LDQv9GH0LDRgdGC0LjQvdC4INCe0ZbRgdCQ0LLRgtC-!5e0!3m2!1sen!2sua!4v1793480631175!5m2!1sen!2sua",
 	"mapUrl": "https://maps.app.goo.gl/Huhz3J9wVgZJPssp9",
 	"mapTarget": "49.80699845634188, 24.05505852883552",
 	"instagram": "ois_auto.sto",
-	"warranty": "24 місяці",
-	"experience": "10 років",
 	"navigation": [
 		{
-			"href": "#services",
+			"sectionId": "services",
 			"label": "Послуги"
 		},
 		{
-			"href": "#why-choose",
+			"sectionId": "why-choose",
 			"label": "Переваги"
 		},
 		{
-			"href": "#visit",
+			"sectionId": "visit",
 			"label": "Контакти"
 		}
 	],
-	"footerAbout": "Сімейне СТО у {cityLocative}: чесні кошториси, сертифіковані майстри та гарантія {warranty} на кожну роботу.",
+	"footerAbout": "Сімейне СТО у Львові: чесні кошториси, сертифіковані майстри та гарантія 24 місяці на кожну роботу.",
 	"booking": {
 		"title": "Записатися на сервіс",
 		"intro": "Залиште свої контакти, і ми зателефонуємо, щоб узгодити зручний час."

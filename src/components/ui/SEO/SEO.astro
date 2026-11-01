@@ -1,55 +1,143 @@
 ---
 import seo from '../../../content/seo.json';
-import { formatText, site } from '../../../data/site';
+import services from '../../../content/services.json';
+import { formatText, site, siteSettings } from '../../../data/site';
+import { getOpeningHoursSpecifications } from '../../../data/hours';
 
 interface Props {
 	title?: string;
 	description?: string;
-	canonicalUrl?: string;
 	image?: string;
 	imageAlt?: string;
 	noIndex?: boolean;
 }
 
-const { title, description, canonicalUrl, image, imageAlt, noIndex = false } = Astro.props;
+const { title, description, image, imageAlt, noIndex = false } = Astro.props;
+const baseUrl = seo.siteUrl || Astro.site?.toString() || Astro.url.origin;
+const root = new URL('/', baseUrl).href;
+const absoluteUrl = (path = '') => (path ? new URL(path, baseUrl).href : '');
 const titleText = formatText(title ?? seo.title);
 const descriptionText = formatText(description ?? seo.description);
-const canonicalTarget = canonicalUrl ?? seo.canonicalUrl;
-const resolvedCanonicalUrl =
-	canonicalTarget || (Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined);
-const socialImage = image ?? seo.openGraph.image;
-const socialImageAlt = imageAlt ?? seo.openGraph.imageAlt;
-const resolvedSocialImage = socialImage
-	? new URL(socialImage, Astro.site ?? Astro.url).toString()
+const resolvedSocialImage = absoluteUrl(image || seo.openGraph.image);
+const socialImageAlt = formatText(
+	imageAlt || seo.openGraph.imageAlt || `${site.name} — автосервіс у ${site.city}`,
+);
+const twitterImage = absoluteUrl(seo.twitter.image) || resolvedSocialImage;
+const twitterImageAlt = formatText(seo.twitter.imageAlt) || socialImageAlt;
+
+// Social preview metadata
+const openGraphTitle = formatText(seo.openGraph.title) || titleText;
+const openGraphDescription = formatText(seo.openGraph.description) || descriptionText;
+const twitterTitle = formatText(seo.twitter.title) || openGraphTitle;
+const twitterDescription = formatText(seo.twitter.description) || openGraphDescription;
+const robots = noIndex || import.meta.env.DEV ? 'noindex, nofollow' : seo.robots;
+
+// Local business structured data
+const openingHoursSpecification = getOpeningHoursSpecifications();
+const coordinates = siteSettings.mapTarget.match(
+	/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/,
+);
+const geo = coordinates
+	? {
+			'@type': 'GeoCoordinates',
+			latitude: Number(coordinates[1]),
+			longitude: Number(coordinates[2]),
+		}
 	: undefined;
-const openGraphTitle = formatText(seo.openGraph.title || titleText);
-const openGraphDescription = formatText(seo.openGraph.description || descriptionText);
-const twitterTitle = formatText(seo.twitter.title || openGraphTitle);
-const twitterDescription = formatText(seo.twitter.description || openGraphDescription);
-const twitterImage = seo.twitter.image
-	? new URL(seo.twitter.image, Astro.site ?? Astro.url).toString()
-	: resolvedSocialImage;
+const sameAs = [
+	...new Set(
+		[
+			siteSettings.instagram && site.socialLinks.instagram.href,
+			site.address.mapUrl,
+			...seo.schema.sameAs,
+		].filter((url): url is string => Boolean(url)),
+	),
+];
+const offerCatalog = {
+	'@type': 'OfferCatalog',
+	name: services.headline,
+	itemListElement: services.categories.map((category) => ({
+		'@type': 'OfferCatalog',
+		name: category.title,
+		itemListElement: category.services.map((service) => ({
+			'@type': 'Offer',
+			itemOffered: { '@type': 'Service', name: service.name },
+			priceSpecification: {
+				'@type': 'PriceSpecification',
+				priceCurrency: seo.schema.currency,
+				...(service.from ? { minPrice: service.price } : { price: service.price }),
+			},
+		})),
+	})),
+};
+const businessId = `${root}#business`;
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': seo.schema.type,
+			'@id': businessId,
+			name: site.name,
+			description: formatText(seo.schema.description) || descriptionText,
+			url: root,
+			telephone: siteSettings.phoneNumber,
+			image: [resolvedSocialImage],
+			logo: absoluteUrl(seo.schema.logo),
+			priceRange: seo.schema.priceRange,
+			currenciesAccepted: seo.schema.currency,
+			address: {
+				'@type': 'PostalAddress',
+				streetAddress: site.address.full.replace(/^м\.\s*[^,]+,\s*/, ''),
+				addressLocality: site.city,
+				addressCountry: 'UA',
+			},
+			...(geo ? { geo } : {}),
+			hasMap: site.address.mapUrl,
+			areaServed: { '@type': 'City', name: site.city },
+			openingHoursSpecification,
+			sameAs,
+			hasOfferCatalog: offerCatalog,
+		},
+		{
+			'@type': 'WebSite',
+			'@id': `${root}#website`,
+			url: root,
+			name: site.name,
+			inLanguage: seo.language,
+			publisher: { '@id': businessId },
+		},
+	],
+};
+const structuredDataJson = JSON.stringify(structuredData).replace(/</g, '\\u003c');
 ---
 
-<title>{titleText}</title>
 <meta name='description' content={descriptionText} />
-<meta name='robots' content={noIndex ? 'noindex, nofollow' : seo.robots} />
+<meta name='robots' content={robots} />
 <meta name='theme-color' content={seo.themeColor} />
-{resolvedCanonicalUrl && <link rel='canonical' href={resolvedCanonicalUrl} />}
-<link rel='icon' type='image/x-icon' href={seo.favicon} />
-<link rel='apple-touch-icon' href={seo.appleTouchIcon} />
 
+<!-- Site verification -->
+<meta name='google-site-verification' content={seo.verification.google} />
+<meta name='msvalidate.01' content={seo.verification.bing} />
+<link rel='canonical' href={root} />
+<link rel='icon' href={seo.favicon} />
+<link rel='apple-touch-icon' href={seo.appleTouchIcon} />
+<title>{titleText}</title>
+
+<!-- Open Graph preview -->
 <meta property='og:locale' content={seo.openGraph.locale} />
 <meta property='og:type' content={seo.openGraph.type} />
-<meta property='og:site_name' content={formatText(seo.openGraph.siteName)} />
+<meta property='og:site_name' content={formatText(seo.openGraph.siteName) || site.name} />
 <meta property='og:title' content={openGraphTitle} />
 <meta property='og:description' content={openGraphDescription} />
-{resolvedCanonicalUrl && <meta property='og:url' content={resolvedCanonicalUrl} />}
-{resolvedSocialImage && <meta property='og:image' content={resolvedSocialImage} />}
-{resolvedSocialImage && <meta property='og:image:alt' content={socialImageAlt} />}
+<meta property='og:url' content={root} />
+<meta property='og:image' content={resolvedSocialImage} />
+<meta property='og:image:alt' content={socialImageAlt} />
 
+<!-- X card preview -->
 <meta name='twitter:card' content={seo.twitter.card} />
 <meta name='twitter:title' content={twitterTitle} />
 <meta name='twitter:description' content={twitterDescription} />
-{twitterImage && <meta name='twitter:image' content={twitterImage} />}
-{twitterImage && <meta name='twitter:image:alt' content={socialImageAlt} />}
+<meta name='twitter:image' content={twitterImage} />
+<meta name='twitter:image:alt' content={twitterImageAlt} />
+
+<script type='application/ld+json' set:html={structuredDataJson} is:inline />

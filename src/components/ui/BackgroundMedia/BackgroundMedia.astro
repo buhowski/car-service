@@ -71,7 +71,7 @@ const getVideoType = (src?: string): string | undefined => {
 			src={!isLazy ? imageSource : undefined}
 			data-src={isLazy ? imageSource : undefined}
 			data-lazy-media={isLazy ? 'image' : undefined}
-			alt={media.alt ?? ''}
+			alt={media.alt}
 			width='1920'
 			height='1080'
 			fetchpriority={isLazy ? 'low' : fetchPriority}

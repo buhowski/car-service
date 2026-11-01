@@ -15,9 +15,6 @@ const encodedTarget = encodeURIComponent(mapTargetGeo);
 const textValues = {
 	name: businessName,
 	city: settings.city,
-	cityLocative: settings.cityLocative,
-	warranty: settings.warranty,
-	experience: settings.experience,
 	phone: formattedPhone,
 	address: addressLabel,
 };
@@ -43,7 +40,10 @@ export const site = {
 		booking: phoneHref,
 		services: '#services',
 	},
-	navigation: settings.navigation,
+	navigation: settings.navigation.map(({ sectionId, label }) => ({
+		href: `#${sectionId}`,
+		label,
+	})),
 	socialLinks: {
 		viber: {
 			href: `viber://chat?number=%2B${phoneDigits}`,
@@ -63,5 +63,5 @@ export const site = {
 	},
 } as const;
 
-export const footerAbout = formatText(settings.footerAbout);
+export const footerAbout = settings.footerAbout;
 export const siteSettings = settings;

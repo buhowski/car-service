@@ -5,13 +5,13 @@ export const locale = 'uk-UA';
 export const timeZone = 'Europe/Kyiv';
 
 const days = [
-	{ key: 'mon', weekday: 1 },
-	{ key: 'tue', weekday: 2 },
-	{ key: 'wed', weekday: 3 },
-	{ key: 'thu', weekday: 4 },
-	{ key: 'fri', weekday: 5 },
-	{ key: 'sat', weekday: 6 },
-	{ key: 'sun', weekday: 0 },
+	{ key: 'weekdays', weekday: 1, schemaDay: 'Monday' },
+	{ key: 'weekdays', weekday: 2, schemaDay: 'Tuesday' },
+	{ key: 'weekdays', weekday: 3, schemaDay: 'Wednesday' },
+	{ key: 'weekdays', weekday: 4, schemaDay: 'Thursday' },
+	{ key: 'weekdays', weekday: 5, schemaDay: 'Friday' },
+	{ key: 'sat', weekday: 6, schemaDay: 'Saturday' },
+	{ key: 'sun', weekday: 0, schemaDay: 'Sunday' },
 ] as const;
 
 // 1 Jan 2023 is Sunday, so day number = weekday index
@@ -22,15 +22,39 @@ const getDayName = (weekday: number) =>
 
 export const getOpeningHours = () =>
 	days.map(({ key, weekday }) => {
-		const { open, close } = schedule[key];
-		const isClosed = !open || !close;
+		const { schedule: time } = schedule[key];
+		const isClosed = !time;
 		return {
 			weekday,
 			day: getDayName(weekday),
-			time: isClosed ? ui.schedule.closedLabel : `${open} – ${close}`,
+			time: isClosed ? ui.schedule.closedLabel : time,
 			isClosed,
 		};
 	});
+
+export const getOpeningHoursSpecifications = () => {
+	const specifications = new Map<
+		string,
+		{ dayOfWeek: string[]; opens: string; closes: string }
+	>();
+
+	days.forEach(({ key, schemaDay }) => {
+		const match = schedule[key].schedule.match(
+			/^((?:[01]\d|2[0-3]):[0-5]\d)-((?:[01]\d|2[0-3]):[0-5]\d)$/,
+		);
+		if (!match) return;
+
+		const [, opens, closes] = match;
+		const specification = specifications.get(key) ?? { dayOfWeek: [], opens, closes };
+		specification.dayOfWeek.push(schemaDay);
+		specifications.set(key, specification);
+	});
+
+	return [...specifications.values()].map((specification) => ({
+		'@type': 'OpeningHoursSpecification',
+		...specification,
+	}));
+};
 
 export const highlightToday = () => {
 	const today = new Date(new Date().toLocaleString('en-US', { timeZone })).getDay();

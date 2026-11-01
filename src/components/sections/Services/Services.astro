@@ -22,8 +22,8 @@ const { categories } = servicesData;
 					categories.map((category, index) => (
 						<ServiceCategoryTrigger
 							category={category}
-							triggerId={`desktop-service-trigger-${category.id}`}
-							panelId={`desktop-service-panel-${category.id}`}
+							triggerId={`service-trigger-${index}`}
+							panelId={`service-panel-${index}`}
 							active={index === 0}
 						/>
 					))
@@ -34,8 +34,8 @@ const { categories } = servicesData;
 				{
 					categories.map((category, index) => (
 						<ServicePricePanel
-							id={`desktop-service-panel-${category.id}`}
-							triggerId={`desktop-service-trigger-${category.id}`}
+							id={`service-panel-${index}`}
+							triggerId={`service-trigger-${index}`}
 							title={category.title}
 							services={category.services}
 							active={index === 0}
@@ -51,13 +51,13 @@ const { categories } = servicesData;
 					<div class='services__entry'>
 						<ServiceCategoryTrigger
 							category={category}
-							triggerId={`mobile-service-trigger-${category.id}`}
-							panelId={`mobile-service-panel-${category.id}`}
+							triggerId={`mobile-service-trigger-${index}`}
+							panelId={`mobile-service-panel-${index}`}
 							active={index === 0}
 						/>
 						<ServicePricePanel
-							id={`mobile-service-panel-${category.id}`}
-							triggerId={`mobile-service-trigger-${category.id}`}
+							id={`mobile-service-panel-${index}`}
+							triggerId={`mobile-service-trigger-${index}`}
 							title={category.title}
 							services={category.services}
 							active={index === 0}

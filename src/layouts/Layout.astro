@@ -11,6 +11,14 @@ import seo from '../content/seo.json';
 <!doctype html>
 <html lang={seo.language}>
 	<head>
+		<meta charset='utf-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover' />
+		<meta name='color-scheme' content='dark light' />
+
+		<script is:inline>
+			document.documentElement.classList.add('js');
+		</script>
+
 		<style is:inline>
 			.page-loader {
 				position: fixed;
@@ -22,14 +30,8 @@ import seo from '../content/seo.json';
 			}
 		</style>
 
-		<meta charset='utf-8' />
-		<!-- <meta name="robots" content="index, follow"> -->
-		<meta
-			name='viewport'
-			content='width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover'
-		/>
-		<meta name='color-scheme' content='dark light' />
 		<SEO />
+
 		<link rel='preload' href='/fonts/Inter-Regular.woff2' as='font' type='font/woff2' crossorigin />
 		<link
 			rel='preload'
@@ -38,7 +40,6 @@ import seo from '../content/seo.json';
 			type='font/woff2'
 			crossorigin
 		/>
-		<link rel='stylesheet' href='/fonts/stylesheet.css' />
 	</head>
 
 	<body>
@@ -50,7 +51,6 @@ import seo from '../content/seo.json';
 		<Footer />
 		<BookingModal />
 
-		<script src='../scripts/enable-js.ts'></script>
 		<script src='../scripts/reveal.ts'></script>
 	</body>
 </html>

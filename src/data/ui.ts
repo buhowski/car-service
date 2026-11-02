@@ -26,6 +26,7 @@ export const ui = {
 		contactMethods: ['Telegram', 'Viber', 'Дзвінок'],
 		alternativeContact: "Або зв'яжіться з нами:",
 		optionalLabel: "необов'язково",
+		consent: "Номер телефону використовується лише для зв'язку щодо запису.",
 		submitLabel: 'Надіслати заявку',
 		namePlaceholder: 'Як до вас звертатися',
 		phonePlaceholder: 'XX XXX XX XX',

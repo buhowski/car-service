@@ -304,12 +304,6 @@ content:
             type: string
             required: true
 
-          - name: brandImage
-            label: Логотип
-            type: image
-            options:
-              media: uploads
-
           - name: city
             label: Місто
             type: string
@@ -395,10 +389,6 @@ content:
         type: file
         path: src/content/seo.json
         fields:
-          - name: language
-            label: Мова сторінки
-            type: string
-
           - name: siteUrl
             label: URL сайту
             description: Основна адресу з "https:// і кінцевим /" для canonical і schema.
@@ -412,13 +402,11 @@ content:
             label: Опис для пошуку
             type: text
 
-          - name: robots
-            label: Індексація
-            type: string
-
-          - name: themeColor
-            label: Колір браузера
-            type: string
+          - name: brandImage
+            label: Логотип
+            type: image
+            options:
+              media: uploads
 
           - name: favicon
             label: Іконка сайту
@@ -441,67 +429,11 @@ content:
             label: Прев'ю у соцмережах
             type: object
             fields:
-              - name: locale
-                label: Локаль
-                type: string
-
-              - name: type
-                label: Тип
-                type: string
-
-              - name: siteName
-                label: Назва сайту
-                type: string
-
-              - name: title
-                label: Заголовок
-                description: Порожньо = заголовок сторінки.
-                type: string
-
-              - name: description
-                label: Опис
-                description: Порожньо = опис для пошуку.
-                type: text
-
               - name: image
                 label: Картинка
                 type: image
                 options:
                   media: uploads
-
-              - name: imageAlt
-                label: SEO Alt
-                type: string
-
-          # X sharing preview
-          - name: twitter
-            label: Прев'ю в X (Twitter)
-            type: object
-            fields:
-              - name: card
-                label: Тип картки
-                type: string
-
-              - name: title
-                label: Заголовок
-                description: Порожньо = заголовок прев'ю.
-                type: string
-
-              - name: description
-                label: Опис
-                description: Порожньо = опис прев'ю.
-                type: text
-
-              - name: image
-                label: Картинка
-                description: Порожньо = картинка прев'ю.
-                type: image
-                options:
-                  media: uploads
-
-              - name: imageAlt
-                label: SEO Alt
-                type: string
 
       # Business search details
       - name: schema

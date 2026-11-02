@@ -1,4 +1,5 @@
 import settings from '../content/site.json';
+import seo from '../content/seo.json';
 import { ui } from './ui';
 
 const phoneHref = `tel:${settings.phoneNumber}`;
@@ -26,7 +27,7 @@ export const formatText = (template: string, values: Record<string, string | num
 
 export const site = {
 	name: businessName,
-	brand: { prefix: settings.brandPrefix, name: settings.brandName, image: settings.brandImage },
+	brand: { prefix: settings.brandPrefix, name: settings.brandName, image: seo.brandImage },
 	city: settings.city,
 	phone: { display: formattedPhone, href: phoneHref },
 	address: {

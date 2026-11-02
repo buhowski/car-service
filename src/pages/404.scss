@@ -1,0 +1,32 @@
+@use '../styles/functions' as fn;
+@use '../styles/variables' as var;
+
+.not-found {
+	display: grid;
+	min-height: 60vh;
+	place-items: center;
+	padding: var.$section-space 0;
+	text-align: center;
+
+	// .not-found__code
+	&__code {
+		margin: 0 0 var.$space-2;
+		color: var.$color-secondary;
+		font-family: var.$font-display;
+		font-size: clamp(4rem, 12vw, 8rem);
+		font-weight: var.$font-weight-semibold;
+		line-height: 1;
+	}
+
+	// .not-found__title
+	&__title {
+		margin-bottom: var.$space-3;
+	}
+
+	// .not-found__text
+	&__text {
+		max-width: fn.rem(480);
+		margin: 0 auto var.$space-6;
+		color: var.$color-text-muted;
+	}
+}

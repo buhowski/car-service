@@ -346,6 +346,13 @@
 	margin: 8px 0;
 }
 
+.booking-form__consent {
+	margin: 0;
+	color: var.$color-text-muted;
+	font-size: var.$text-xs;
+	line-height: var.$line-height-copy;
+}
+
 .booking-form__hp {
 	position: absolute;
 	left: -9999px;

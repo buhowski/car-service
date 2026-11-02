@@ -8,7 +8,7 @@
 	"packageManager": "yarn@4.18.1",
 	"scripts": {
 		"dev": "astro dev",
-		"dev:cf": "wrangler pages dev -- npx astro dev",
+		"dev:cf": "yarn build && wrangler pages dev dist --port 8788",
 		"build": "astro build",
 		"preview": "astro preview"
 	},

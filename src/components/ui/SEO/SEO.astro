@@ -19,17 +19,12 @@ const absoluteUrl = (path = '') => (path ? new URL(path, baseUrl).href : '');
 const titleText = formatText(title ?? seo.title);
 const descriptionText = formatText(description ?? seo.description);
 const resolvedSocialImage = absoluteUrl(image || seo.openGraph.image);
-const socialImageAlt = formatText(
-	imageAlt || seo.openGraph.imageAlt || `${site.name} — автосервіс у ${site.city}`,
-);
-const twitterImage = absoluteUrl(seo.twitter.image) || resolvedSocialImage;
-const twitterImageAlt = formatText(seo.twitter.imageAlt) || socialImageAlt;
+const socialImageAlt = formatText(imageAlt || titleText || descriptionText);
 
 // Social preview metadata
-const openGraphTitle = formatText(seo.openGraph.title) || titleText;
-const openGraphDescription = formatText(seo.openGraph.description) || descriptionText;
-const twitterTitle = formatText(seo.twitter.title) || openGraphTitle;
-const twitterDescription = formatText(seo.twitter.description) || openGraphDescription;
+const socialTitle = titleText;
+const socialDescription = descriptionText;
+const twitterCard = seo.twitter.card || 'summary_large_image';
 const robots = noIndex || import.meta.env.DEV ? 'noindex, nofollow' : seo.robots;
 
 // Local business structured data
@@ -82,7 +77,7 @@ const structuredData = {
 			url: root,
 			telephone: siteSettings.phoneNumber,
 			image: [resolvedSocialImage],
-			logo: absoluteUrl(siteSettings.brandImage),
+			logo: absoluteUrl(seo.brandImage),
 			priceRange: seo.schema.priceRange,
 			currenciesAccepted: seo.schema.currency,
 			address: {
@@ -120,24 +115,23 @@ const structuredDataJson = JSON.stringify(structuredData).replace(/</g, '\\u003c
 <meta name='msvalidate.01' content={seo.verification.bing} />
 <link rel='canonical' href={root} />
 <link rel='icon' href={seo.favicon} />
-<link rel='apple-touch-icon' href={siteSettings.brandImage} />
 <title>{titleText}</title>
 
 <!-- Open Graph preview -->
 <meta property='og:locale' content={seo.openGraph.locale} />
 <meta property='og:type' content={seo.openGraph.type} />
-<meta property='og:site_name' content={formatText(seo.openGraph.siteName) || site.name} />
-<meta property='og:title' content={openGraphTitle} />
-<meta property='og:description' content={openGraphDescription} />
+<meta property='og:site_name' content={site.name} />
+<meta property='og:title' content={socialTitle} />
+<meta property='og:description' content={socialDescription} />
 <meta property='og:url' content={root} />
 <meta property='og:image' content={resolvedSocialImage} />
 <meta property='og:image:alt' content={socialImageAlt} />
 
 <!-- X card preview -->
-<meta name='twitter:card' content={seo.twitter.card} />
-<meta name='twitter:title' content={twitterTitle} />
-<meta name='twitter:description' content={twitterDescription} />
-<meta name='twitter:image' content={twitterImage} />
-<meta name='twitter:image:alt' content={twitterImageAlt} />
+<meta name='twitter:card' content={twitterCard} />
+<meta name='twitter:title' content={socialTitle} />
+<meta name='twitter:description' content={socialDescription} />
+<meta name='twitter:image' content={resolvedSocialImage} />
+<meta name='twitter:image:alt' content={socialImageAlt} />
 
 <script type='application/ld+json' set:html={structuredDataJson} is:inline />

@@ -6,6 +6,14 @@ import BookingModal from '../components/ui/BookingModal/BookingModal.astro';
 import PageLoader from '../components/ui/PageLoader/PageLoader.astro';
 import SEO from '../components/ui/SEO/SEO.astro';
 import seo from '../content/seo.json';
+
+interface Props {
+	title?: string;
+	description?: string;
+	noIndex?: boolean;
+}
+
+const { title, description, noIndex = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -30,7 +38,7 @@ import seo from '../content/seo.json';
 			}
 		</style>
 
-		<SEO />
+		<SEO title={title} description={description} noIndex={noIndex} />
 
 		<link rel='preload' href='/fonts/Inter-Regular.woff2' as='font' type='font/woff2' crossorigin />
 		<link

@@ -435,25 +435,25 @@ content:
                 options:
                   media: uploads
 
-      # Business search details
-      - name: schema
-        label: Структуровані дані
-        type: object
-        fields:
-          - name: type
-            label: Тип бізнесу
-            type: string
+          # Business search details
+          - name: schema
+            label: Структуровані дані
+            type: object
+            fields:
+              - name: type
+                label: Тип бізнесу
+                type: string
 
-          - name: priceRange
-            label: Рівень цін
-            type: string
+              - name: priceRange
+                label: Рівень цін
+                type: string
 
-          - name: currency
-            label: Валюта
-            type: string
+              - name: currency
+                label: Валюта
+                type: string
 
-          - name: sameAs
-            label: Соцмережі бізнесу
-            description: Без інстаграм
-            type: string
-            list: true
+              - name: sameAs
+                label: Соцмережі бізнесу
+                description: Додаткові посилання. Додавай кожне окремим пунктом списку.
+                type: string
+                list: true

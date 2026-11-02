@@ -2,8 +2,6 @@
 
 Business website for an automotive car repair service in Lviv, Ukraine.
 
-Astro, TypeScript, JavaScript (ES6+), HTML5, CSS3, SCSS, Vite, Pages CMS, JSON, Telegram Bot API, Google Maps API, Node.js, Git, CI/CD, Responsive Design, Accessibility, SEO, Core Web Vitals, Cloudflare Pages
-
 ## Prerequisites
 
 - Node.js 24+

@@ -4,13 +4,9 @@
 	"robots": "index, follow, max-image-preview:large",
 	"title": "СТО Поршень у Львові — діагностика та ремонт авто",
 	"description": "СТО Поршень у Львові: діагностика, ремонт ходової та двигуна, ТО. Сертифіковані майстри, прозорі ціни, гарантія 24 місяці. Запис: 066 857 35 64.",
-	"themeColor": "#121316",
 	"brandImage": "/logo.png",
 	"favicon": "/favicon.ico",
-	"verification": {
-		"google": "",
-		"bing": ""
-	},
+	"siteVerification": [],
 	"openGraph": {
 		"locale": "uk_UA",
 		"type": "website",

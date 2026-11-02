@@ -81,7 +81,7 @@ content:
             required: true
 
           - name: headlineSecond
-            label: Продовження заголовка
+            label: Продовження після виділення заголовка
             type: string
             required: true
 
@@ -288,19 +288,17 @@ content:
     type: group
     items:
       - name: site
-        label: Сайт
+        label: Загальне
         type: file
         path: src/content/site.json
         fields:
           - name: brandPrefix
             label: Префікс назви
-            description: 'Наприклад: СТО.'
             type: string
             required: true
 
           - name: brandName
             label: Назва
-            description: 'Наприклад: Поршень.'
             type: string
             required: true
 
@@ -309,58 +307,60 @@ content:
             type: string
             required: true
 
-          - name: phoneNumber
-            label: Телефон
-            description: 'Формат: +380668573564.'
-            type: string
-            required: true
-
           - name: address
             label: Адреса
             type: string
             required: true
 
+          - name: phoneNumber
+            label: Телефон
+            description: 'Формат: +380668573564'
+            type: string
+            required: true
+
+          - name: instagram
+            label: Instagram
+            description: https://www.instagram.com/ois_auto.sto — без параметрів
+            type: string
+
           - name: mapEmbedUrl
-            label: Карта embed
-            description: Встав адресу з атрибута src.
+            label: iframe Карта
+            description: Google Maps -> Поділитися -> Вбудувати карту -> src=URL
             type: string
             required: true
 
           - name: mapUrl
             label: Посилання на Google Maps
-            description: Порожньо - пошук за адресою.
+            description: Google Maps -> Поділитися -> Копіювати URL
             type: string
+            required: true
 
           - name: mapTarget
-            label: Адреса або координати
-            description: Для карти, якщо немає embed.
+            label: Координати
+            description: Google Maps -> Права кнопка на точку = Координати
             type: string
-
-          - name: instagram
-            label: Instagram
-            description: Посилання без параметрів в кінці https://www.instagram.com/ois_auto.sto
-            type: string
+            required: true
 
           - name: navigation
-            label: Меню
+            label: Навігація
             type: object
             list: true
             fields:
               - name: sectionId
                 label: ID розділу
-                description: 'Наприклад: services. Має збігатися з ID на сторінці.'
+                description: 'Має збігатися з ID на сторінці'
                 type: string
 
               - name: label
-                label: Назва пункту
+                label: Назва
                 type: string
 
           - name: footerAbout
-            label: Опис у footer
+            label: Опис Footer
             type: text
 
           - name: booking
-            label: Форма запису
+            label: Форма
             type: object
             required: true
             fields:
@@ -370,7 +370,7 @@ content:
                 required: true
 
               - name: intro
-                label: Вступний текст
+                label: Опис
                 type: text
                 required: true
 
@@ -385,13 +385,13 @@ content:
 
       # SEO
       - name: seo
-        label: SEO і прев'ю у соцмережах
+        label: SEO
         type: file
         path: src/content/seo.json
         fields:
           - name: siteUrl
             label: URL сайту
-            description: Основна адресу з "https:// і кінцевим /" для canonical і schema.
+            description: 'https:// і кінцевим /'
             type: string
 
           - name: title
@@ -399,32 +399,9 @@ content:
             type: string
 
           - name: description
-            label: Опис для пошуку
+            label: Опис сторінки
             type: text
 
-          - name: brandImage
-            label: Логотип
-            type: image
-            options:
-              media: uploads
-
-          - name: favicon
-            label: Іконка сайту
-            type: string
-
-          - name: verification
-            label: Підтвердження сайту
-            type: object
-            fields:
-              - name: google
-                label: Google
-                type: string
-
-              - name: bing
-                label: Bing
-                type: string
-
-          # Social sharing preview
           - name: openGraph
             label: Прев'ю у соцмережах
             type: object
@@ -435,25 +412,18 @@ content:
                 options:
                   media: uploads
 
-          # Business search details
           - name: schema
             label: Структуровані дані
             type: object
             fields:
-              - name: type
-                label: Тип бізнесу
-                type: string
-
-              - name: priceRange
-                label: Рівень цін
-                type: string
-
-              - name: currency
-                label: Валюта
-                type: string
-
               - name: sameAs
                 label: Соцмережі бізнесу
-                description: Додаткові посилання. Додавай кожне окремим пунктом списку.
+                description: Без Інстаграм
                 type: string
                 list: true
+
+          - name: siteVerification
+            label: Верифікація сайту
+            description: Наприклад <meta name="google-site-verification" content="код">
+            type: string
+            list: true

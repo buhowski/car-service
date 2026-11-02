@@ -2,12 +2,12 @@
 	"brandPrefix": "СТО",
 	"brandName": "Поршень",
 	"city": "Львів",
-	"phoneNumber": "+380668573564",
 	"address": "м. Львів, вул. Луганська, 3а",
+	"phoneNumber": "+380668573564",
+	"instagram": "https://www.instagram.com/ois_auto.sto",
 	"mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d773.9816483241337!2d24.054942388912558!3d49.806867820892215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473ae734df4d4723%3A0x295611f0460cb7f1!2z0KHQotCeICLQn9C-0YDRiNC10L3RjCIgLyDQkNCy0YLQvtC30LDQv9GH0LDRgdGC0LjQvdC4INCe0ZbRgdCQ0LLRgtC-!5e0!3m2!1sen!2sua!4v1793480631175!5m2!1sen!2sua",
 	"mapUrl": "https://maps.app.goo.gl/Huhz3J9wVgZJPssp9",
-	"mapTarget": "49.80699845634188, 24.05505852883552",
-	"instagram": "https://www.instagram.com/ois_auto.sto",
+	"mapTarget": "49.80686863100687, 24.0550491411044",
 	"navigation": [
 		{
 			"sectionId": "services",

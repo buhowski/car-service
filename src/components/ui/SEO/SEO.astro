@@ -41,13 +41,12 @@ const geo = coordinates
 	: undefined;
 const sameAs = [
 	...new Set(
-		[
-			siteSettings.instagram && site.socialLinks.instagram.href,
-			site.address.mapUrl,
-			...seo.schema.sameAs,
-		].filter((url): url is string => Boolean(url)),
+		[site.socialLinks.instagram.href, ...seo.schema.sameAs]
+			.filter(Boolean)
+			.map((url) => url.replace(/\/+$/, '')),
 	),
 ];
+
 const offerCatalog = {
 	'@type': 'OfferCatalog',
 	name: services.headline,
@@ -73,7 +72,7 @@ const structuredData = {
 			'@type': seo.schema.type,
 			'@id': businessId,
 			name: site.name,
-			description: formatText(seo.schema.description) || descriptionText,
+			description: descriptionText,
 			url: root,
 			telephone: siteSettings.phoneNumber,
 			image: [resolvedSocialImage],
@@ -111,8 +110,12 @@ const structuredDataJson = JSON.stringify(structuredData).replace(/</g, '\\u003c
 <meta name='theme-color' content={seo.themeColor} />
 
 <!-- Site verification -->
-<meta name='google-site-verification' content={seo.verification.google} />
-<meta name='msvalidate.01' content={seo.verification.bing} />
+{
+	seo.verification.google && (
+		<meta name='google-site-verification' content={seo.verification.google} />
+	)
+}
+{seo.verification.bing && <meta name='msvalidate.01' content={seo.verification.bing} />}
 <link rel='canonical' href={root} />
 <link rel='icon' href={seo.favicon} />
 <title>{titleText}</title>
@@ -126,6 +129,8 @@ const structuredDataJson = JSON.stringify(structuredData).replace(/</g, '\\u003c
 <meta property='og:url' content={root} />
 <meta property='og:image' content={resolvedSocialImage} />
 <meta property='og:image:alt' content={socialImageAlt} />
+<meta property='og:image:width' content='1200' />
+<meta property='og:image:height' content='630' />
 
 <!-- X card preview -->
 <meta name='twitter:card' content={twitterCard} />

@@ -338,7 +338,7 @@ content:
 
           - name: instagram
             label: Instagram
-            description: Якщо порожньо, іконка не показується.
+            description: Посилання без параметрів в кінці https://www.instagram.com/ois_auto.sto
             type: string
 
           - name: navigation
@@ -444,10 +444,6 @@ content:
             label: Тип бізнесу
             type: string
 
-          - name: description
-            label: Опис бізнесу
-            type: text
-
           - name: priceRange
             label: Рівень цін
             type: string
@@ -458,5 +454,6 @@ content:
 
           - name: sameAs
             label: Соцмережі бізнесу
+            description: Без інстаграм
             type: string
             list: true

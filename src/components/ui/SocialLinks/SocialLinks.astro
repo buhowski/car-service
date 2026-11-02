@@ -31,7 +31,7 @@ const links: SocialLink[] = [
 	...(socialOnly ? [] : [phoneLink]),
 	site.socialLinks.telegram,
 	site.socialLinks.viber,
-	site.socialLinks.instagram,
+	...(site.socialLinks.instagram.href ? [site.socialLinks.instagram] : []),
 ];
 
 const isExternalUrl = (href: string) => href.startsWith('https://') || href.startsWith('http://');

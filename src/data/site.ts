@@ -57,7 +57,7 @@ export const site = {
 			icon: 'telegram' as const,
 		},
 		instagram: {
-			href: `https://www.instagram.com/${settings.instagram}`,
+			href: settings.instagram,
 			label: formatText(ui.common.instagramLabel),
 			icon: 'instagram' as const,
 		},

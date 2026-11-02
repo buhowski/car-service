@@ -21,8 +21,7 @@
 	},
 	"schema": {
 		"type": "AutoRepair",
-		"description": "Діагностика, технічне обслуговування та ремонт автомобілів у Львові.",
-		"priceRange": "₴₴",
+		"priceRange": "$$",
 		"currency": "UAH",
 		"sameAs": []
 	}

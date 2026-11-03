@@ -1,4 +1,4 @@
-# СТО "Поршень" (Львів, Україна)
+# СТО "Поршень"
 
 Business website for an automotive car repair service in Lviv, Ukraine.
 

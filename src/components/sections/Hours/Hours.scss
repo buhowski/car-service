@@ -159,18 +159,13 @@
 	// .hours__map-route
 	&__map-route {
 		position: absolute;
-		right: fn.rem(8);
-		bottom: fn.rem(20);
+		right: fn.rem(9);
+		bottom: fn.rem(22);
 		z-index: var.$z-overlay;
 		gap: fn.rem(8);
 		padding: fn.rem(10) fn.rem(16);
 		box-shadow: var.$shadow-md;
 		font-size: var.$text-sm;
-
-		&:hover {
-			background: var.$color-ink;
-			color: var.$color-accent;
-		}
 	}
 
 	// .hours__map-canvas

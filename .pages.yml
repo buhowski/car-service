@@ -432,3 +432,7 @@ content:
             description: Наприклад <meta name="google-site-verification" content="код">
             type: string
             list: true
+
+# Prevent Page CMS to rewrite Git
+settings:
+  content: true

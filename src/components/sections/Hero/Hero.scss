@@ -56,7 +56,7 @@
 
 	// .hero__sub
 	&__sub {
-		max-width: 33rem;
+		max-width: fn.rem(620);
 		margin-bottom: 1.8rem;
 		color: var.$color-text-on-dark;
 		font-size: var.$text-lg;

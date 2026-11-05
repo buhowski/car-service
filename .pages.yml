@@ -433,6 +433,7 @@ content:
             type: string
             list: true
 
-# Prevent Page CMS to rewrite Git
+# Preserve fields not managed by Pages CMS
 settings:
-  content: true
+  content:
+    merge: true

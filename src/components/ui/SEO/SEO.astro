@@ -39,9 +39,12 @@ const geo = coordinates
 			longitude: Number(coordinates[2]),
 		}
 	: undefined;
+
+const schemaSameAs = (seo.schema as { sameAs?: string[] }).sameAs ?? [];
+
 const sameAs = [
 	...new Set(
-		[site.socialLinks.instagram.href, ...seo.schema.sameAs]
+		[site.socialLinks.instagram.href, ...schemaSameAs]
 			.filter(Boolean)
 			.map((url) => url.replace(/\/+$/, '')),
 	),

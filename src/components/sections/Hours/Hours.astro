@@ -22,6 +22,7 @@ const contacts = [
 		label: ui.contacts.contactLabel,
 		text: site.phone.display,
 		href: site.phone.href,
+		actionBtn: true,
 	},
 ];
 ---
@@ -67,7 +68,18 @@ const contacts = [
 								<div>
 									<span>{c.label}</span>
 									<div class='hours__links'>
-										<a class='hours__link' href={c.href} target='_blank' rel='noopener noreferrer'>
+										{c.actionBtn && (
+											<Button variant='primary-dark' data-booking-open>
+												Записатися
+											</Button>
+										)}
+
+										<a
+											class={`${c.actionBtn ? 'button button--secondary-dark' : 'hours__link'}`}
+											href={c.href}
+											target='_blank'
+											rel='noopener noreferrer'
+										>
 											{c.text}
 										</a>
 									</div>
@@ -86,7 +98,7 @@ const contacts = [
 					title={formatText(ui.contacts.mapTitle)}></iframe>
 
 				<Button
-					variant='primary'
+					variant='primary-dark'
 					class='hours__map-route'
 					href={site.address.directionsUrl}
 					target='_blank'

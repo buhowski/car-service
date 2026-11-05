@@ -35,7 +35,7 @@ const { id, triggerId, title, services, active = false } = Astro.props;
 						{service.price.toLocaleString('uk-UA')} {ui.services.currencyLabel}
 					</span>
 					<Button
-						variant='primary'
+						variant='primary-dark'
 						class='service-price-panel__order'
 						aria-label={formatText(ui.services.orderAriaLabel, { service: service.name })}
 						data-booking-open

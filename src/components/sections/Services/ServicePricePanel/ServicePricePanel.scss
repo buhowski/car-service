@@ -61,17 +61,10 @@
 
 	// .service-price-panel__order
 	&__order {
-		padding: fn.rem(11) fn.rem(15);
+		padding: fn.rem(12) fn.rem(15) fn.rem(11);
 		font-size: var.$text-sm;
 		letter-spacing: var.$tracking-normal;
 		white-space: nowrap;
-		background: var.$color-ink;
-		color: var.$color-paper;
-
-		&:not(:disabled):hover {
-			background: var.$color-ink;
-			color: var.$color-accent;
-		}
 	}
 
 	// .service-price-panel__note

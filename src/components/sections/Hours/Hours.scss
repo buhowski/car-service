@@ -122,6 +122,14 @@
 	// .hours__links
 	&__links {
 		margin-top: 0.7rem;
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: fn.rem(12) fn.rem(25);
+
+		.button {
+			min-width: 200px;
+		}
 	}
 
 	// .hours__link
@@ -133,7 +141,6 @@
 		color: var.$color-text;
 		letter-spacing: var.$tracking-normal;
 		font-weight: var.$font-weight-medium;
-		transition: scale var.$motion-duration ease;
 
 		&:hover {
 			color: var.$color-secondary;
@@ -160,10 +167,9 @@
 	&__map-route {
 		position: absolute;
 		right: fn.rem(9);
-		bottom: fn.rem(22);
+		bottom: fn.rem(20);
 		z-index: var.$z-overlay;
-		gap: fn.rem(8);
-		padding: fn.rem(10) fn.rem(16);
+		padding: fn.rem(11) fn.rem(24);
 		box-shadow: var.$shadow-md;
 		font-size: var.$text-sm;
 	}

@@ -8,14 +8,13 @@
 	align-items: center;
 	justify-content: center;
 	gap: fn.rem(8);
-	padding: fn.rem(15) fn.rem(24);
-	border: 1px solid transparent;
+	padding: fn.rem(16) fn.rem(46);
 	border-radius: var.$radius-sm;
 	font-family: var.$font-display;
 	font-size: var.$text-base;
 	font-weight: var.$font-weight-semibold;
 	line-height: var.$line-height-tight;
-	letter-spacing: var.$tracking-wide;
+	letter-spacing: var.$tracking-wider;
 	text-align: center;
 	text-decoration: none;
 	text-transform: var.$text-transform-display;
@@ -25,9 +24,9 @@
 		transform var.$motion-duration ease,
 		background-color var.$motion-duration ease,
 		color var.$motion-duration ease,
+		scale var.$motion-duration ease,
 		border-color var.$motion-duration ease;
 
-	@include bp.press-feedback;
 	&:disabled {
 		cursor: not-allowed;
 		opacity: 0.5;
@@ -47,6 +46,16 @@
 		&:not(:disabled):hover {
 			background: var.$color-paper;
 		}
+
+		// .button--primary-dark
+		&-dark {
+			background: var.$color-ink;
+			color: var.$color-paper;
+
+			&:not(:disabled):hover {
+				color: var.$color-accent;
+			}
+		}
 	}
 
 	// .button--secondary
@@ -59,26 +68,40 @@
 			background: var.$color-accent;
 			color: var.$color-ink;
 		}
+
+		// .button--secondary-dark
+		&-dark {
+			background: transparent;
+			color: var.$color-ink;
+			box-shadow: inset 0 0 0 3px var.$color-ink;
+
+			&:not(:disabled):hover {
+				background: var.$color-ink;
+				color: var.$color-paper;
+			}
+		}
 	}
 
 	&--primary,
+	&--primary-dark,
+	&--secondary-dark,
 	&--secondary {
-		border: 0;
-		border-radius: 0;
-		padding-block: fn.rem(16);
-		letter-spacing: var.$tracking-wider;
+		$spaceSize: 12;
+
 		transition:
 			transform var.$motion-duration ease,
 			color var.$motion-duration ease,
 			background-color var.$motion-duration ease;
 		clip-path: polygon(
-			fn.rem(10) 0,
+			fn.rem($spaceSize) 0,
 			100% 0,
-			100% calc(100% - fn.rem(10)),
-			calc(100% - fn.rem(10)) 100%,
+			100% calc(100% - fn.rem($spaceSize)),
+			calc(100% - fn.rem($spaceSize)) 100%,
 			0 100%,
-			0 fn.rem(10)
+			0 fn.rem($spaceSize)
 		);
+
+		@include bp.press-feedback;
 	}
 	// .button--block
 	&--block {

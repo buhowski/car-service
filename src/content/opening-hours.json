@@ -1,5 +1,5 @@
 {
-	"weekdays": { "schedule": "09:30-19:00" },
-	"sat": { "schedule": "10:00-16:00" },
+	"weekdays": { "schedule": "09:30–19:00" },
+	"sat": { "schedule": "10:00–16:00" },
 	"sun": { "schedule": "" }
 }

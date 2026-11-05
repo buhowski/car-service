@@ -1,13 +1,14 @@
 {
-	"eyebrow": "СТО 'Поршень' • Львів",
-	"headline": "Потрібна діагностика або ремонт?",
-	"subtext": "Зателефонуйте або залиште заявку — допоможемо визначити потрібні роботи та узгодити час візиту.",
+	"eyebrow": "СТО Поршень · Львів",
+	"headline": "Авто потребує уваги?",
+	"headlineSecond": "Давайте розберемося",
+	"subtext": "Розкажіть, що турбує. Підкажемо, з чого почати, та домовимося про візит.",
 	"background": {
 		"image": "/uploads/video/cta-poster.jpg",
 		"video": "/uploads/video/sto-porshen-cta-video-car-driving.mp4",
 		"mobileVideo": "",
 		"alt": ""
 	},
-	"primaryCta": "Записатися на СТО",
+	"primaryCta": "Залишити заявку",
 	"secondaryCta": "Зателефонувати"
 }

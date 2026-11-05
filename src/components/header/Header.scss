@@ -17,13 +17,20 @@
 		background-color: rgba(var.$color-ink, 90%);
 		backdrop-filter: blur(fn.rem(6));
 		box-shadow: 0 4px 20px rgba(var.$color-black, 66%);
+
+		.header__nav {
+			padding: fn.rem(10) 0;
+		}
 	}
 
 	// .header__nav
 	&__nav {
+		padding: fn.rem(25) 0;
+		transition: padding var.$motion-duration ease;
+		will-change: transform;
+
 		.container {
 			display: flex;
-			min-height: fn.rem(72);
 			align-items: center;
 			justify-content: space-between;
 			gap: 1rem;

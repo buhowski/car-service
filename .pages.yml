@@ -75,13 +75,14 @@ content:
             type: string
             required: true
 
-          - name: headlineHighlight
-            label: Виділена частина заголовка
+          - name: headlineSecond
+            label: Другий рядок заголовка
             type: string
             required: true
 
-          - name: headlineSecond
-            label: Продовження після виділення заголовка
+          - name: highlightedWord
+            label: Виділена частина заголовка
+            description: Вставити слово із заголовка яке треба виділити
             type: string
             required: true
 
@@ -247,6 +248,10 @@ content:
             label: Заголовок
             type: string
             required: true
+
+          - name: headlineSecond
+            label: Другий рядок заголовка
+            type: string
 
           - name: subtext
             label: Опис

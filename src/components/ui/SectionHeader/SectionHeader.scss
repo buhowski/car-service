@@ -22,7 +22,11 @@
 	}
 	// .section-header__title
 	&__title {
-		max-width: 24ch;
+		max-width: 28ch;
+
+		span {
+			display: block;
+		}
 	}
 	&--center &__title {
 		margin-inline: auto;

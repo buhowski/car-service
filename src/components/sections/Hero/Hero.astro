@@ -7,6 +7,8 @@ import BackgroundMedia from '../../ui/BackgroundMedia/BackgroundMedia.astro';
 import { site } from '../../../data/site';
 import content from '../../../content/hero.json';
 const heroData = content;
+const headlineLines = [heroData.headline, heroData.headlineSecond];
+const highlightedWord = heroData.highlightedWord;
 ---
 
 <section class='hero' id='hero' aria-labelledby='hero-heading'>
@@ -17,12 +19,25 @@ const heroData = content;
 	<Container>
 		<BusinessHours class='hero__meta' />
 		<h1 id='hero-heading' class='hero__title' data-reveal>
-			<span class='hero__title-line'>{heroData.headline}</span>
+			{
+				headlineLines.map((line) => {
+					const wordIndex = line.indexOf(highlightedWord);
 
-			<span class='hero__title-line'>
-				<span class='hero__highlight'>{heroData.headlineHighlight} </span>
-				{heroData.headlineSecond}
-			</span>
+					return (
+						<span class='hero__title-line'>
+							{wordIndex === -1 ? (
+								line
+							) : (
+								<>
+									{line.slice(0, wordIndex)}
+									<span class='hero__highlight'>{highlightedWord}</span>
+									{line.slice(wordIndex + highlightedWord.length)}
+								</>
+							)}
+						</span>
+					);
+				})
+			}
 		</h1>
 		<p class='hero__sub' data-reveal>{heroData.subtext}</p>
 

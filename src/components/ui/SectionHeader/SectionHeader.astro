@@ -2,11 +2,12 @@
 import './SectionHeader.scss';
 interface Props {
 	id?: string;
-  eyebrow: string;
-  headline: string;
-  description?: string;
-  centered?: boolean;
-  class?: string;
+	eyebrow: string;
+	headline: string;
+	headlineSecond?: string;
+	description?: string;
+	centered?: boolean;
+	class?: string;
 	'data-reveal'?: boolean;
 }
 
@@ -14,20 +15,23 @@ const {
 	id,
 	eyebrow,
 	headline,
+	headlineSecond,
 	description,
 	centered = false,
 	class: className = '',
 	'data-reveal': dataReveal,
 } = Astro.props;
 
-const classes = [
-  'section-header',
-  centered && 'section-header--center',
-  className,
-].filter(Boolean).join(' ');
+const classes = ['section-header', centered && 'section-header--center', className]
+	.filter(Boolean)
+	.join(' ');
 ---
+
 <div class={classes} data-reveal={dataReveal ? '' : undefined}>
-  <span class="section-header__eyebrow">{eyebrow}</span>
-  <h2 id={id} class="section-header__title">{headline}</h2>
-  {description && <p class="section-header__description">{description}</p>}
+	<span class='section-header__eyebrow'>{eyebrow}</span>
+	<h2 id={id} class='section-header__title'>
+		{headline}
+		{headlineSecond && <span>{headlineSecond}</span>}
+	</h2>
+	{description && <p class='section-header__description'>{description}</p>}
 </div>

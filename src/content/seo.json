@@ -1,26 +1,25 @@
 {
-  "language": "uk",
-  "siteUrl": "https://sto-porshen.pages.dev/",
-  "robots": "index, follow, max-image-preview:large",
-  {
-  "title": "СТО Поршень Львів — професійний автосервіс та ремонт авто",
-  "description": "Надійний ремонт ходової, двигуна, електрообладнання та діагностика авто у Львові. Досвідчені майстри, підбір запчастин. 066 857 35 64. Записуйтесь на СТО!",
-  "brandImage": "/logo.png",
-  "favicon": "/favicon.ico",
-  "siteVerification": [
-    "<meta name=\"google-site-verification\" content=\"lTl2W7Y_C5vtyoeirFkIAas9zlx7F1k_QJQ25fr18eA\" />"
-  ],
-  "openGraph": {
-    "locale": "uk_UA",
-    "type": "website",
-    "image": "/uploads/screenshot.png"
-  },
-  "twitter": {
-    "card": "summary_large_image"
-  },
-  "schema": {
-    "type": "AutoRepair",
-    "priceRange": "$$",
-    "currency": "UAH"
-  }
+	"language": "uk",
+	"siteUrl": "https://sto-porshen.pages.dev/",
+	"robots": "index, follow, max-image-preview:large",
+	"title": "СТО Поршень Львів — професійний автосервіс та ремонт авто",
+	"description": "Надійний ремонт ходової, двигуна, електрообладнання та діагностика авто у Львові. Досвідчені майстри, підбір запчастин. 066 857 35 64. Записуйтесь на СТО!",
+	"brandImage": "/logo.png",
+	"favicon": "/favicon.ico",
+	"siteVerification": [
+		"<meta name=\"google-site-verification\" content=\"lTl2W7Y_C5vtyoeirFkIAas9zlx7F1k_QJQ25fr18eA\" />"
+	],
+	"openGraph": {
+		"locale": "uk_UA",
+		"type": "website",
+		"image": "/uploads/screenshot.png"
+	},
+	"twitter": {
+		"card": "summary_large_image"
+	},
+	"schema": {
+		"type": "AutoRepair",
+		"priceRange": "$$",
+		"currency": "UAH"
+	}
 }

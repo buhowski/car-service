@@ -38,7 +38,7 @@
 	&__category-list {
 		display: grid;
 		align-content: start;
-		gap: 0.55rem;
+		gap: 10px;
 
 		@include bp.tablet-md {
 			display: none;
@@ -68,7 +68,7 @@
 	&__entry {
 		@include bp.tablet-md {
 			display: block;
-			margin-bottom: var.$space-2;
+			margin-bottom: 10px;
 		}
 	}
 }

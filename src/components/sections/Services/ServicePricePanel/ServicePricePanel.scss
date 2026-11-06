@@ -9,11 +9,22 @@
 	animation: service-price-panel-in var.$motion-duration ease both;
 	background: var.$color-light;
 	box-shadow: var.$shadow-md;
+	border: 1px solid var.$color-line;
+	border-radius: var.$radius-sm;
+
+	@include bp.tablet-md {
+		margin-top: 10px;
+		padding: 1rem;
+	}
 
 	// .service-price-panel__heading
 	&__heading {
 		padding-bottom: 1.2rem;
 		border-bottom: fn.rem(2) solid var.$color-ink;
+
+		@include bp.tablet-md {
+			padding-bottom: 0.9rem;
+		}
 	}
 
 	// .service-price-panel__kicker
@@ -38,9 +49,15 @@
 		display: grid;
 		min-height: fn.rem(58);
 		grid-template-columns: minmax(0, 1fr) auto auto;
+		align-items: center;
 		gap: 1rem;
 		padding: 15px 0;
 		border-bottom: 1px solid var.$color-line;
+
+		@include bp.tablet-md {
+			grid-template-columns: minmax(0, 1fr) auto;
+			align-items: start;
+		}
 	}
 
 	// .service-price-panel__name
@@ -66,6 +83,11 @@
 		font-size: var.$text-sm;
 		letter-spacing: var.$tracking-normal;
 		white-space: nowrap;
+
+		@include bp.tablet-md {
+			grid-column: 1 / -1;
+			justify-self: end;
+		}
 	}
 
 	// .service-price-panel__note
@@ -74,24 +96,6 @@
 		color: var.$color-text-muted;
 		font-size: var.$text-xs;
 		text-align: right;
-	}
-
-	@include bp.tablet-md {
-		margin-top: var.$space-2;
-		padding: 1rem;
-
-		&__heading {
-			padding-bottom: 0.9rem;
-		}
-
-		&__row {
-			grid-template-columns: minmax(0, 1fr) auto;
-		}
-
-		&__order {
-			grid-column: 1 / -1;
-			justify-self: end;
-		}
 	}
 }
 

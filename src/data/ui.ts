@@ -46,7 +46,7 @@ export const ui = {
 		scheduleTitle: 'Графік',
 		scheduleAriaLabel: 'Графік роботи',
 		addressLabel: 'Адреса',
-		contactLabel: 'Звʼяжіться з нами',
+		contactLabel: 'Звʼязок',
 		mapTitle: 'Карта: {address}',
 	},
 	brands: {

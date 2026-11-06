@@ -12,7 +12,7 @@ const { class: className = '' } = Astro.props;
 const brandImage = site.brand.image?.trim();
 ---
 
-<a class:list={['brand', className]} href='#main' aria-label={formatText(ui.common.brandHomeLabel)}>
+<a class:list={['brand', className]} href='#home' aria-label={formatText(ui.common.brandHomeLabel)}>
 	<span class='brand__mark' aria-hidden='true'>
 		{
 			brandImage ? (

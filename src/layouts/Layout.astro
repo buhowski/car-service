@@ -55,7 +55,7 @@ const siteVerification = seo.siteVerification.filter(Boolean);
 		{siteVerification.map((tag) => <Fragment set:html={tag} />)}
 	</head>
 
-	<body>
+	<body id='home'>
 		<PageLoader />
 		<Header />
 		<main id='main'>

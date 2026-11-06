@@ -39,7 +39,7 @@ export const site = {
 	},
 	links: {
 		booking: phoneHref,
-		services: '#services',
+		services: '#service',
 	},
 	navigation: settings.navigation.map(({ sectionId, label }) => ({
 		href: `#${sectionId}`,

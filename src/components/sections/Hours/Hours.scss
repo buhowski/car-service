@@ -152,7 +152,7 @@
 		position: relative;
 		min-height: fn.rem(380);
 		border: 1px solid var.$color-line;
-		border-radius: var.$radius-md;
+		border-radius: var.$radius-sm;
 		overflow: hidden;
 		@include bp.surface-card;
 

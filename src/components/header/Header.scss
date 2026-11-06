@@ -16,7 +16,7 @@
 	&--scrolled {
 		border-bottom: 1px solid rgba(var.$color-paper, 10%);
 		background-color: rgba(var.$color-ink, 86%);
-		backdrop-filter: blur(fn.rem(6));
+		backdrop-filter: blur(6px);
 		box-shadow: 0 6px 20px rgba(var.$color-black, 72%);
 
 		.header__nav {
@@ -29,6 +29,10 @@
 		padding: fn.rem(25) 0;
 		transition: padding var.$motion-duration ease;
 		will-change: transform;
+
+		@include bp.mobile {
+			padding: fn.rem(15) 0;
+		}
 
 		.container {
 			display: flex;
@@ -173,7 +177,7 @@
 	&__mobile-close {
 		@include bp.focus-ring;
 		position: absolute;
-		top: 10px;
+		top: 13px;
 		right: 15px;
 		display: grid;
 		width: fn.rem(42);

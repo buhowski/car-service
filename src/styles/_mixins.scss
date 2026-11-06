@@ -2,19 +2,19 @@
 @use 'variables' as var;
 
 @mixin tablet-lg {
-	@media (max-width: fn.rem(1279)) {
+	@media (max-width: 1279px) {
 		@content;
 	}
 }
 
 @mixin tablet-md {
-	@media (max-width: fn.rem(1023)) {
+	@media (max-width: 1023px) {
 		@content;
 	}
 }
 
 @mixin mobile {
-	@media (max-width: fn.rem(767)) {
+	@media (max-width: 767px) {
 		@content;
 	}
 }

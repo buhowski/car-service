@@ -35,7 +35,7 @@
 		img {
 			width: 100%;
 			height: auto;
-			border-radius: var.$radius-md;
+			border-radius: var.$radius-sm;
 		}
 
 		@include bp.tablet-md {

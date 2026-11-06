@@ -38,14 +38,15 @@
 		display: grid;
 		min-height: fn.rem(58);
 		grid-template-columns: minmax(0, 1fr) auto auto;
-		align-items: center;
 		gap: 1rem;
-		padding: 0.8rem 0;
+		padding: 15px 0;
 		border-bottom: 1px solid var.$color-line;
 	}
 
 	// .service-price-panel__name
 	&__name {
+		line-height: normal;
+
 		@include bp.tablet-md {
 			font-size: var.$text-sm;
 		}
@@ -69,7 +70,7 @@
 
 	// .service-price-panel__note
 	&__note {
-		margin: 1.2rem 0 0;
+		margin: 15px 0 0;
 		color: var.$color-text-muted;
 		font-size: var.$text-xs;
 		text-align: right;
@@ -85,7 +86,6 @@
 
 		&__row {
 			grid-template-columns: minmax(0, 1fr) auto;
-			gap: 0.8rem 1rem;
 		}
 
 		&__order {

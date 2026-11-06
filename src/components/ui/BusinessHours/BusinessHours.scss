@@ -5,12 +5,12 @@
 	display: flex;
 	width: fit-content;
 	align-items: center;
-	gap: 0.45rem;
-	padding: 0.65rem 0.9rem;
+	gap: 0.5rem;
+	padding: 0.6rem 0.8rem;
 	border: 1px solid rgba(var.$color-white, 16%);
 	border-radius: var.$radius-sm;
 	background: rgba(var.$color-ink, 30%);
-	backdrop-filter: blur(fn.rem(4));
+	backdrop-filter: blur(6px);
 	color: var.$color-paper;
 	font-size: fn.rem(14);
 	font-variant-numeric: tabular-nums;

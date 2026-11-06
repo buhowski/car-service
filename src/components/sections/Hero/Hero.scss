@@ -13,7 +13,7 @@
 	overflow: hidden;
 
 	@include bp.mobile {
-		padding: 7rem 0 5rem;
+		padding: 7rem 0;
 
 		.business-hours {
 			font-size: fn.rem(13);

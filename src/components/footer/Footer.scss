@@ -25,7 +25,6 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
-		// align-items: center;
 		gap: fn.rem(22);
 		padding: 2.5rem 0;
 		border-bottom: 1px solid rgba(var.$color-paper, 16%);
@@ -38,7 +37,7 @@
 
 	// .footer__brand-link
 	&__brand-link {
-		margin-bottom: 0.75rem;
+		margin-bottom: 20px;
 	}
 
 	// .footer__about

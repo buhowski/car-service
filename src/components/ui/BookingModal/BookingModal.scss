@@ -77,7 +77,6 @@
 		margin: 0 0 var.$space-4;
 		color: var.$color-text-muted;
 		font-size: var.$text-sm;
-		line-height: var.$line-height-copy-relaxed;
 	}
 }
 
@@ -330,14 +329,14 @@
 		}
 	}
 
-	.button--primary {
+	.button {
 		&:disabled {
 			cursor: progress;
 		}
 
 		&:not(:disabled):hover {
-			background: var.$color-ink;
-			color: var.$color-accent;
+			background: var.$color-accent;
+			color: var.$color-ink;
 		}
 	}
 }

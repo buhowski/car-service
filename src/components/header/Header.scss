@@ -7,16 +7,17 @@
 	top: 0;
 	z-index: var.$z-header;
 	width: 100%;
+	line-height: normal;
 	transition:
 		box-shadow var.$motion-duration ease,
 		background-color var.$motion-duration ease;
 
 	// .header--scrolled
 	&--scrolled {
-		border-bottom: 1px solid rgba(var.$color-paper, 12%);
-		background-color: rgba(var.$color-ink, 90%);
+		border-bottom: 1px solid rgba(var.$color-paper, 10%);
+		background-color: rgba(var.$color-ink, 86%);
 		backdrop-filter: blur(fn.rem(6));
-		box-shadow: 0 4px 20px rgba(var.$color-black, 66%);
+		box-shadow: 0 6px 20px rgba(var.$color-black, 72%);
 
 		.header__nav {
 			padding: fn.rem(10) 0;
@@ -45,11 +46,6 @@
 	&__brand {
 		@include bp.tablet-lg {
 			font-size: var.$text-xl;
-
-			.brand__mark {
-				width: fn.rem(36);
-				height: fn.rem(36);
-			}
 		}
 	}
 
@@ -74,8 +70,8 @@
 		position: relative;
 		z-index: 2;
 		display: none;
-		width: fn.rem(44);
-		height: fn.rem(44);
+		width: fn.rem(42);
+		height: fn.rem(42);
 		align-content: center;
 		justify-items: center;
 		gap: fn.rem(5);
@@ -156,13 +152,13 @@
 		top: 0;
 		right: 0;
 		display: flex;
-		width: min(85vw, fn.rem(340));
+		width: min(80vw, fn.rem(320));
 		height: 100dvh;
 		flex-direction: column;
 		gap: fn.rem(25);
 		padding: 5rem 1.5rem 2rem;
 		border-left: fn.rem(2) solid var.$color-accent;
-		background: var.$color-surface-dark;
+		background: var.$color-ink;
 		transform: translateX(100%);
 		transition: transform var.$motion-duration ease;
 		overflow-y: auto;
@@ -177,11 +173,11 @@
 	&__mobile-close {
 		@include bp.focus-ring;
 		position: absolute;
-		top: 1rem;
-		right: 1rem;
+		top: 10px;
+		right: 15px;
 		display: grid;
-		width: fn.rem(44);
-		height: fn.rem(44);
+		width: fn.rem(42);
+		height: fn.rem(42);
 		place-items: center;
 		padding: 0;
 		border: 1px solid rgba(var.$color-paper, 16%);

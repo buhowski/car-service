@@ -18,12 +18,10 @@
 		letter-spacing: var.$tracking-widest;
 		font-size: var.$text-xs;
 		color: var.$color-accent;
-		margin: 0 0 var.$space-3;
+		margin: 0 0 5px;
 	}
 	// .section-header__title
 	&__title {
-		max-width: 28ch;
-
 		span {
 			display: block;
 		}
@@ -40,22 +38,14 @@
 		margin-top: var.$space-4;
 		color: var.$color-text-muted;
 		font-size: var.$text-lg;
-		line-height: var.$line-height-copy-relaxed;
+
+		@include bp.mobile {
+			margin-top: var.$space-3;
+		}
 	}
 }
 
 .section-header + p,
 .section-header + .lead {
 	margin-top: var.$space-4;
-}
-
-.section-header {
-	@include bp.mobile {
-		&__title {
-			max-width: 20ch;
-		}
-		&__description {
-			margin-top: var.$space-3;
-		}
-	}
 }

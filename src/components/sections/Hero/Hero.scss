@@ -13,7 +13,7 @@
 	overflow: hidden;
 
 	@include bp.mobile {
-		padding: 6.5rem 0 5rem;
+		padding: 7rem 0 5rem;
 
 		.business-hours {
 			font-size: fn.rem(13);
@@ -60,13 +60,17 @@
 		margin-bottom: fn.rem(40);
 		color: var.$color-text-on-dark;
 		font-size: var.$text-lg;
+
+		@include bp.mobile {
+			font-size: 1rem;
+		}
 	}
 
 	// .hero__actions
 	&__actions {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 1.5rem;
+		gap: 1rem 2rem;
 
 		@include bp.mobile {
 			margin-bottom: 0;

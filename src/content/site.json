@@ -10,11 +10,11 @@
 	"mapTarget": "49.806868392010934, 24.05504854376012",
 	"navigation": [
 		{
-			"sectionId": "services",
+			"sectionId": "service",
 			"label": "Послуги"
 		},
 		{
-			"sectionId": "why-choose",
+			"sectionId": "why",
 			"label": "Переваги"
 		},
 		{
@@ -22,7 +22,7 @@
 			"label": "Марки авто"
 		},
 		{
-			"sectionId": "visit",
+			"sectionId": "contacts",
 			"label": "Контакти"
 		}
 	],

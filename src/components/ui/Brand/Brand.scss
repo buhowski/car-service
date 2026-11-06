@@ -4,14 +4,13 @@
 .brand {
 	display: inline-flex;
 	align-items: center;
-	gap: 0.6rem;
+	gap: 10px;
 	font-family: var.$font-display;
-	font-size: var.$text-2xl;
+	font-size: fn.rem(26);
 	font-weight: var.$font-weight-semibold;
 	letter-spacing: var.$tracking-normal;
 	color: var.$color-paper;
-	text-decoration: none;
-	text-transform: var.$text-transform-display;
+	text-transform: uppercase;
 
 	&:hover {
 		color: var.$color-paper;

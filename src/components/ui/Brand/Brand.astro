@@ -10,9 +10,14 @@ interface Props {
 
 const { class: className = '' } = Astro.props;
 const brandImage = site.brand.image?.trim();
+const homeLink = Astro.url.pathname === '/' ? '#home' : '/#home';
 ---
 
-<a class:list={['brand', className]} href='#home' aria-label={formatText(ui.common.brandHomeLabel)}>
+<a
+	class:list={['brand', className]}
+	href={homeLink}
+	aria-label={formatText(ui.common.brandHomeLabel)}
+>
 	<span class='brand__mark' aria-hidden='true'>
 		{
 			brandImage ? (

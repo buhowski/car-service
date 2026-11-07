@@ -3,9 +3,9 @@
 
 .not-found {
 	display: grid;
-	min-height: 60vh;
+	min-height: calc(100vh - 8px);
 	place-items: center;
-	padding: var.$section-space 0;
+	padding: 200px 0;
 	text-align: center;
 
 	// .not-found__code

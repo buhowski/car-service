@@ -29,9 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	burger.addEventListener('click', toggle);
 	overlay?.addEventListener('click', close);
 	closeBtn?.addEventListener('click', close);
-	menu.querySelectorAll<HTMLAnchorElement>('[data-nav-link], [data-booking-open]').forEach((link) => {
-		link.addEventListener('click', close);
-	});
+	menu
+		.querySelectorAll<HTMLAnchorElement>('[data-nav-link], [data-booking-open]')
+		.forEach((link) => {
+			link.addEventListener('click', close);
+		});
 
 	document.addEventListener('keydown', (e) => {
 		if (e.key === 'Escape' && menu.classList.contains('header__mobile--open')) close();
@@ -39,9 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	const nav = document.querySelector<HTMLElement>('[data-site-header]');
 	const sectionLinks = Array.from(
 		document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]'),
-	);
+	).filter((link) => document.getElementById(link.hash.slice(1)));
 
 	function updateActiveLink() {
+		if (!sectionLinks.length) return;
+
 		const activationLine = (nav?.getBoundingClientRect().height ?? 72) + 8;
 		let activeSectionId: string | undefined;
 

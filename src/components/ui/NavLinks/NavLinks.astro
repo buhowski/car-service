@@ -8,10 +8,17 @@ interface Props {
 
 const { className = '' } = Astro.props;
 const links = site.navigation;
+const navigationBase = Astro.url.pathname === '/' ? '' : '/';
 ---
 
 <ul class={className} role='list'>
-	{links.map((link) => (
-		<li><a class='nav-links__item' data-nav-link href={link.href}>{link.label}</a></li>
-	))}
+	{
+		links.map((link) => (
+			<li>
+				<a class='nav-links__item' data-nav-link href={`${navigationBase}${link.href}`}>
+					{link.label}
+				</a>
+			</li>
+		))
+	}
 </ul>

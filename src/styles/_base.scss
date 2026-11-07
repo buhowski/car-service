@@ -18,6 +18,10 @@ body {
 	background: var.$color-paper;
 	text-rendering: optimizeLegibility;
 	cursor: default;
+
+	&:has(.not-found) .header {
+		background-color: rgba(18, 19, 22, 0.86);
+	}
 }
 
 h1,

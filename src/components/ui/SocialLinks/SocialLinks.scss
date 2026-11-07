@@ -28,7 +28,7 @@
 		&:is(:hover, :focus-visible) {
 			border-color: var.$color-accent;
 			background: var.$color-accent;
-			color: var.$color-ink;
+			color: var.$color-surface-dark;
 		}
 	}
 }

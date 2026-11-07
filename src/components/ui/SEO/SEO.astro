@@ -85,6 +85,7 @@ const structuredData = {
 				'@type': 'PostalAddress',
 				streetAddress: site.address.full.replace(/^м\.\s*[^,]+,\s*/, ''),
 				addressLocality: site.city,
+				postalCode: site.address.postalCode,
 				addressCountry: 'UA',
 			},
 			...(geo ? { geo } : {}),

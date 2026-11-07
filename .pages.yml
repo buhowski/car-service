@@ -317,6 +317,11 @@ content:
             type: string
             required: true
 
+          - name: postalCode
+            label: Поштовий індекс
+            type: string
+            required: true
+
           - name: phoneNumber
             label: Телефон
             description: 'Формат: +380668573564'

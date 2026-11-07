@@ -32,6 +32,7 @@ export const site = {
 	phone: { display: formattedPhone, href: phoneHref },
 	address: {
 		full: addressLabel,
+		postalCode: settings.postalCode,
 		mapUrl: settings.mapUrl || `https://www.google.com/maps/search/?api=1&query=${encodedTarget}`,
 		mapEmbedUrl:
 			settings.mapEmbedUrl || `https://maps.google.com/maps?q=${encodedTarget}&output=embed`,

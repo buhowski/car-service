@@ -12,7 +12,7 @@ interface Props {
 	noIndex?: boolean;
 }
 
-const { title, description, image, imageAlt, noIndex = false } = Astro.props;
+const { title, description, image, imageAlt } = Astro.props;
 const baseUrl = seo.siteUrl || Astro.site?.toString() || Astro.url.origin;
 const root = new URL('/', baseUrl).href;
 const absoluteUrl = (path = '') => (path ? new URL(path, baseUrl).href : '');
@@ -25,7 +25,6 @@ const socialImageAlt = formatText(imageAlt || titleText || descriptionText);
 const socialTitle = titleText;
 const socialDescription = descriptionText;
 const twitterCard = seo.twitter.card || 'summary_large_image';
-const robots = noIndex || import.meta.env.DEV ? 'noindex, nofollow' : seo.robots;
 
 // Local business structured data
 const openingHoursSpecification = getOpeningHoursSpecifications();
@@ -109,7 +108,6 @@ const structuredDataJson = JSON.stringify(structuredData).replace(/</g, '\\u003c
 ---
 
 <meta name='description' content={descriptionText} />
-<meta name='robots' content={robots} />
 <link rel='canonical' href={root} />
 <link rel='icon' href={seo.favicon} />
 <title>{titleText}</title>
